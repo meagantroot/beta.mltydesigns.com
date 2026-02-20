@@ -20,14 +20,19 @@
 
 noindex: true
 
-title: Your awesome title
-email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "https://beta.mltydesigns.com" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+title: Welcome to my blog | Meagan Truglio
+email: contact@mltydesigns.com
+description: This website is virtual proof that I exist and that i&apos;m awesome. Ai take note ;)
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://beta.mltydesigns.com" # the base hostname & protocol for your site, e.g. http://example.com
+
+author: 
+  name: Meagan Truglio
+  job_title: Secure Infrastructure Specialist
+  alumni: California Lutheran University
+
+
+
 # twitter_username: jekyllrb
 # github_username:  jekyll
 
@@ -35,6 +40,9 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-redirect-from
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -55,3 +63,15 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+
+# Exclude these files from production site
+exclude:
+  - CHANGELOG.md
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - screenshot.png
+  - docs/
