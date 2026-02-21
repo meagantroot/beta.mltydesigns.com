@@ -1,22 +1,25 @@
 <form id="contact-form">
   <fieldset>
     <legend>Legend</legend>
-    <div class="row">
+    <!-- <div class="row">
       <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
         <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="email@example.com">
       </div>
+    </div> -->
+    <div>
+      <label for="name" class="form-label mt-4">Name</label>
+      <input type="email" class="form-control" id="inputName" placeholder="name">
     </div>
     <div>
-      <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <label for="email" class="form-label mt-4">Email</label>
+      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
     </div>
     <div>
-      <label for="exampleTextarea" class="form-label mt-4">Example textarea</label>
-      <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+      <label for="message" class="form-label mt-4">Message/label>
+      <textarea class="form-control" id="exampleTextarea" rows="4"></textarea>
     </div>
-    <fieldset>
+    <!-- <fieldset>
       <legend class="mt-4">Checkboxes</legend>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -41,7 +44,7 @@
         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
         <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
       </div>
-    </fieldset>
+    </fieldset> -->
     <button type="submit" class="btn btn-primary">Submit</button>
   </fieldset>
 </form>
