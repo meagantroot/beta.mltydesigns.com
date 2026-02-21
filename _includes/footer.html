@@ -27,6 +27,7 @@
         },
         body: JSON.stringify({
           surveyId: '{{ site.formbricks_form_id }}',
+          meta: {action: 'Website Form', source: '{{ page.title }}', url: '{{ page.url }}'},
           finished: true,
           data: formValues // Must be 'data'
         }),
