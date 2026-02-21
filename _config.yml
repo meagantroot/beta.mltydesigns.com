@@ -42,7 +42,7 @@ plugins:
 
 # Contact Form
 formbricks_environment_id: "cmlvsyd9km9wcu4011cb75i2c"
-formbricks_api_host: "https://app.formbricks.com"
+formbricks_form_id: "cmlvtdij7mfk9uf01yom0e3zo"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

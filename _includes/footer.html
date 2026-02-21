@@ -7,14 +7,25 @@
 </script>
 
 <script>
-  window.formbricks = {
-    environmentId: "{{ site.formbricks_environment_id }}",
-    apiHost: "{{ site.formbricks_api_host }}",
-  };
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    // Send data to Formbricks API
+    await fetch('https://app.formbricks.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        surveyId: '{{ site.formbricks_form_id}}',
+        values: data
+      }),
+    });
+    alert('Thank you for your message, I look forward to connecting!');
+  });
 </script>
 <script src="https://app.formbricks.com"></script>
 
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script> -->
 </body>
 </html>
