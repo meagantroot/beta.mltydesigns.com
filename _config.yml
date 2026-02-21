@@ -41,7 +41,6 @@ plugins:
   - jekyll-redirect-from
 
 # Contact Form
-formbricks_environment_id: "cmlvsyd9km9wcu4011cb75i2c"
 formbricks_form_id: "cmlvtdij7mfk9uf01yom0e3zo"
 
 # Exclude from processing.
