@@ -14,12 +14,12 @@
     const data = Object.fromEntries(formData);
 
     // Send data to Formbricks API
-    await fetch('https://app.formbricks.com', {
+    await fetch('https://app.formbricks.com/api/v1/client/{{ site.formbricks_environment_id }}/responses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         surveyId: '{{ site.formbricks_form_id}}',
-        values: data
+        data: data
       }),
     });
     alert('Thank you for your message, I look forward to connecting!');
