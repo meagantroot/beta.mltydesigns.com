@@ -44,6 +44,10 @@ plugins:
 formbricks_environment_id: "cmlvsyd9km9wcu4011cb75i2c"
 formbricks_form_id: "cmlvtdij7mfk9uf01yom0e3zo"
 
+formbricks_form_question_1_id: "ewf5htwkwph2gjczn9crpp71"
+formbricks_form_question_2_id: "ualo5jj37y0sslmn8jy9j0og"
+formbricks_form_question_3_id: "b7ftpu50yawzy64h8yr1flvu"
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
