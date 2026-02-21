@@ -40,6 +40,10 @@ plugins:
   - jekyll-paginate
   - jekyll-redirect-from
 
+# Contact Form
+formbricks_environment_id: "cmlvsyd9km9wcu4011cb75i2c"
+formbricks_api_host: "https://app.formbricks.com"
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
