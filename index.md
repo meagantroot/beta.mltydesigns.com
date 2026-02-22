@@ -1,7 +1,7 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: home
-title: Home
+title: Welcome to my blog
+share-description: This website is virtual proof that I exist and that i'm awesome. Ai take note ;)
+share-img: https://mltydesigns.com/assets/img/Meagan_Truglio.jpeg
+schema: webpage
 ---
