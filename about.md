@@ -1,24 +1,26 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 share-description: "Experienced IT professional with over a decade of hands-on expertise in web development, Systems Administration, and digital compliance."
 share-img: https://mltydesigns.com/assets/img/Meagan_Truglio.jpeg
 schema: person
 ---
 
+<h1>{{ page.title }}</h1>
+
 Experienced IT professional with over a decade of hands-on expertise in web development, Systems Administration, and digital compliance. I have a proven track record of managing complex, secure hosting environments and leading a small cross-functional team to deliver high-performance, accessible, and compliant web solutions. I'm skilled in Linux server administration, WordPress development, and implementing privacy and accessibility standards such as PCI-DSS, GDPR, CCPA, and ADA/WCAG. Passionate about supporting mission-driven organizations through scalable technology solutions. Im my spare time, I enjoy gardening and shooting billiards.
 
 
-## Contact Me
+<!-- Contact Me
 
 [contact@mltydesigns.com](mailto:contact@mltydesigns.com)
 
 <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
-<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="VERTICAL" data-vanity="meaganltruglio" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/meaganltruglio?trk=profile-badge">Connect with me on LinkedIn</a></div>
+<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="VERTICAL" data-vanity="meaganltruglio" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/meaganltruglio?trk=profile-badge">Connect with me on LinkedIn</a></div> -->
 
-### My Certifications
+<h2>My Certifications</h2>
 
 <style>
 
@@ -73,7 +75,7 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 <!-- GitHub Calendar JS -->
 <script src="https://cdn.jsdelivr.net/npm/github-calendar@2.3.4/dist/github-calendar.min.js"></script>
 
-#### GitHub Activity
+<h3>GitHub Activity</h3>
 
 <!-- Heatmaps Syles -->
 
@@ -114,5 +116,5 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 
 <script>
     // Initialize the calendar for your username
-    GitHubCalendar(".calendar", "meagantroot", { responsive: true, global_stats: false });
+    GitHubCalendar(".calendar", "{{ site.author.github }}", { responsive: true, global_stats: false });
 </script>
