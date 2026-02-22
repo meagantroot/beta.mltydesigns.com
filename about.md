@@ -100,6 +100,10 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
     max-width: 800px; /* Adjust based on your preferred desktop size */
 }
 
+.calendar table {
+    border-collapse: initial;
+}
+
 /* Optional: Make the text smaller on mobile for better fit */
 @media (max-width: 600px) {
     .calendar {
