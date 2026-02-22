@@ -88,7 +88,6 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
     overflow-x: auto; /* Adds a scrollbar on mobile instead of breaking layout */
     overflow-y: hidden;
     padding: 10px;
-    display: flex;
     justify-content: center;
 }
 
