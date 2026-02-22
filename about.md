@@ -20,7 +20,7 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 
 <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="VERTICAL" data-vanity="meaganltruglio" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/meaganltruglio?trk=profile-badge">Connect with me on LinkedIn</a></div> -->
 
-<h2>My Certifications</h2>
+<h2 style="margin-top: 16px;">My Certifications</h2>
 
 <style>
 
