@@ -102,6 +102,7 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 
 .calendar table {
     border-collapse: initial;
+    direction: rtl !important;
 }
 
 /* Optional: Make the text smaller on mobile for better fit */
