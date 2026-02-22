@@ -5,8 +5,6 @@
 layout: home
 title: Home
 ---
-
-<main class="container py-5">
       <h1>
         
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-leaf-fill" viewBox="0 0 16 16">
@@ -416,4 +414,3 @@ title: Home
     </div>
   </div>
 </div>
-</main>
