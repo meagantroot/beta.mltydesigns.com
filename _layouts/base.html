@@ -10,6 +10,7 @@
   {% include header.html %}
 
   <main class="container py-5">
+    <p>Total posts found: {{ site.posts | size }}</p>
   {{ page.content }}
   </main>
 

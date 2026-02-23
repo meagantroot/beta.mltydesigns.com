@@ -5,5 +5,3 @@ share-description: This website is virtual proof that I exist and that i'm aweso
 share-img: https://mltydesigns.com/assets/img/Meagan_Truglio.jpeg
 schema: webpage
 ---
-
-<p>Total posts found: {{ site.posts | size }}</p>
