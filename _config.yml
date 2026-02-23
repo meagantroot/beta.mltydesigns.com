@@ -59,6 +59,15 @@ date_format: "%B %d, %Y"
 feed_show_tags: true
 feed_show_categories: true
 
+# Jekyll Options
+timezone: "America/Los_Angeles"
+markdown: kramdown
+highlighter: rouge
+permalink: /:year-:month-:day-:title/
+
+kramdown:
+  input: GFM
+
 # Defaults
 defaults:
   -
