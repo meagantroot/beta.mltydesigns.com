@@ -1,0 +1,15 @@
+---
+---
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Jekyll Debug</h1>
+  <p>Site Title: {{ site.title }}</p>
+  <p>Total Posts: {{ site.posts.size }}</p>
+  <ul>
+    {% for post in site.posts %}
+      <li>{{ post.title }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
