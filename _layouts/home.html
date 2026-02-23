@@ -1,6 +1,3 @@
 ---
 layout: base
-posts: {{ site.posts | where_exp: "post", "post.draft != true" }}
 ---
-
-<p>Total posts found: {{ page.posts | size }}</p>
