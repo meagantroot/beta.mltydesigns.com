@@ -56,8 +56,8 @@ paginate_path: "/page:num/"
 feed_show_excerpt: true
 excerpt_length: 100
 date_format: "%B %d, %Y"
-feed_show_tags: true
-feed_show_categories: true
+# feed_show_tags: true
+# feed_show_categories: true
 
 # Jekyll Options
 timezone: "America/Los_Angeles"
@@ -76,8 +76,8 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      comments: false  # add comments to all blog posts
-      social-share: true # add social media sharing buttons to all blog posts
+      # comments: false  # add comments to all blog posts
+      # social-share: true # add social media sharing buttons to all blog posts
   -
     scope:
       path: "" # any file that's not a post will be a "page" layout by default
