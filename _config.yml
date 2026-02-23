@@ -72,7 +72,7 @@ permalink: /:year-:month-:day-:title/
 defaults:
   -
     scope:
-      path: "_posts" # applies to all files in the _posts directory
+      path: ""
       type: "posts"
     values:
       layout: "post"
