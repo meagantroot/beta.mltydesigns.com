@@ -65,14 +65,14 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
 
-kramdown:
-  input: GFM
+# kramdown:
+#   input: GFM
 
 # Defaults
 defaults:
   -
     scope:
-      path: ""
+      path: "_posts" # applies to all files in the _posts directory
       type: "posts"
     values:
       layout: "post"
