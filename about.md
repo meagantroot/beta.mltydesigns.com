@@ -17,7 +17,7 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 
     .image-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         gap: 15px;
         padding: 20px;
         max-width: 100%;
@@ -66,7 +66,6 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 <script src="https://cdn.jsdelivr.net/npm/github-calendar@2.3.4/dist/github-calendar.min.js"></script>
 
 <h3>GitHub Activity</h3>
-
 
 <!-- The container for heatmap -->
 <div class="calendar">
