@@ -59,6 +59,21 @@ date_format: "%B %d, %Y"
 feed_show_tags: true
 feed_show_categories: true
 
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: false  # add comments to all blog posts
+      social-share: true # add social media sharing buttons to all blog posts
+  -
+    scope:
+      path: "" # any file that's not a post will be a "page" layout by default
+    values:
+      layout: "page"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
