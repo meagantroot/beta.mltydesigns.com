@@ -13,6 +13,44 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 
 <h2>My Certifications</h2>
 
+<style>
+
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        padding: 20px;
+        max-width: 100%;
+        margin: auto;
+    }
+
+    .image-grid img {
+        width: 100%;
+        height: 150px;
+        object-fit: contain;
+        border-radius: 0px;
+        transition: transform 0.3s ease;
+    }
+
+    .image-grid img:hover {
+        transform: scale(1.05);
+    }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+        .image-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+        .image-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
 <div class="image-grid">
     <a href="https://www.credly.com/badges/7efbb25c-f6ea-49c7-b2ef-8343ba228d71" target="_blank"><img src="https://beta.mltydesigns.com/assets/img/A+.webp" alt="CompTIA A+ Certified" title="CompTIA A+ Certified"></a>
     <a href="https://www.credly.com/badges/c247895e-4151-4e9e-af38-32f0c80997eb" target="_blank"><img src="https://beta.mltydesigns.com/assets/img/Network+.webp" alt="CompTIA Network+ Certified" title="CompTIA Network+ Certified"></a>
@@ -31,9 +69,9 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 
 <!-- Heatmaps Syles -->
 
-<style>
+<!-- <style> -->
 
-.calendar a { display: none !important; }
+<!-- .calendar a { display: none !important; }
 
 /* Container for the heatmap */
 .calendar {
@@ -62,9 +100,9 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
     .calendar {
         font-size: 10px;
     }
-}
+} -->
 
-</style>
+<!-- </style> -->
 
 <!-- The container for heatmap -->
 <div class="calendar">
