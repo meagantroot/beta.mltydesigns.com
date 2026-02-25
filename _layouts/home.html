@@ -14,14 +14,9 @@ layout: base
     <div class="col-4 col-sm-12">
         <h2>Blog Posts</h2>
         <ul>
-            {% for post in site.posts %}
-
-            {% assign post_date = post.date | date: '%s' | plus: 0 %}
-            {% assign today_date = 'now' | date: '%s' | plus: 0 %}
-            {% assign seconds_since = today_date | minus: post_date %}
-            {% assign days_since = seconds_since | divided_by: 86400 %}
+            {% for post in site.posts %
             
-            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ post.title }}</h5>
                     <small>{{ post.date }}</small>
@@ -29,59 +24,8 @@ layout: base
                 <small>post.subtitle</small>
                 <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
             </a>
-            <!-- <li>
-                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                <p>{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
-            </li> -->
             {% endfor %}
         </ul>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-<!-- 
-<div class="list-group">
-
-
-
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Donec id elit non mi porta.</small>
-  </a>
-
-
-
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Donec id elit non mi porta.</small>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-</div> -->
