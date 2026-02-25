@@ -2,4 +2,28 @@
 layout: base
 ---
 
-{{ content }}
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col-md-8 col-sm-12">
+        <h1>{{ page.title }}</h1>
+        {{ content }}
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <h2>Recent Posts</h2>
+        <div class="list-group">
+            {% for post in site.posts %}
+            <article>
+            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <small>{{ post.date | date: "%B %d, %Y" }}</small>
+                </div>
+                <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
+                <small>Continue Reading ></small>
+            </a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+  </div>
+</div>
