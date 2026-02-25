@@ -20,7 +20,7 @@ layout: base
                     <small>{{ post.date | date: "%B %d, %Y" }}</small>
                 </div>
                 <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
-                <a href="{{ post.url | relative_url }}"><small>Continue Reading ></small></a>
+                <small>Continue Reading ></small>
             </a>
             {% endfor %}
         </div>
