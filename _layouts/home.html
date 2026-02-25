@@ -10,9 +10,9 @@ layout: base
     </div>
     <div class="container">
         <h2>Blog Posts</h2>
+            <div class="row">
             {% for post in site.posts %}
-            <!-- <article class="col-lg-4 col-md-6 col-sm-12"> -->
-                <div class="card border-success mb-3">
+                <article class="card border-success mb-3">
                 <div class="card-header"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
                 <div class="card-body">
                     <h4 class="card-title">{{ post.subtitle }}</h4>
@@ -20,9 +20,9 @@ layout: base
                     <p class="card-text">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
                     <small><a href="{{ post.url | relative_url }}">Continue Reading ></a></small>
                 </div>
-                </div>
-            <!-- </article> -->
+                </article>
             {% endfor %}
+            </div>
     </div>
   </div>
 </div>
