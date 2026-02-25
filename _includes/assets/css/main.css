@@ -4,6 +4,10 @@
     margin-top: 12px;
 }
 
+img {
+    border-radius: 5px 5px 5px 5px/25px 25px 25px 5px;
+}
+
 /* GitHub Heatmaps Syles */
 
 .calendar a { display: none !important; }
