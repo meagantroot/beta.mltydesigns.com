@@ -8,6 +8,11 @@ img {
     border-radius: 5px 5px 5px 5px/25px 25px 25px 5px;
 }
 
+.card a {
+    text-decoration: none;
+    color: #000;
+}
+
 /* GitHub Heatmaps Syles */
 
 .calendar a { display: none !important; }
