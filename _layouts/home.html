@@ -13,9 +13,9 @@ layout: base
             {% for post in site.posts %}
             <article>
                 <div class="card border-success mb-3">
-                <div class="card-header"><a href="{{ post.url | relative_url }}">{{ post.tags }}</a></div>
+                <div class="card-header"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
                 <div class="card-body">
-                    <h4 class="card-title">{{ post.title }}</h4>
+                    <h4 class="card-title">{{ post.subtitle }}</h4>
                     <small>{{ post.date | date: "%B %d, %Y" }}</small>
                     <p class="card-text">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
                     <small><a href="{{ post.url | relative_url }}">Continue Reading ></a></small>
