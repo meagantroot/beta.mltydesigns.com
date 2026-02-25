@@ -21,6 +21,7 @@ layout: base
                 <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
                 <small>Continue Reading ></small>
             </a>
+            <span class="badge bg-success">{{ post.tags }}</span>
             </article>
             {% endfor %}
         </div>
