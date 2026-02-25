@@ -20,7 +20,11 @@ layout: base
                 <!-- <td>{{ plant.family }}</td>
                 <td>{{ plant.genus }}</td>
                 <td>{{ plant.species }}</td> -->
-                <td>{% if plant.pepper } {{ plant.scoville }} shu {% endif }</td>
+                <td>
+                    {% if plant.pepper }
+                    {{ plant.scoville }} shu 
+                    {% endif }
+                </td>
                 <td>{{ plant.germination_days }} days</td>
                 <td>{{ plant.soil_temp }}</td>
                 <td>{{ plant.humidity }}</td>
