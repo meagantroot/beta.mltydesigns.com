@@ -5,9 +5,9 @@ layout: base
         <thead>
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Family</th>
+                <!-- <th scope="col">Family</th>
                 <th scope="col">Genus</th>
-                <th scope="col">Species</th>
+                <th scope="col">Species</th> -->
                 <th scope="col">Scoville</th>
                 <th scope="col">Germination</th>
                 <th scope="col">Soil Temp</th>
@@ -17,11 +17,11 @@ layout: base
             {% for plant in site.plants %}
 
                 <td>{{ plant.title }}</td>
-                <td>{{ plant.family }}</td>
+                <!-- <td>{{ plant.family }}</td>
                 <td>{{ plant.genus }}</td>
-                <td>{{ plant.species }}</td>
+                <td>{{ plant.species }}</td> -->
                 <td>{{ plant.scoville }}</td>
-                <td>{{ plant.germination }}</td>
+                <td>{{ plant.germination_days }}</td>
                 <td>{{ plant.soil_temp }}</td>
                 <td>{{ plant.humidity }}</td>
                 <td>{{ plant.light }}</td>
