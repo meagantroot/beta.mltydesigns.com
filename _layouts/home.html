@@ -18,6 +18,7 @@ layout: base
                     <h5 class="mb-1">{{ post.title }}</h5>
                     <small>{{ post.date | date: "%B %d, %Y" }}</small>
                 </div>
+                <hr/>
                 <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
                 <small>Continue Reading ></small>
             </a>
