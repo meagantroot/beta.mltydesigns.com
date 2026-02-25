@@ -9,21 +9,7 @@
 
 <main class="container py-5">
   <div class="container">{{ page.content }}</div>
-  
-  <div class="container">
-  <h2>Blog Posts</h2>
-  <ul>
-    {% for post in site.posts %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <p>{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
-      </li>
-    {% endfor %}
-  </ul>
-
-  </div>
-
-</main>
+  </main>
 
   {% include footer.html %}
 
