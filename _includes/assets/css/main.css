@@ -29,6 +29,7 @@ img {
     overflow-y: hidden;
     padding: 10px;
     justify-content: center;
+    font-family: inherit !important;
 }
 
 /* Ensure the SVG scales with the container */
