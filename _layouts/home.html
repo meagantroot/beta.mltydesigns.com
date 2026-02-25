@@ -13,7 +13,10 @@ layout: base
             {% for post in site.posts %}
                 <a href="{{ post.url | relative_url }}">
                 <article class="card border-success mb-3 m-2 col-lg-4 col-md-6 col-sm-12">
-                <div class="card-header"><h3>{{ post.title }}</h3></div>
+                <div class="card-header">
+                    <img src="{{ post.share-img }}" alt="{{ post.title }} image" class="img-fluid">
+                    <h3>{{ post.title }}</h3>
+                </div>
                 <div class="card-body">
                     <h4 class="card-title">{{ post.subtitle }}</h4>
                     <small>{{ post.date | date: "%B %d, %Y" }}</small>
