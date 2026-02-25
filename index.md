@@ -38,14 +38,14 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
     /* Tablet */
     @media (max-width: 992px) {
         .image-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 2fr);
         }
     }
 
     /* Mobile */
     @media (max-width: 576px) {
         .image-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 2fr;
         }
     }
 </style>
