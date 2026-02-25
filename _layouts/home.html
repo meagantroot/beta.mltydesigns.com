@@ -6,21 +6,82 @@ layout: base
 
 <div class="container text-center">
   <div class="row align-items-start">
-    <div class="col">
+    <div class="col-8 col-sm-12">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pretium id tortor laoreet porttitor. Nulla lacinia metus vel dolor ornare, vel vehicula ante placerat. Proin auctor sem in dui porttitor suscipit. Curabitur vel malesuada nulla, vitae blandit risus. Suspendisse egestas quam a congue semper. Pellentesque volutpat dignissim pellentesque. Aenean id enim id magna ullamcorper convallis. Praesent urna ex, consectetur sed nisl malesuada, imperdiet facilisis sem. Fusce ac leo dui.</p>
         <p>Nullam scelerisque dui nec sollicitudin ullamcorper. Integer maximus nibh ac ultricies auctor. Proin nunc velit, varius eget arcu sit amet, suscipit eleifend odio. Curabitur tempus fringilla eros, vel lacinia lectus fermentum sit amet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ornare commodo fringilla. Ut laoreet risus neque, ac maximus sapien malesuada eu. Donec quis vehicula diam, eget facilisis mi. Fusce enim urna, laoreet ut quam ac, euismod facilisis lorem. Suspendisse orci risus, molestie vitae venenatis nec, rutrum eget mauris.</p>
         <p>Nulla accumsan, leo non convallis euismod, neque metus iaculis felis, sit amet scelerisque neque leo id lorem. Nulla non ex nec ex iaculis commodo quis non neque. Sed blandit vel risus vel porttitor. Vestibulum mattis ac est sit amet suscipit. Aenean sodales, sem in sodales fermentum, sapien lectus aliquet magna, eget tempor risus augue id lorem. Morbi gravida quis neque vel placerat. Duis quis pretium turpis. Donec ut hendrerit massa. Vestibulum blandit odio non viverra imperdiet. Pellentesque feugiat lacus enim, ac ornare tellus facilisis sed. Nullam a nunc efficitur, mollis eros et, vulputate lacus. Nam quis quam quis enim auctor tempor vel eu neque.</p>
     </div>
-    <div class="col">
+    <div class="col-4 col-sm-12">
         <h2>Blog Posts</h2>
         <ul>
             {% for post in site.posts %}
-            <li>
+
+            {% assign post_date = post.date | date: '%s' | plus: 0 %}
+            {% assign today_date = 'now' | date: '%s' | plus: 0 %}
+            {% assign seconds_since = today_date | minus: post_date %}
+            {% assign days_since = seconds_since | divided_by: 86400 %}
+            
+            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <small>{{ das_since}} days ago</small>
+                </div>
+                <small>post.subtitle</small>
+                <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
+            </a>
+            <!-- <li>
                 <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
                 <p>{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
-            </li>
+            </li> -->
             {% endfor %}
         </ul>
     </div>
   </div>
+</div>
+
+
+
+
+
+
+
+<div class="list-group">
+
+
+
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small>3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small>Donec id elit non mi porta.</small>
+  </a>
+
+
+
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small class="text-muted">3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small>3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small>Donec id elit non mi porta.</small>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small class="text-muted">3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
 </div>
