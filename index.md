@@ -45,7 +45,7 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
     /* Mobile */
     @media (max-width: 576px) {
         .image-grid {
-            grid-template-columns: 2fr;
+            grid-template-columns: repeat(2, 2fr);
         }
     }
 </style>
@@ -67,7 +67,7 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
 #### GitHub Activity
 
 <!-- The container for heatmap -->
-<div class="calendar">
+<div class="calendar ">
     Loading Meagan's contributions...
 </div>
 
