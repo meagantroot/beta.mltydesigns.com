@@ -1,5 +1,9 @@
 /* Main CSS File */
 
+.btn { 
+    margin-top: 12px;
+}
+
 /* GitHub Heatmaps Syles */
 
 .calendar a { display: none !important; }
