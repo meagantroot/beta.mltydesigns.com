@@ -19,8 +19,8 @@ layout: base
                     <h5 class="mb-1">{{ post.title }}</h5>
                     <small>{{ post.date | date: "%B %d, %Y" }}</small>
                 </div>
-                <small>post.subtitle</small>
                 <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
+                <a href="{{ post.url | relative_url }}"><small>Continue Reading ></small></a>
             </a>
             {% endfor %}
         </div>
