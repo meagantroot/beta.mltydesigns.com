@@ -14,9 +14,9 @@ layout: base
     <div class="col-4 col-sm-12">
         <h2>Blog Posts</h2>
         <ul>
-            {% for post in site.posts %
+            {% for post in site.posts %}
             
-            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
+            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', 'inactive' %}">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ post.title }}</h5>
                     <small>{{ post.date }}</small>
