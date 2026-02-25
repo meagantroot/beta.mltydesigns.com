@@ -13,6 +13,10 @@ img {
     color: #000;
 }
 
+.card-header {
+    background-color: transparent;
+}
+
 /* GitHub Heatmaps Syles */
 
 .calendar a { display: none !important; }
