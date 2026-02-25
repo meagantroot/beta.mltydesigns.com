@@ -11,17 +11,17 @@ layout: base
     <div class="container">
             <div class="row">
             {% for post in site.posts %}
-                <article class="card border-success mb-3 m-2 col-lg-4 col-md-6 col-sm-12">
                 <a href="{{ post.url | relative_url }}">
+                <article class="card border-success mb-3 m-2 col-lg-4 col-md-6 col-sm-12">
                 <div class="card-header"><h3>{{ post.title }}</h3></div>
                 <div class="card-body">
                     <h4 class="card-title">{{ post.subtitle }}</h4>
                     <small>{{ post.date | date: "%B %d, %Y" }}</small>
                     <p class="card-text">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
-                    <small><a href="{{ post.url | relative_url }}">Continue Reading ></a></small>
+                    <small>Continue Reading ></small>
                 </div>
-                </a>
                 </article>
+                </a>
             {% endfor %}
             </div>
     </div>
