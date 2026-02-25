@@ -13,14 +13,14 @@ layout: base
         <div class="list-group">
             {% for post in site.posts %}
             <article>
-            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ post.title }}</h5>
-                    <small>{{ post.date | date: "%B %d, %Y" }}</small>
+                <div class="card border-success mb-3">
+                <div class="card-header"><a href="{{ post.url | relative_url }}">{{ post.date | date: "%B %d, %Y" }}</a></div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ post.title }}</h4>
+                    <p class="card-text">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
+                    <small><a href="{{ post.url | relative_url }}">Continue Reading ></a></small>
                 </div>
-                <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
-                <small>Continue Reading ></small>
-            </a>
+                </div>
             </article>
             {% endfor %}
         </div>
