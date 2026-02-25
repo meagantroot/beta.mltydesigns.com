@@ -1,0 +1,31 @@
+---
+layout: base
+---
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Family</th>
+                <th scope="col">Genus</th>
+                <th scope="col">Species</th>
+                {% if page.pepper %}<th scope="col">Scoville</th>{% endif %}
+                <th scope="col">Germination</th>
+                <th scope="col">Soil Temp</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Light</th>
+            </tr>
+            {% for plant in site.plants %}
+
+                <td>{{ plant.name }}</td>
+                <td>{{ plant.family }}</td>
+                <td>{{ plant.genus }}</td>
+                <td>{{ plant.species }}</td>
+                {% if page.pepper %}<td>{{ plant.scoville }}</td>{% endif %}
+                <td>{{ plant.germination }}</td>
+                <td>{{ plant.soil_temp }}</td>
+                <td>{{ plant.humidity }}</td>
+                <td>{{ plant.light }}</td>
+            </tr>
+            {% endfor %}
+        </thead>
+    </table>

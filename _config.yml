@@ -96,18 +96,6 @@ collections:
       layout: "plant"  # This is the layout that will be used for plant pages
       # social-share: false # Don't show social media sharing buttons on plant pages
 
-# Setup NFC Post Type
-collections:
-  nfc:  # Replace 'projects' with your desired type name
-    output: true
-    permalink: /nfc/:name/
-    scope:
-      path: "_nfc"  # This is the directory where your plant markdown files will be stored
-      type: "nfc"
-    values:
-      layout: "nfc"  # This is the layout that will be used for plant pages
-      # social-share: false # Don't show social media sharing buttons on plant pages
-
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
