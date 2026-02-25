@@ -20,9 +20,9 @@ layout: base
                 </div>
                 <hr/>
                 <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
+                <span class="badge bg-success">{{ post.tags }}</span>
                 <small>Continue Reading ></small>
             </a>
-            <span class="badge bg-success">{{ post.tags }}</span>
             </article>
             {% endfor %}
         </div>
