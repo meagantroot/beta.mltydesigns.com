@@ -15,7 +15,7 @@ layout: base
             {% for post in site.posts %}
             <article>
             <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
-                <div class="d-flex w-100 justify-content-between">
+                <div class="d-flex w-100">
                     <h5 class="mb-1">{{ post.title }}</h5>
                     <small>{{ post.date | date: "%B %d, %Y" }}</small>
                 </div>
