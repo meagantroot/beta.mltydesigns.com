@@ -14,7 +14,7 @@ layout: base
                 <th scope="col">Soil Temp</th>
                 <th scope="col">Humidity</th>
                 <th scope="col">Light</th>
-                <th scope="col">Tags</th>
+                <!-- <th scope="col">Tags</th> -->
             </tr>
             {% for plant in site.plants %}
 
@@ -27,7 +27,7 @@ layout: base
                 <td>{{ plant.soil_temp }}</td>
                 <td>{{ plant.humidity }}</td>
                 <td>{{ plant.light }}</td>
-                <td>{{ plant.nfc_tags }}</td>
+                <!-- <td>{{ plant.nfc_tags }}</td> -->
             </tr>
             {% endfor %}
         </thead>
