@@ -29,7 +29,7 @@ title: Blog Archive
             <ul class="list-group">
             {% for category in site.categories %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                 <a href="/categories/{{ category | first | slugify }}/">{{ category_name | last }}</a>
+                 <a href="/categories/{{ category | first | slugify }}/">{{ category.name | last }}</a>
                 <span class="badge bg-primary rounded-pill">{{ category | last | size }}</span>
             </li>
             {% endfor %}
