@@ -1,49 +1,12 @@
 ---
 layout: base
 ---
-<h2>Posts related to: {{ page.title }}</h2>
-
-{% for post in site.categories.[page.category] %}
-  <div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-      <h2 class="post-title">{{ post.title }}</h2>
-    </a>
-    <p class="post-meta">
-      Posted on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-  </div>
-  <hr>
-{% endfor %}
-
-
-
+<h1 class="heading">Posts related to: {{ page.title }}</h1>
 {{ content }}
 <div class="container">
     <div class="row">
     <div class="col-lg-8 col-md-12 p-2">
-        <h2 class="heading">Recent Posts</h2>
         <div class="list-group">
-
-
-<!-- 
-{% for post in site.categories.[page.category] %}
-  <div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-      <h2 class="post-title">{{ post.title }}</h2>
-    </a>
-    <p class="post-meta">
-      Posted on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-  </div>
-  <hr>
-{% endfor %}           -->
-
-
-
-
-
-
-
             {% for post in site.categories.[page.category] %}
             <article>
             <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
