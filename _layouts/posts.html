@@ -26,21 +26,18 @@ title: Blog Archive
     </div>
         <div class="col-lg-4 col-md-12 p-2 mb-4">
             <h2 class="heading">Categories</h2>
-
-
-
-{% assign categories = site.categories | sort %}
-{% for category in categories %}
-  <h2 id="{{ category[0] | slugify }}">{{ category[0] | capitalize }}</h2>
-  <ul>
-    {% for post in category[1] %}
-      <li>
-        <span class="date">{{ post.date | date: "%b %d, %Y" }}</span> — 
-        <a href="{{ post.url }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-{% endfor %}
+            {% assign categories = site.categories | sort %}
+            {% for category in categories %}
+            <h2 id="{{ category[0] | slugify }}">{{ category[0] | capitalize }}</h2>
+            <ul>
+                {% for post in category[1] %}
+                <li>
+                    <span class="date">{{ post.date | date: "%b %d, %Y" }}</span> — 
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
 
 
 
@@ -48,13 +45,15 @@ title: Blog Archive
 
 
             <ul class="list-group">
+            {% assign categories = site.categories | sort %}
             {% for category in site.categories %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                 <a href="/categories/{{ category | first | slugify }}/">{{ post.title }}</a>
-                <span class="badge bg-primary rounded-pill">{{ category | last | size }}</span>
+                 <a href="/categories/{{ category | first | slugify }}/">{{ category[0].title | capitalize }}</a>
+                <span class="badge bg-primary rounded-pill">{{ category[0] | size }}</span>
             </li>
             {% endfor %}
             </ul>
+            {% endfor %}
     </div>
     </div>
 </div>
