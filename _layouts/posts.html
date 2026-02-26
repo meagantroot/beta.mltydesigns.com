@@ -31,7 +31,7 @@ title: Blog Archive
                 {% for category in categories %}
                 {% assign category_name = category | first %}
                 {% assign posts_in_category = category | last %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center text-capitalize">
                     <a href="/categories/{{ category_name | slugify }}">{{ category_name }}</a>
                     <span class="badge bg-primary rounded-pill">{{ posts_in_category | size }}</span>
                 </li>
