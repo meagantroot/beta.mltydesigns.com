@@ -26,6 +26,27 @@ title: Blog Archive
     </div>
         <div class="col-lg-4 col-md-12 p-2 mb-4">
             <h2 class="heading">Categories</h2>
+
+
+
+{% assign categories = site.categories | sort %}
+{% for category in categories %}
+  <h2 id="{{ category[0] | slugify }}">{{ category[0] | capitalize }}</h2>
+  <ul>
+    {% for post in category[1] %}
+      <li>
+        <span class="date">{{ post.date | date: "%b %d, %Y" }}</span> — 
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+
+
+
+
+
+
             <ul class="list-group">
             {% for category in site.categories %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
