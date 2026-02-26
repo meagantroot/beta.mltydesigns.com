@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: base
 ---
 <h2>Posts related to: {{ page.title }}</h2>
 
@@ -14,3 +14,64 @@ layout: posts
   </div>
   <hr>
 {% endfor %}
+
+
+
+{{ content }}
+<div class="container">
+    <div class="row">
+    <div class="col-lg-8 col-md-12 p-2">
+        <h2 class="heading">Recent Posts</h2>
+        <div class="list-group">
+
+
+<!-- 
+{% for post in site.categories.[page.category] %}
+  <div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+      <h2 class="post-title">{{ post.title }}</h2>
+    </a>
+    <p class="post-meta">
+      Posted on {{ post.date | date: "%B %-d, %Y" }}
+    </p>
+  </div>
+  <hr>
+{% endfor %}           -->
+
+
+
+
+
+
+
+            {% for post in site.categories.[page.category] %}
+            <article>
+            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
+                <div class="w-100">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <p><small>{{ post.date | date: "%B %d, %Y" }}</small></p>
+                </div>
+                <hr/>
+                <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
+                <button class="btn btn-small {% cycle 'btn-light', 'btn-primary' %}">Continue Reading ></button>
+            </a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+        <div class="col-lg-4 col-md-12 p-2 mb-4">
+            <h2 class="heading">Categories</h2>
+            <ul class="list-group">
+                {% assign categories = site.categories | sort %}
+                {% for category in categories %}
+                {% assign category_name = category | first %}
+                {% assign posts_in_category = category | last %}
+                <li class="list-group-item d-flex justify-content-between align-items-center text-capitalize">
+                    <a href="/categories/{{ category_name | slugify }}">{{ category_name }}</a>
+                    <span class="badge bg-primary rounded-pill">{{ posts_in_category | size }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
+    </div>
+</div>
