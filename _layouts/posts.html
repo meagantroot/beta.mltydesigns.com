@@ -4,12 +4,37 @@ layout: base
 
 {{ content }}
 
-<div class="card">
-<div class="card-body">
-    <h4 class="card-title">Card title</h4>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+<div class="col-lg-8 col-md-12 p-2">
+    {% for post in site.posts %}
+        <article>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    </article>
+    {% endfor %}
 </div>
+
+<div class="col-lg-4 col-md-12 p-2">
+    <h2 class="heading">Recent Posts</h2>
+    <div class="list-group">
+        {% for post in site.posts %}
+        <article>
+        <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
+            <div class="w-100">
+                <h5 class="mb-1">{{ post.title }}</h5>
+                <p><small>{{ post.date | date: "%B %d, %Y" }}</small></p>
+            </div>
+            <hr/>
+            <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
+            <button class="btn btn-small {% cycle 'btn-light', 'btn-primary' %}">Continue Reading ></button>
+        </a>
+        </article>
+        {% endfor %}
+    </div>
 </div>
