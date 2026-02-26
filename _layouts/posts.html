@@ -31,7 +31,7 @@ title: Blog Archive
             <ul>
             {% for category in site.categories %}
             <li>
-                <a href="/category/{{ category | first | slugify }}/">{{ category | first }}</a>
+                <a href="/categories/{{ category | first | slugify }}/">{{ category | first }}</a>
                 ({{ category | last | size }} posts)
             </li>
             {% endfor %}
