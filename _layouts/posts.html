@@ -29,14 +29,6 @@ title: Blog Archive
             {% assign categories = site.categories | sort %}
             {% for category in categories %}
             <h2 id="{{ category[0] | slugify }}">{{ category[0] | capitalize }}</h2>
-            <ul>
-                {% for post in category[1] %}
-                <li>
-                    <span class="date">{{ post.date | date: "%b %d, %Y" }}</span> — 
-                    <a href="{{ post.url }}">{{ post.title }}</a>
-                </li>
-                {% endfor %}
-            </ul>
             {% endfor %}
 
 
