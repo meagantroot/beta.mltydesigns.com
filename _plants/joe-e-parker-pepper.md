@@ -1,6 +1,6 @@
 ---
 layout: plant
-title: Joe E.Parker Pepper
+title: Joe E. Parker Pepper
 subtitle: 
 tags: [peppers]
 comments: false
