@@ -1,5 +1,6 @@
 ---
 layout: base
+title: Blog Archive
 ---
 
 {{ content }}
@@ -24,6 +25,19 @@ layout: base
         </div>
     </div>
         <div class="col-lg-4 col-md-12 p-2 mb-4">
+            <h2 class="heading">Categories</h2>
+
+
+            <ul>
+            {% for category in site.categories %}
+            <li>
+                <a href="/category/{{ category | first | slugify }}/">{{ category | first }}</a>
+                ({{ category | last | size }} posts)
+            </li>
+            {% endfor %}
+            </ul>
+
+
             <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Cras justo odio
