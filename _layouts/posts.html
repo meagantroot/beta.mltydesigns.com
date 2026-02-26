@@ -34,7 +34,7 @@ title: Blog Archive
                 {% assign posts_in_category = category | last %}
                 <li>
                 <a href="{{ site.baseurl }}/categories/#{{ category_name | slugify }}">
-                    {{ category_name | capitalize }} 
+                    {{ category_name | proper }} 
                     <span class="post-count">({{ posts_in_category | size }})</span>
                 </a>
                 </li>
