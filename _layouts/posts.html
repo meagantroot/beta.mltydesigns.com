@@ -35,11 +35,26 @@ title: Blog Archive
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a href="/categories/{{ category_name | slugify }}">
                     {{ category_name }} 
-                    <span class="badge bg-primary rounded-pill">{{ posts_in_category | size }}</span>
+                    <span class="badge bg-primary rounded-pill">({{ posts_in_category | last | size }})</span>
                 </a>
                 </li>
             {% endfor %}
             </ul>
-        </div>
+
+
+
+
+
+
+
+            <ul class="list-group">
+                {% for category in site.categories %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                 <a href="/categories/{{ category | first | slugify }}/">{{ category.name | last }}</a>
+                <span class="badge bg-primary rounded-pill">{{ category | last | size }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
     </div>
 </div>
