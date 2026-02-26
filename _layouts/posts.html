@@ -26,32 +26,14 @@ title: Blog Archive
     </div>
         <div class="col-lg-4 col-md-12 p-2 mb-4">
             <h2 class="heading">Categories</h2>
-
             <ul class="list-group">
-            {% assign categories = site.categories | sort %}
-            {% for category in categories %}
+                {% assign categories = site.categories | sort %}
+                {% for category in categories %}
                 {% assign category_name = category | first %}
                 {% assign posts_in_category = category | last %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="/categories/{{ category_name | slugify }}">
-                    {{ category_name }} 
-                    <span class="badge bg-primary rounded-pill">({{ posts_in_category | last | size }})</span>
-                </a>
-                </li>
-            {% endfor %}
-            </ul>
-
-
-
-
-
-
-
-            <ul class="list-group">
-                {% for category in site.categories %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                 <a href="/categories/{{ category | first | slugify }}/">{{ category.name | last }}</a>
-                <span class="badge bg-primary rounded-pill">{{ category | last | size }}</span>
+                    <a href="/categories/{{ category_name | slugify }}">{{ category_name }}</a>
+                    <span class="badge bg-primary rounded-pill">({{ posts_in_category}})</span>
                 </li>
                 {% endfor %}
             </ul>
