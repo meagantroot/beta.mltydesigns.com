@@ -21,7 +21,7 @@ layout: base
                 </div>
                 <hr/>
                 <p class="mb-1">{{ post.excerpt | markdownify | strip_html | truncate: 360 }}</p>
-                <small>Continue Reading ></small>
+                <button class="btn btn-small {% cycle 'btn-light', 'btn-secoundary' %}">Continue Reading ></button>
             </a>
             </article>
             {% endfor %}
