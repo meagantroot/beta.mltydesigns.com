@@ -42,6 +42,7 @@ img {
 .calendar table {
     border-collapse: initial;
     direction: rtl !important;
+    caption-side: top !important;
 }
 
 html[data-bs-theme="dark"] {
