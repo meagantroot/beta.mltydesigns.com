@@ -14,6 +14,13 @@
 
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
 
+    {% if page.schema == "person" %}
+        {% include schema-person.html %}
+    {% elsif page.schema == "webpage" %}
+        {% include schema-webpage.html %}
+    {% elsif page.schema == "article" %}
+        {% include schema-article.html %}
+    {% endif %}
 
     <link rel="alternate" type="application/rss+xml" title="{{site.author.name}}" href="/feed.xml">
 
