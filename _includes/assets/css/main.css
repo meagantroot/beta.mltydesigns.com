@@ -44,10 +44,9 @@ img {
     direction: rtl !important;
 }
 
-
 html[data-bs-theme="dark"] {
 
-    .ContributionCalendar-grid thead, .ContributionCalendar-label {
+    .ContributionCalendar-grid thead, ..ContributionCalendar-grid thead td, .ContributionCalendar-label {
         background-color: #212529 !important;
     }
 
