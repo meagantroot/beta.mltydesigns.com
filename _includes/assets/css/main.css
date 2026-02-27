@@ -51,10 +51,8 @@ html[data-bs-theme="dark"] {
         background-color: transparent !important;
     }
 
-
-
     .list-group-item, .list-group-item:hover, .list-group-item:focus {
-        background-color: #fff !important;
+        background-color: ##3a3e42 !important;
         color: var(--bs-body-color) !important;
     }
 
