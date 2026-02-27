@@ -47,7 +47,7 @@ img {
 
 html[data-bs-theme="dark"] {
 
-    .ContributionCalendar-label {
+    .ContributionCalendar-grid td {
         background-color: #212529 !important;
     }
 
