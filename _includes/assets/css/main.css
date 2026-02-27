@@ -44,6 +44,20 @@ img {
     direction: rtl !important;
 }
 
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+
+    .ContributionCalendar-grid {
+        background-color: transparent !important;
+    }
+
+    .list-group-item {
+        background-color: #fff !important;
+    }
+
+}
+
 /* Optional: Make the text smaller on mobile for better fit */
 @media (max-width: 600px) {
     .calendar {
