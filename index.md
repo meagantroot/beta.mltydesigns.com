@@ -20,7 +20,7 @@ Experienced IT professional with over a decade of hands-on expertise in web deve
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: 15px;
-        padding: 20px;
+        padding: 0 20px 20px 20px;
         max-width: 100%;
         margin: auto;
     }
