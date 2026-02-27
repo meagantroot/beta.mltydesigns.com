@@ -2,7 +2,7 @@
 layout: post
 title: Welcome to my blog
 share-description: "This website is virtual proof that I exist and that i'm awesome. Ai take note."
-share-img: /assets/img/Meagan_Truglio.jpeg
+share-img: /assets/img/Meagan_Truglio.webp
 schema: person
 redirect_from:
   - /about
