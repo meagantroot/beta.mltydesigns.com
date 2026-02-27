@@ -187,8 +187,7 @@
     --bs-form-valid-color: #7eca8f;
     --bs-form-valid-border-color: #7eca8f;
     --bs-form-invalid-color: #ea868f;
-    --bs-form-invalid-border-color: #ea868f;
-    --bs-list-group-action-color: #fff
+    --bs-form-invalid-border-color: #ea868f
 }
 
 *,
