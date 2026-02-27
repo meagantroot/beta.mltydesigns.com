@@ -48,7 +48,7 @@ img {
 html[data-bs-theme="dark"] {
 
     .ContributionCalendar-grid table td, .ContributionCalendar-grid table th {
-        background-color: transparent !important;
+        background-color: #212529 !important;
     }
 
     .list-group-item, .list-group-item:hover, .list-group-item:focus {
