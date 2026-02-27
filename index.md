@@ -5,7 +5,7 @@ share-description: "This website is virtual proof that I exist and that i'm awes
 share-img: /assets/img/Meagan_Truglio.webp
 schema: person
 redirect_from:
-  - /about
+  - /about/
 ---
 
 ## About Me
