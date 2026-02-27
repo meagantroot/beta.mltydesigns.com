@@ -52,7 +52,7 @@ html[data-bs-theme="dark"] {
     }
 
     .list-group-item, .list-group-item:hover, .list-group-item:focus {
-        background-color: ##3a3e42 !important;
+        background-color: #3a3e42 !important;
         color: var(--bs-body-color) !important;
     }
 
