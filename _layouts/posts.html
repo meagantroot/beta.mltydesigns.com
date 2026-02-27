@@ -10,7 +10,7 @@ title: Blog Archive
         <div class="list-group">
             {% for post in site.posts %}
             <article>
-            <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
+            <a href="{{ post.url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
                 <div class="w-100">
                     <h5 class="mb-1">{{ post.title }}</h5>
                     <p><small>{{ post.date | date: "%B %d, %Y" }}</small></p>
