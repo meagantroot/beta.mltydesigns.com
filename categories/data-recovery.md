@@ -5,4 +5,5 @@ category: data recovery
 permalink: /categories/data-recovery/
 schema: webpage
 noindex: true
+sitemap: false
 ---
