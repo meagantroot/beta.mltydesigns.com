@@ -45,15 +45,15 @@ img {
 }
 
 
-/* Dark mode styles */
-@media (prefers-color-scheme: dark) {
+html[data-bs-theme="dark"] {
 
     .ContributionCalendar-grid {
         background-color: transparent !important;
     }
 
-    .list-group-item {
+    .list-group-item, .list-group-item:hover, .list-group-item:focus, .list-group-item:active {
         background-color: #fff !important;
+        color: var(--bs-body-color) !important;
     }
 
 }
