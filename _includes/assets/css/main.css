@@ -47,11 +47,13 @@ img {
 
 html[data-bs-theme="dark"] {
 
-    .ContributionCalendar-grid {
+    .ContributionCalendar-grid table td, .ContributionCalendar-grid table th {
         background-color: transparent !important;
     }
 
-    .list-group-item, .list-group-item:hover, .list-group-item:focus, .list-group-item:active {
+
+
+    .list-group-item, .list-group-item:hover, .list-group-item:focus {
         background-color: #fff !important;
         color: var(--bs-body-color) !important;
     }
