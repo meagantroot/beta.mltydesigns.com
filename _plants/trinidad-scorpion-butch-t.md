@@ -1,6 +1,6 @@
 ---
 layout: plant
-title: Greek Pepperoncini Pepper
+title: Trinidad Scorpion "Butch T" Pepper
 subtitle: 
 tags: [peppers]
 comments: false
@@ -10,14 +10,13 @@ author: Meagan Truglio
 readtime: false
 schema: article
 pepper: true
-scoville: "100 - 500" # Use the range from base to peak scoville
-germination_days: "10-14"
-soil_temp: "78-85°F"
-humidity: "80-100%"
-light: "14-16 hours"
+scoville: "800,000 - 1,463,700" # Use the range from base to peak scoville
+germination_days: "7-21"
+soil_temp: "80-85°F"
+humidity: "70-80%"
+light: "12-16 hours"
 noindex: true
 sitemap: false
 redirect_from:
-  - /04:D4:94:71:C8:2A:81
-  - /04:CE:31:71:C8:2A:81
+  - /04:EA:B6:71:C8:2A:81
 ---
