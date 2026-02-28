@@ -18,5 +18,5 @@ light: "8-12 hours"
 noindex: true
 sitemap: false
 redirect_from:
-  - /04:CE:BE:71:C8:2A:81
+  - /04:CB:BE:71:C8:2A:81
 ---
