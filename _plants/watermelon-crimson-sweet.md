@@ -2,7 +2,7 @@
 layout: plant
 title: Watermelon Crimson Sweet
 subtitle: 
-tags: [vines]
+tags: [melons]
 comments: false
 author: Meagan Truglio
 #share-img: https://mltydesigns.com/assets/img/input.gif
