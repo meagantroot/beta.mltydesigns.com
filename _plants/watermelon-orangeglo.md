@@ -1,23 +1,22 @@
 ---
 layout: plant
-title: Tabasco Pepper
+title: Watermelon Orangeglo
 subtitle: 
-tags: [peppers]
+tags: [vines]
 comments: false
 author: Meagan Truglio
 #share-img: https://mltydesigns.com/assets/img/input.gif
 #share-description: ""
 readtime: false
 schema: article
-pepper: true
-scoville: "35,000 - 50,000" # Use the range from base to peak scoville
-germination_days: "7-28"
+pepper: false
+scoville:  # Use the range from base to peak scoville
+germination_days: "7-10
 soil_temp: "70-85°F"
-humidity: "80-90%"
-light: "6-8 hours"
+humidity: "80-100%"
+light: "10-12 hours"
 noindex: true
 sitemap: false
 redirect_from:
-  - /04:EC:6B:71:C8:2A:81
-  - /04:EA:76:71:C8:2A:81
+  - /04:82:26:71:C8:2A:81
 ---
