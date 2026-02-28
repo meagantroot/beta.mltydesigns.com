@@ -1,8 +1,8 @@
 ---
 layout: plant
-title: Aji Mango Drop Pepper
+title: Pea Snap Sugar Daddy
 subtitle: 
-tags: [peppers]
+tags: [vine]
 comments: false
 author: Meagan Truglio
 #share-img: https://mltydesigns.com/assets/img/input.gif
@@ -10,13 +10,14 @@ author: Meagan Truglio
 readtime: false
 schema: article
 pepper: true
-scoville: "25,000" # Use the range from base to peak scoville
-germination_days: "10-20"
-soil_temp: "80-90°F"
-humidity: "80-100%"
-light: "12-16 hours"
+scoville: 
+germination_days: "5-10"
+soil_temp: "60-70°F"
+humidity: "65-85%"
+light: "6-12 hours"
 noindex: true
 sitemap: false
 redirect_from:
-  - /04:AE:9C:71:C8:2A:81
+  - /04:DD:35:71:C8:2A:81
+  - /04:62:48:71:C8:2A:81
 ---
