@@ -19,4 +19,5 @@ noindex: true
 sitemap: false
 redirect_from:
   - /04:51:82:71:C8:2A:81
+  - /04:1B:88:71:C8:2A:81
 ---
