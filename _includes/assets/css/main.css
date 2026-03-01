@@ -42,6 +42,10 @@ img {
 
 .calendar a { display: none !important; }
 
+[data-bs-theme="dark"] .calendar table td {
+        background-color: unset;
+}
+
 /* Container for the heatmap */
 .calendar {
     width: 100%;
