@@ -17,6 +17,27 @@ img {
     background-color: transparent;
 }
 
+/* Light Mode Toogle Icon Styles */
+
+[data-bs-theme="light"] .form-switch .bi-moon-stars-fill {
+  display: none;
+}
+
+[data-bs-theme="light"] .form-switch .bi-sun-fill {
+  display: inline;
+}
+
+/* Dark Mode Toggle Icon Styles */
+
+[data-bs-theme="dark"] .form-switch .bi-sun-fill {
+  display: none;
+}
+
+[data-bs-theme="dark"] .form-switch .bi-moon-stars-fill {
+  display: inline;
+}
+
+
 /* GitHub Heatmaps Syles */
 
 .calendar a { display: none !important; }
