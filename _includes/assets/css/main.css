@@ -40,7 +40,7 @@ img {
 
 /* GitHub Heatmaps Syles */
 
-[data-bs-theme="dark"] table td, [data-bs-theme="dark"] table th {
+[data-bs-theme="dark"] .calendar table td, [data-bs-theme="dark"] .calendar table th {
         background-color: transparent;
 }
 
