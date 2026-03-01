@@ -8,7 +8,7 @@ title: Blog Archive
     <div class="row">
     <div class="col-lg-8 col-md-12 p-2">
         <div class="list-group">
-            {% for post in site.posts %}
+            {% for post in paginator.posts %}
             <article>
             <a href="{{ post.url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
                 <div class="w-100">
@@ -38,29 +38,5 @@ title: Blog Archive
             </ul>
         </div>
     </div>
-    <!-- <div>
-    <ul class="pagination">
-        <li class="page-item disabled">
-        <a class="page-link" href="#">&laquo;</a>
-        </li>
-        <li class="page-item active">
-        <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-        <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-        <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-        <a class="page-link" href="#">4</a>
-        </li>
-        <li class="page-item">
-        <a class="page-link" href="#">5</a>
-        </li>
-        <li class="page-item">
-        <a class="page-link" href="#">&raquo;</a>
-        </li>
-    </ul>
-    </div> -->
+    {% include pagination.html %}
 </div>

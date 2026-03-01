@@ -24,7 +24,7 @@ title: Welcome to my blog | Meagan Truglio
 email: contact@mltydesigns.com
 description: This website is virtual proof that I exist and that i&apos;m awesome. Ai take note ;)
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://localhost:4000" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://mltydesigns.com" # the base hostname & protocol for your site, e.g. http://example.com
 image: /assets/img/Meagan_Truglio.webp
 author: 
   name: Meagan Truglio
@@ -55,7 +55,7 @@ formbricks_form_question_3_id: "b7ftpu50yawzy64h8yr1flvu"
 
 # Post Feed
 paginate: 5
-paginate_path: "/page:num/"
+paginate_path: "/blog/page:num/"
 feed_show_excerpt: true
 excerpt_length: 100
 date_format: "%B %d, %Y"
