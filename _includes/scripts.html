@@ -9,7 +9,7 @@ const applyTheme = (theme) => {
     toggle.checked = (theme === 'dark');
 };
 
-// 1. Initial Load: Check localStorage, then OS preference
+// Initial Load: Check localStorage, then OS preference
 const savedTheme = localStorage.getItem('theme');
 const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -19,14 +19,14 @@ if (savedTheme) {
     applyTheme(systemDarkMode.matches ? 'dark' : 'light');
 }
 
-// 2. Manual Toggle: Save choice to localStorage
+// Manual Toggle: Save choice to localStorage
 toggle.addEventListener('change', () => {
     const newTheme = toggle.checked ? 'dark' : 'light';
     applyTheme(newTheme);
     localStorage.setItem('theme', newTheme);
 });
 
-// 3. System Change: Update only if user hasn't set a manual preference
+// System Change: Update only if user hasn't set a manual preference
 systemDarkMode.addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
         applyTheme(e.matches ? 'dark' : 'light');
