@@ -40,6 +40,10 @@ img {
 
 /* GitHub Heatmaps Syles */
 
+[data-bs-theme="dark"] table td, [data-bs-theme="dark"] table th {
+        background-color: transparent;
+}
+
 .calendar a { display: none !important; }
 
 /* Container for the heatmap */
