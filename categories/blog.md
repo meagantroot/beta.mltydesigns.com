@@ -7,5 +7,5 @@ schema: webpage
 noindex: true
 sitemap: false
 redirect_from:
- - /categories/
+  - /categories/
 ---
