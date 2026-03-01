@@ -55,7 +55,7 @@ formbricks_form_question_3_id: "b7ftpu50yawzy64h8yr1flvu"
 
 # Post Feed
 paginate: 5
-paginate_path: "/page:num/"
+paginate_path: "/blog/page:num/"
 feed_show_excerpt: true
 excerpt_length: 100
 date_format: "%B %d, %Y"

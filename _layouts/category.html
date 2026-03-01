@@ -7,7 +7,7 @@ layout: base
     <div class="row">
     <div class="col-lg-8 col-md-12 p-2">
         <div class="list-group">
-            {% for post in site.categories.[page.category] %}
+            {% for post in site.categories[page.category] %}
             <article>
             <a href="{{ post.url | relative_url }}" class="list-group-item list-group-item-action flex-column align-items-start {% cycle 'active', '' %}">
                 <div class="w-100">
