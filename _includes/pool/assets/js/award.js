@@ -5,7 +5,7 @@ function award(idx,awardType) {
     const mode = gameState.mode;
     const theme = localStorage.theme;
     
-    console.log("Awarding a: " + awardType);
+    // console.log("Awarding a: " + awardType);
 
     render();   // This redraws the button with the new number and correct disabled state
 
