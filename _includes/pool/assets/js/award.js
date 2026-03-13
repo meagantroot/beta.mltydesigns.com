@@ -11,7 +11,7 @@ function award(idx,awardType) {
 
     if (typeof saveGame === "function") saveGame();
 
-    const ballColor = theme === "dark" || "" ? "rgb(33, 37, 41)" : "white";
+    const ballColor = theme === "light" ? "white" : "rgb(33, 37, 41)";
 
     launchConfetti();
 

@@ -11,7 +11,7 @@ const applyTheme = (theme) => {
 
 // Initial Load: Check localStorage, then OS preference
 const savedTheme = localStorage.getItem('theme');
-const systemDarkMode = window.matchMedia('(prefers-color-scheme: light)');
+const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
 
 if (savedTheme) {
     applyTheme(savedTheme);
