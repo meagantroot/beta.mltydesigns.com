@@ -304,3 +304,5 @@ input[type="text"] {
     pointer-events: none;
     z-index: 999999;
 }
+
+.bmc-btn-container { text-align:left; margin-top: 22px}
