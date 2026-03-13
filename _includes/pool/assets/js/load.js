@@ -94,23 +94,23 @@ function render() {
                 rows += `
                 <tr style="${rowStyle} ${bgStyle}">
                     <td class="text-muted">${idx + 1}</td>
-                    <td>${inn.balls.join(',') || '-'} ${badges}</td>
+                    <td>${inn.balls.join(', ') || '-'} ${badges}</td>
                     <td class="text-end fw-bold">${inn.points}</td>
                 </tr>`;
             }
 
             return `
-            <div class="col">
+            <div class="col-sm-12 col-md-6 mb-2">
                 <div class="card border-${gameState.currentTurn === i ? 'success' : 'secondary'}">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="d-flex justify-content-between align-items-center mb-0">
                             <h5 class="m-0">${p.name}</h5>
                             <button id="timeout-btn-${i}" class="btn btn-sm btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#timeout-modal" onclick="useTimeout(${i})" ${isDisabled}>
 
                                 Timeouts: ${p.timeouts}
                             </button>
                         </div>
-                        <div class="mb-2">
+                        <div class="m-0">
                             <small class="text-muted">Racks: ${p.racksWon} | Safeties: ${p.defensiveShots} | Scratches: ${p.scratches}</small>
                         </div>
                         <table class="table table-striped table-sm mb-0">
