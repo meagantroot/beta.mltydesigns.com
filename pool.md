@@ -1,6 +1,7 @@
 ---
 title: The Practice App
 layout: pool
+share-img: assets/img/icon-512.png
 permalink: /pool
 noindex: true
 schema: webpage
