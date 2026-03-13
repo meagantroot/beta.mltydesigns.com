@@ -52,7 +52,7 @@ function useTimeout(idx) {
 
     // Show the Modal and Timer
     // const theme = localStorage.theme;
-    const ballColor = theme === "dark" ? "rgb(33, 37, 41)" : "white";
+    const ballColor = theme === "light" ? "white" : "rgb(33, 37, 41)";
     
     document.getElementById('timeout-player-name').innerText = `${p.name}'s Timeout`;
     document.getElementById('timeout-modal').style.display = 'flex';
