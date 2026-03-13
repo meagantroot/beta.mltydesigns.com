@@ -59,5 +59,3 @@ function displayHistory() {
             </div>
         </div>`).join('') || "No matches.";
 }
-
-// <h3 class="d-flex justify-content-between">${m.players[0].name}<small>(${m.players[0].score}/${m.players[0].target})</small> <small>vs</small> ${m.players[1].name}<small>(${m.players[1].score}/${m.players[1].target})</small></h3><br>

@@ -40,8 +40,6 @@ function updateLifetimeStats() {
         const max = 15;
         const randomBall = Math.floor(Math.random() * (max - min + 1)) + min;
 
-        // <div class="ball" data-id="${randomBall}">${randomBall}</div>
-
         html += `<tr><td>${name}</td><td class="text-center">${winRate}%</td><td class="text-center">${avgScratches}</td><td class="text-center">${s.bnr}</td><td class="text-center">${s.break8}</td><td class="text-center">${s.snap9}</td><td class="text-center">${s.games}</td></tr>`;
     }
 

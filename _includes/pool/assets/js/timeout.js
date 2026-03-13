@@ -12,14 +12,6 @@ function updateTimerDisplay(seconds) {
     }
 }
 
-// function stopTimeout() {
-//     clearInterval(timeoutInterval);
-//     timeoutInterval = null; // Clear the reference
-//     const modal = document.getElementById('timeout-modal');
-//     if (modal) modal.style.display = 'none';
-//     activeTimeoutPlayerIdx = null;
-// }
-
 function stopTimeout() {
     clearInterval(timeoutInterval);
     timeoutInterval = null;
@@ -34,67 +26,31 @@ function stopTimeout() {
     }
 }
 
-
-// function useTimeout(idx) {
-//     const p = gameState.players[idx];
-//     const mode = gameState.mode;
-//     const theme = localStorage.theme;
-
-//     if ( theme === "dark" ) {
-//         ballColor = "rgb(33, 37, 41)";
-//     } else {
-//         ballColor = "white";
-//     }
-    
-//     // Disable the button if no timeouts are left
-//     if (p.timeouts <= 0) {
-//         document.getElementById(`timeout-btn-${idx}`).disabled = true;
-//     }
-
-//     // // 1. Save snapshot for Undo BEFORE changing anything
-//     // const stateCopy = JSON.parse(JSON.stringify(gameState));
-//     // delete stateCopy.history; // Keep history clean
-//     // gameState.history.push(stateCopy);
-//     // if (gameState.history.length > 20) gameState.history.shift();
-
-//     // 2. Proceed with logic
-//     activeTimeoutPlayerIdx = idx;
-//     p.timeouts--;
-    
-//     // 3. UI and Timer Logic
-//     document.getElementById('timeout-player-name').innerText = `${p.name}'s Timeout`;
-//     document.getElementById('timeout-modal').style.display = 'flex';
-
-//     let timeLeft = 60;
-//     updateTimerDisplay(timeLeft);
-
-
-
 function useTimeout(idx) {
     const p = gameState.players[idx];
     const mode = gameState.mode;
     const theme = localStorage.theme;
     
-    // 1. Guard clause: Stop if they are already at 0
-    // if (p.timeouts <= 0) {
-    //     alert("No timeouts remaining!");
-    //     return;
-    // }
+    // Guard clause: Stop if they are already at 0
+    if (p.timeouts <= 0) {
+        alert("No timeouts remaining!");
+        return;
+    }
 
     // Safety check: if somehow clicked while disabled, just exit
     if (p.timeouts <= 0) return;
 
-    // 2. Proceed with logic
+    // Proceed with logic
     activeTimeoutPlayerIdx = idx;
     p.timeouts--; // Decrement the count
     
-    // 3. UPDATE THE UI (This fixes the display and the button state)
+    // UPDATE THE UI (This fixes the display and the button state)
     // saveGame(); // Save the new count to localStorage
     render();   // This redraws the button with the new number and correct disabled state
 
     if (typeof saveGame === "function") saveGame();
 
-    // 4. Show the Modal and Timer
+    // Show the Modal and Timer
     // const theme = localStorage.theme;
     const ballColor = theme === "dark" ? "rgb(33, 37, 41)" : "white";
     

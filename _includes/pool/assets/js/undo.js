@@ -12,15 +12,15 @@ function undoInning() {
         // location.reload();
     }
 
-    // 1. Pop the last snapshot
+    // Pop the last snapshot
     const previousState = gameState.history.pop();
 
-    // 2. Restore the entire state (this restores p.timeouts AND gameState.table)
+    // Restore the entire state (this restores p.timeouts AND gameState.table)
     Object.assign(gameState, previousState);
 
-    // 3. Persist the change
+    // Persist the change
     saveGame();
-    // 4. RE-RENDER the UI
+    // RE-RENDER the UI
     // This will re-run the ballGrid map logic and the timeout button template
     render(); 
 }

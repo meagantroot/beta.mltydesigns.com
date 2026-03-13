@@ -39,18 +39,6 @@ function downloadBackup() {
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "pool_backup.json"; a.click();
 }
 
-// Import Data
-// function importBackup(e) {
-//     const reader = new FileReader();
-//     reader.onload = (ev) => {
-//         const d = JSON.parse(ev.target.result);
-//         if (d.active) localStorage.setItem('pool_score_data', JSON.stringify(d.active));
-//         if (d.history) localStorage.setItem('pool_match_history', JSON.stringify(d.history));
-//         location.reload();
-//     };
-//     reader.readAsText(e.target.files[0]);
-// }
-
 function importBackup(e) {
     const file = e.target.files[0];
 

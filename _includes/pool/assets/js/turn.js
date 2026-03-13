@@ -79,12 +79,12 @@ else if (action === 'breakAndRun' && !isBreakShot) {
     return; 
 }
 else {
-    // 2. Group Assignment Logic
+    // Group Assignment Logic
     if (pocketed.length > 0 && !p.group && action !== 'scratch') {
         assign8BallGroups(pocketed, p, opponent);
     }
 
-    // 3. Check win/loss conditions if the 8-ball was involved
+    // Check win/loss conditions if the 8-ball was involved
     const ballsRemaining = getRemainingGroupBalls(p);
     const isOn8Ball = (p.group && ballsRemaining === 0);
 
@@ -280,7 +280,7 @@ function finalizeTurn(action, pts, resetRack, earlyLoss = false, isBR = false, i
     if (gameState.currentInningIndex === undefined) gameState.currentInningIndex = 0;
     const currentIdx = gameState.currentInningIndex;
 
-    // 1. Initialize inning objects for both players to ensure table rows are synced
+    // Initialize inning objects for both players to ensure table rows are synced
     if (!p.innings[currentIdx]) {
         p.innings[currentIdx] = { balls: [], points: 0, action: null };
     }
@@ -288,12 +288,12 @@ function finalizeTurn(action, pts, resetRack, earlyLoss = false, isBR = false, i
         opponent.innings[currentIdx] = { balls: [], points: 0, action: 'waiting' };
     }
 
-    // 2. Save Persistent Badges/Flags for this Inning
+    // Save Persistent Badges/Flags for this Inning
     // This allows the render function to show 'BR' or 'SNAP'
     p.innings[currentIdx].isBR = isBR || (action === 'breakAndRun');
     p.innings[currentIdx].isSnap = isSnap;
 
-    // 3. Handle Early Loss for 8-ball
+    // Handle Early Loss for 8-ball
     if (earlyLoss) {
         opponent.racksWon++;
         opponent.score += 1;
@@ -302,7 +302,7 @@ function finalizeTurn(action, pts, resetRack, earlyLoss = false, isBR = false, i
         p.innings[currentIdx].action = 'loss';
     }
 
-    // 4. Update stats and Inning Data for the active shooter
+    // Update stats and Inning Data for the active shooter
     p.score += pts;
     p.innings[currentIdx].balls.push(...pocketed);
     p.innings[currentIdx].points += pts;
@@ -316,7 +316,7 @@ function finalizeTurn(action, pts, resetRack, earlyLoss = false, isBR = false, i
         p.innings[currentIdx].action = 'scratch'; 
     }
 
-    // 5. Manage Table State and Inning Transitions
+    // Manage Table State and Inning Transitions
     if (resetRack) {
         // Mark all pocketed balls as 'dead' before resetting the table for the next rack
         gameState.table.forEach(b => { if(b.state === 'pocketed') b.state = 'dead'; });

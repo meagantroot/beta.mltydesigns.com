@@ -7,17 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const p1Display = document.getElementById('p1skillValue');
     const p2Display = document.getElementById('p2skillValue');
 
-    // 1. Update the function to accept both the value AND the target element
+    // Update the function to accept both the value AND the target element
     function updateSlider(slider, display) {
         const val = slider.value;
         display.innerText = val;
     }
 
-    // 2. Initial run for both
+    // Initial run for both
     if (p1Slider && p1Display) updateSlider(p1Slider, p1Display);
     if (p2Slider && p2Display) updateSlider(p2Slider, p2Display);
 
-    // 3. Independent listeners
+    // Independent listeners
     p1Slider.addEventListener('input', () => updateSlider(p1Slider, p1Display));
     p2Slider.addEventListener('input', () => updateSlider(p2Slider, p2Display));
 });
@@ -36,20 +36,19 @@ function updateSkillLimits() {
         const display = document.getElementById(id + 'Value');
         
         if (input) {
-            // 1. Update the range constraints
+            // Update the range constraints
             input.min = newMin;
             input.max = newMax;
 
-            // 2. Reset the value to 5
+            // Reset the value to 5
             input.value = 5;
 
-            // 3. Update the text display
+            // Update the text display
             if (display) {
                 display.innerText = 5;
             }
 
-            // 4. Trigger the 'input' event manually
-            // This tells other parts of your script that the value has changed
+            // Trigger the event
             input.dispatchEvent(new Event('input'));
         }
     });
