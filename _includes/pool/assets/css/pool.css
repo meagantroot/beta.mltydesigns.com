@@ -1,0 +1,306 @@
+/* CSS for Pool Scoring App */
+
+:root {
+    --primary: var(--bs-primary);
+    --success: var(--bs-success);
+    --info: var(--bs-info);
+    --warning: var(--bs-warning);
+    --danger: var(--bs-danger);
+    --dark: var(--bs-dark);
+    --light: var(--bs-light);
+}
+
+body {
+    padding: 20px;
+    line-height: 1.5;
+}
+
+input[type="text"] {
+    border: 2px solid;
+    padding: 8px;
+    vertical-align: middle;
+}
+
+/* Visual Ball Grid */
+.ball-grid {
+    display: grid;
+    /* Use 5 columns, but make them shrink to fit the screen */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 8px; /* Slightly tighter for mobile */
+    margin: 0;
+    width: 100%;
+    max-width: 400px; /* Limits size on desktop */
+    justify-items: center;
+}
+
+.ball {
+    width: 100%; 
+    max-width: 64px; /* Cap the size on large screens */
+    aspect-ratio: 1 / 1; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(14px, 4vw, 18px); 
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #333; /* Thinner border looks better on small screens */
+    user-select: none;
+    transition: 0.2s;
+    position: relative;
+    z-index: 1;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.ball.active {
+    background: #fff;
+    box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ball.pocketed {
+    transform: scale(.75);
+    box-shadow: 0 0 15px var(--success);
+    border-color: #000;
+    z-index: 2;
+    opacity: 50%;
+}
+
+.ball.dead {
+    opacity: 0.15;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
+/* Ball Colors & Stripes */
+.ball[data-id="1"],
+.ball[data-id="9"] {
+    background: #FFD700;
+    color: white;
+}
+
+.ball[data-id="2"],
+.ball[data-id="10"] {
+    background: #0000FF;
+    color: white;
+}
+
+.ball[data-id="3"],
+.ball[data-id="11"] {
+    background: #FF0000;
+    color: white;
+}
+
+.ball[data-id="4"],
+.ball[data-id="12"] {
+    background: #800080;
+    color: white;
+}
+
+.ball[data-id="5"],
+.ball[data-id="13"] {
+    background: #FF8C00;
+    color: white;
+}
+
+.ball[data-id="6"],
+.ball[data-id="14"] {
+    background: #008000;
+    color: white;
+}
+
+.ball[data-id="7"],
+.ball[data-id="15"] {
+    background: #800000;
+    color: white;
+}
+
+.ball[data-id="8"] {
+    background: #000;
+    color: white;
+}
+
+.ball[data-id="9"],
+.ball[data-id="10"],
+.ball[data-id="11"],
+.ball[data-id="12"],
+.ball[data-id="13"],
+.ball[data-id="14"],
+.ball[data-id="15"] {
+    background-image: linear-gradient(to bottom, white 20%, transparent 20%, transparent 80%, white 80%);
+}
+
+/* Shared styles for both balls */
+.ball[data-id="1"],
+.ball[data-id="2"],
+.ball[data-id="3"],
+.ball[data-id="4"],
+.ball[data-id="5"],
+.ball[data-id="6"],
+.ball[data-id="7"],
+.ball[data-id="8"],
+.ball[data-id="9"],
+.ball[data-id="10"],
+.ball[data-id="11"],
+.ball[data-id="12"],
+.ball[data-id="13"],
+.ball[data-id="14"],
+.ball[data-id="15"] {
+    color: black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    /* Match your ball size */
+    height: 64px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Center circle for both */
+.ball[data-id="1"]::before,
+.ball[data-id="2"]::before,
+.ball[data-id="3"]::before,
+.ball[data-id="4"]::before,
+.ball[data-id="5"]::before,
+.ball[data-id="6"]::before,
+.ball[data-id="7"]::before,
+.ball[data-id="8"]::before,
+.ball[data-id="9"]::before,
+.ball[data-id="10"]::before,
+.ball[data-id="11"]::before,
+.ball[data-id="12"]::before,
+.ball[data-id="13"]::before,
+.ball[data-id="14"]::before,
+.ball[data-id="15"]::before {
+    content: '';
+    position: absolute;
+    background: white;
+    width: 45%;
+    /* Slightly smaller than the stripe for a clean look */
+    height: 45%;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.btn-close::before {
+    display: none;
+}
+
+.dice {
+    width: 64px;
+    height: 64px;
+    /* D&D Triangular shape */
+    /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
+    /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); */
+    clip-path: circle(50%);
+
+    /* Marbled resin texture */
+    background: #ffffff;
+    display: flex;
+    align-items: flex-end; /* Align numbers toward the base */
+    justify-content: center;
+    padding-bottom: 8px;
+    vertical-align: middle;
+    font-family: 'Georgia', serif; /* Classic fantasy font */
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #000000;
+    /* text-shadow: 2px 2px 4px rgba(0,0,0,0.8); */
+    border: 2px solid #000000;
+    border-radius: 50%;
+    /* box-shadow: outset 0 0 15px rgba(255, 215, 0, 0.3); */
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+/* Rolling animation: chaotic jitter like a real tumble */
+.dice.rolling {
+    animation: dnd-tumble 0.15s infinite;
+}
+
+@keyframes dnd-tumble {
+    0% { transform: rotate(0deg) translate(0, 0); }
+    25% { transform: rotate(10deg) translate(2px, -2px); }
+    50% { transform: rotate(-10deg) translate(-2px, 2px); }
+    75% { transform: rotate(5deg) translate(1px, 1px); }
+    100% { transform: rotate(0deg) translate(0, 0); }
+}
+
+
+/* Timeout Animations */
+
+/* Path lengths are pre-calculated for the animation */
+.draw-path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dashoffset: 300;
+    stroke-dasharray: 300;
+    animation: draw-process 60s linear forwards;
+}
+
+.ball-outline { stroke: #000; stroke-width: 3; }
+.white-circle-outline { stroke: #555; stroke-width: 1; }
+.number-outline { stroke: #000; stroke-width: 2; font-family: Arial, sans-serif; font-weight: bold; font-size: 30px; }
+
+@keyframes draw-process {
+    to {
+    stroke-dashoffset: 0;
+    }
+}
+
+/* Optional: Fade in the colors once the drawing finishes */
+.fill-colors {
+    opacity: 0;
+    animation: fade-in 10s ease-in 50s forwards;
+}
+
+@keyframes fade-in {
+    to { opacity: 1; }
+}
+
+
+/* Award Animations */
+
+/* Path lengths are pre-calculated for the animation */
+.draw-path-award {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dashoffset: 300;
+    stroke-dasharray: 300;
+    animation: draw-process 1s linear forwards;
+}
+
+.ball-outline-award { stroke: #000; stroke-width: 3; }
+.white-circle-outline-award { stroke: #555; stroke-width: 1; }
+.number-outline-award { stroke: #000; stroke-width: 2; font-family: Arial, sans-serif; font-weight: bold; font-size: 30px; }
+
+@keyframes draw-process {
+    to {
+    stroke-dashoffset: 0;
+    }
+}
+
+/* Optional: Fade in the colors once the drawing finishes */
+.fill-colors-award {
+    opacity: 0;
+    animation: fade-in 2s ease-in forwards;
+}
+
+@keyframes fade-in {
+    to { opacity: 1; }
+}
+
+
+/* Confetti */
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 999999;
+}

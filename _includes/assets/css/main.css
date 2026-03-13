@@ -122,3 +122,18 @@ html[data-bs-theme="dark"] {
             grid-template-columns: repeat(2, 2fr);
         }
     }
+
+
+/* Pool Page Styles */
+
+.pool-table {
+  width: 100vw;      /* scale with viewport width */
+  height: auto;     /* preserve aspect ratio */
+  max-height: 100vh; /* never exceed viewport height */
+  /* overflow: hidden;   hide any overflow */
+
+}
+
+.pool-table .table>:not(caption)>*>* {
+    padding: 0;
+}

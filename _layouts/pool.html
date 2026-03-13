@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+{% include head.html %}
+
+<body class="container">
+  <div id="setup-form" class="card">
+    <div class="card-body">
+      <h2 class="card-title text-center">Match Setup</h2>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <!-- Restricted to letters, numbers, and spaces only -->
+            <input type="text" id="p1Name" value="Player 1" pattern="[a-zA-Z0-9 ]+"
+              title="Only alphanumeric characters allowed" style="width:100%" class="mb-2">
+            <label for="p1Skill" class="form-label">Set Skill Level: <b id="p1skillValue">5</b></label>
+            <input id="p1Skill" type="range" class="form-range" min="2" max="8" step="1" value="5">
+          </div>
+          </div>
+          <div class="row">
+          <div class="col">
+            <!-- Restricted to letters, numbers, and spaces only -->
+            <input type="text" id="p2Name" value="Player 2" pattern="[a-zA-Z0-9 ]+"
+              title="Only alphanumeric characters allowed" style="width:100%" class="mb-2">
+            <label for="p2Skill" class="form-label">Set Skill Level: <b id="p2skillValue">5</b></label>
+            <input id="p2Skill" type="range" class="form-range" min="2" max="8" step="1" value="5">
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-2">
+        <div class="btn-group w-100" role="group" aria-label="Select Game Mode">
+          <input type="radio" class="btn-check" name="gameMode" id="gamemode8" autocomplete="off" value="8-ball"
+            checked>
+          <label class="btn btn-outline-primary" for="gamemode8"><span style="margin: 12px auto;" class="ball"
+              data-id="8">8</span> 8-Ball</label>
+          <input type="radio" class="btn-check" name="gameMode" id="gamemode9" autocomplete="off" value="9-ball">
+          <label class="btn btn-outline-primary" for="gamemode9"><span style="margin: 12px auto;" class="ball"
+              data-id="9">9</span> 9-Ball</label>
+          <input type="radio" class="btn-check" name="gameMode" id="gamemode10" autocomplete="off" value="10-ball">
+          <label class="btn btn-outline-primary" for="gamemode10"><span style="margin: 12px auto;" class="ball"
+              data-id="10">10</span> 10-Ball</label>
+        </div>
+      </div>
+      <div class="d-grid gap-2 m-2">
+      <button onclick="startGame()" class="btn btn-success">Start Match</button>
+      </div>
+      <div class="row m-2">
+        <div class="col-sm-4">
+          <button class="btn btn-info w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuPlayerStats"
+            aria-controls="menuPlayerStats">
+            Player Stats
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-outline-dark w-100" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#menuMatchHistory" aria-controls="menuMatchHistory">
+            Match History
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuSettings"
+            aria-controls="menuSettings">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+              <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+              <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+            </svg> Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game UI Container -->
+
+  <div id="game-ui" style="display:none;">
+      <div id="player-container"></div>
+  </div>
+
+  <!-- Player Stats Off Canvas -->
+
+  <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="menuPlayerStats"
+    aria-labelledby="menuPlayerStatsLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="menuPlayerStatsLabel">Player Stats</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="card">
+        <div class="card-body">
+          <!-- <h3 class="card-title">Player Totals</h3> -->
+
+          <div class="table-responsive">
+          <table class="table table-striped">
+          <tr class="table-dark"><th>Player Name</th><th class="text-center">Win Rate</th><th class="text-center">Scratch Rate</th><th class="text-center">Break & Run</th><th class="text-center">8 on the Break</th><th class="text-center">9 on the Snap</th><th class="text-center">Matches Played</th></tr>
+          <tbody id="lifetime-stats-content"></tbody>
+          </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Match History Off Canvas -->
+
+  <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="menuMatchHistory"
+    aria-labelledby="menuMatchHistoryLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="menuMatchHistoryLabel">Match History</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="card">
+        <div class="card-body">
+          <div id="history-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeout Off Canvas -->
+
+  <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="timeout-modal"
+    aria-labelledby="timeout-modalLabel">
+    <div class="offcanvas-header ms-auto me-auto">
+      <h1 id="timeout-player-name" class="offcanvas-title">Timeout</h1>
+    </div>
+    <div class="offcanvas-body">
+      <div class="card">
+        <div class="card-body text-center">
+          <div style="text-align:center; min-width:100%; min-height: 100%; padding:30px;">
+            <!-- <div style="text-align:center;" class="spinner-grow" aria-hidden="true"></div> -->
+  
+            <span id="timeout-spinner"></span>
+            <h2 id="timer-display" style="font-size: 86px;">01:00</h2>
+          </div>
+          <button onclick="stopTimeout()" type="button" class="btn btn-success" data-bs-dismiss="offcanvas">End Timeout</button>
+          <button onclick="cancelTimeout()" type="button" class="btn btn-outline-secondary"
+            data-bs-dismiss="offcanvas">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Off Canvas for Settings Menu -->
+
+  <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="menuSettings"
+    aria-labelledby="menuSettingsLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="menuSettingsLabel">Settings</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row justify-content-between">
+            <div class="col align-self-start">
+
+          <h4 class="card-title">Display Mode</h4>
+          <div class="form-check form-switch ms-auto m-2">
+            <input class="form-check-input" type="checkbox" id="darkModeToggle">
+            <label class="form-check-label" for="darkModeToggle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-moon-stars-fill" viewBox="0 0 16 16">
+                <path
+                  d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+                <path
+                  d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+              </svg>
+            </label>
+          </div>
+            <h5 class="card-title mt-3">Can't Decide What to Play?</h5>
+             <p class="mt-2 text-muted small">Tap the ball to get a random suggestion</p>
+        </div>
+      <div class="col align-self-end">
+            <div class="dice-container text-center">
+                <p class="mb-0">Try</p>
+                <div id="pool-dice" class="dice mx-auto" onclick="rollDiceUI()">?</div>
+                <p class="mt-0">Ball</p>
+            </div>
+      </div>
+          </div>
+    </div>
+  </div>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Local Storage<br /><span id="storage-text">0.00 MB</span></h4>
+          <div style="background:#eee; height:8px; border-radius:4px;">
+            <div id="storage-bar" style="background:var(--success); height:100%; width:0%;"></div>
+          </div>
+          <div style="margin-top:15px; display:flex; gap:10px;">
+          </div>
+          <div>
+            <div class="alert alert-info mt-3">
+              <h4 class="alert-heading">Backup/Download Your Data</h4>
+              <p class="mb-0">This app does not use a centralized server to store past games; all your data is on your
+                device. With great power comes great responsibility; best keep a backup your data!</p>
+              <button class="btn btn-info" onclick="downloadBackup()">Export Data</button>
+            </div>
+            <div class="alert alert-danger mt-3">
+              <h4 class="alert-heading">Danger Zone!</h4>
+              <p class="mb-0">Restoring data from an export file will overwrite all existing data on this device. It's
+                recomended to export your data before preforming a restore or clearing browswer data.</p>
+              <button class="btn btn-outline-dark" onclick="document.getElementById('importFile').click()">Restore
+                Data</button>
+              <input type="file" id="importFile" style="display:none" onchange="importBackup(event)" accept=".json">
+              <button onclick="clearHistory()" class="btn btn-outline-danger">Clear Data</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Winner Offcanvas -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="winnerOffcanvas" aria-labelledby="winnerOffcanvasLabel">
+  <div class="offcanvas-header text-center" style="display:block;">
+    <h2 class="offcanvas-title text-center" id="winnerOffcanvasLabel">Game Over!</h2>
+    <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button> -->
+  </div>
+  <div class="offcanvas-body text-center">
+    <h1 id="winnerNameDisplay"></h1>
+    <p>Congratulations on your victory!</p>
+    <button type="button" class="btn btn-primary w-100" onclick="playAgain()" data-bs-dismiss="offcanvas">Play Again</button>
+  </div>
+</div>
+
+
+
+<!-- Award Offcanvas -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="awardOffcanvas" aria-labelledby="awardOffcanvasLabel">
+  <div class="offcanvas-header text-center" style="display:block;">
+    <!-- <h2 class="offcanvas-title text-center" id="awardOffcanvasLabel">Game Over!</h2> -->
+    <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button> -->
+  </div>
+  <div class="offcanvas-body text-center">
+    <h1 id="winnerNameDisplay"></h1>
+    <span id="award-ball"></span>
+    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="offcanvas">Awesome!</button>
+  </div>
+</div>
+
+
+<!-- <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas" onclick="award(0, '9-ball')" data-bs-target="#awardOffcanvas" aria-controls="awardOffcanvas">🎉 Award Trigger</button> -->
+
+
+  <!-- <button id="celebrate-btn" onclick="launchRainbows()">Celebrate! 🎉</button> -->
+
+  <script type="text/javascript">
+
+    // Include Custom Bootstrap
+    {% include assets/js/bootstrap.bundle.min.js %}
+
+    // Include Game Rules
+    {% include pool/assets/js/rules.js %}
+
+    // Include Skill Level Limit Logic
+    {% include pool/assets/js/skill-level-select.js %}
+
+    // Include Start Game Logic
+    {% include pool/assets/js/start-game.js %}
+
+    // Include Ball Toggle Logic
+    {% include pool/assets/js/ball-toggle.js %}
+
+    // Include 8-ball Grouping Logic
+    {% include pool/assets/js/solids-stripes.js %}
+
+    // Include Player Turn Logic
+    {% include pool/assets/js/turn.js %}
+
+    // Include Undo Turn Logic
+    {% include pool/assets/js/undo.js %}
+
+    // Include Load Game Logic
+    {% include pool/assets/js/load.js %}
+
+    // Include Save Game Logic
+    {% include pool/assets/js/save.js %}
+
+    // Include Game History Logic
+    {% include pool/assets/js/history.js %}
+
+    // Include Player Stats Logic
+    {% include pool/assets/js/stats.js %}
+
+    // Include Storage Meter Logic
+    {% include pool/assets/js/storage.js %}
+
+    // Include Time Out Logic
+    {% include pool/assets/js/timeout.js %}
+
+    // Include Dark/Light Mode Logic
+    {% include pool/assets/js/color-mode.js %}
+
+    // Include Award Logic
+    {% include pool/assets/js/award.js %}
+
+  </script>
+
+</body>
+
+</html>
