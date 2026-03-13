@@ -43,6 +43,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-redirect-from
+  - jekyll-minifier
 
 # Form
 formbricks_environment_id: "cmlvsyd9km9wcu4011cb75i2c"
