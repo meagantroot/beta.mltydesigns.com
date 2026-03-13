@@ -4,7 +4,7 @@
   "start_url": "/pool",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#fff",
   "icons": [
     {
       "src": "assets/img/icon-192.png",
