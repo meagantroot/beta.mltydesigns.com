@@ -2,7 +2,7 @@
 
 function loadGame() {
 
-    
+
     const saved = localStorage.getItem('pool_score_data');
     if (saved) {
         gameState = JSON.parse(saved);
@@ -71,7 +71,7 @@ function render() {
     </div>
 
     <!-- Synchronized Inning Tables -->
-    <div class="row mt-3 g-xl-2">
+    <div class="row mt-1 g-xl-2">
         ${gameState.players.map((p, i) => {
             let rows = "";
             const isDisabled = p.timeouts <= 0 ? 'disabled' : '';
