@@ -83,7 +83,6 @@ function render() {
                 
                 // Style for specialized rows
                 const isWaiting = inn.action === 'waiting';
-                const rowStyle = isWaiting ? 'opacity:0.4;' : '';
                 const bgStyle = inn.action === 'safety' ? 'background:#fff3cd;' : (inn.action === 'scratch' ? 'background:#f8d7da;' : '');
 
                 // Logic for badges (Snap, BR, Defense, Scratch)
@@ -93,11 +92,15 @@ function render() {
                     ${inn.isBR ? '<span class="badge bg-info">BR</span>' : ''}
                     ${inn.isSnap ? `${gameState.mode === '8-ball' ? '<span class="badge bg-primary">8ob</span>' : '<span class="badge bg-warning">9os</span>'}` : ''}
                 `;
-
                 rows += `
-                <tr style="${rowStyle} ${bgStyle}">
+                <tr style="${bgStyle}">
                     <td class="text-muted">${idx + 1}</td>
-                    <td>${inn.balls.join(', ') || '-'} ${badges}</td>
+                    <td>
+                    ${inn.balls.length > 0 
+                        ? inn.balls.map(ball => getBallSvg(ball)).join('') 
+                        : '-'} 
+                    ${badges}
+                    </td>
                     <td class="text-end fw-bold">${inn.points}</td>
                 </tr>`;
             }
@@ -157,6 +160,53 @@ function resetTable() {
     saveGame();
     render();
 }
+
+// SVG Ball Helper
+
+const getBallSvg = (ball) => {
+    const num = parseInt(ball);
+    const isStriped = num >= 9 && num <= 15;
+    const colors = ['#FFD700', '#0000FF', '#FF0000', '#800080', '#FFA500', '#008000', '#800000', '#000000'];
+    const color = colors[(num - 1) % 8] || 'none';
+    // const textColor = (num === 1 || num === 9 || isStriped) ? 'black' : 'white';
+
+
+    if (isStriped) {
+        return `
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <defs>
+                <clipPath id="clip">
+                <circle cx="100" cy="100" r="94"/>
+                </clipPath>
+            </defs>
+            <circle cx="100" cy="100" r="94" fill="white" stroke="#999" stroke-width="2"/>
+            <rect x="0" y="45" width="200" height="110" fill="${color}" clip-path="url(#clip)"/>
+            <circle cx="100" cy="100" r="45" fill="white"/>
+            <text x="100" y="115" font-size="50" text-anchor="middle" fill="black" font-family="Arial" font-weight="bold">${ball}</text>
+            </svg>
+        `;
+    } else {
+        return `
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="94" fill="${color}" stroke="#999" stroke-width="2"/>
+            <circle cx="100" cy="100" r="45" fill="white"/>
+            <text x="100" y="115" font-size="50" text-anchor="middle" fill="black" font-family="Arial" font-weight="bold">${ball}</text>
+            </svg>
+        `;
+    }
+
+
+
+    // return `
+    // <svg width="24" height="24" viewBox="0 0 24 24" style="display:inline-block; vertical-align:middle;">
+    //     <circle cx="12" cy="12" r="10" fill="white" stroke="#000" stroke-width="0.5" />
+    //     ${isStriped 
+    //         ? `<rect x="2" y="7" width="20" height="10" fill="${color}" />` 
+    //         : `<circle cx="12" cy="12" r="10" fill="${color}" />`
+    //     }
+    //     <text x="12" y="16" text-anchor="middle" fill="${textColor}" font-size="10" font-weight="bold">${ball}</text>
+    // </svg>`;
+};
 
 // Celebrate!
 
