@@ -1,0 +1,93 @@
+name: Bug report
+description: Create a bug report to help us improve mltydesigns.com
+title: "[bug]: "
+labels: [bug]
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for taking the time to fill out our bug report form 🙏
+
+- type: checkboxes
+  attributes:
+    label: "👀 Is there an existing issue for this?"
+    description: Please search to see if an issue already exists for the bug you encountered
+    options:
+    - label: I have searched and didn't find similar issue
+      required: true
+
+- type: textarea
+  attributes:
+    label: 👍 Current behavior
+    description: A concise description of what you're experiencing and what you expect
+    placeholder: |
+      When I do <X>, <Y> happens and I see the error message attached below:
+      ```...```
+      What I expect is <Z>
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: 👟 Steps to Replicate
+    description: How do you trigger this bug? Please walk us through it step by step.
+    placeholder: |
+      1. Go to '...'
+      2. Click on '....'
+      3. Scroll down to '....'
+      4. See error
+  validations:
+    required: true
+
+- type: textarea
+  id: logs
+  attributes:
+    label: 📜 Logs (if any)
+    description: Paste any relevant logs here. You can also upload `.log` files via drag & drop.
+    placeholder: |
+      ```
+      paste stack trace, application log, or keploy logs here
+      ```
+  validations:
+    required: false
+
+- type: dropdown
+  id: operating-system
+  attributes:
+    label: "💻 Operating system"
+    description: What OS is your server/device running on?
+    options:
+      - Linux
+      - MacOS
+      - Windows
+      - Something else
+  validations:
+    required: true
+
+- type: dropdown
+  id: operating-system
+  attributes:
+    label: "🧭 Browser Version"
+    description: What OS is your server/device running on?
+    options:
+      - Edge
+      - Chrome
+      - Firefox
+      - Safari
+      - Something else
+  validations:
+    required: true
+
+
+- type: textarea
+  id: use-case
+  attributes:
+    label: 🤔 What use case were you trying? (optional)
+    description: Tell us briefly what you were trying to achieve when this bug occurred.
+    placeholder: |
+      I was trying to capture test cases during a login API call...
+
+- type: markdown
+  attributes:
+    value: |
+      I have read the [Code of Conduct](https://github.com/keploy/keploy/blob/main/CODE_OF_CONDUCT.md) and followed [Contribution Guide](https://keploy.io/docs/keploy-explained/contribution-guide/)
