@@ -79,7 +79,12 @@ function rollDiceUI() {
     
     // Start animation
     diceEl.classList.add('rolling');
-    diceEl.innerText = "?";
+    diceEl.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="width: 100%">
+                <circle cx="100" cy="100" r="94" fill="black" stroke="#999" stroke-width="2"/>
+                <circle cx="100" cy="100" r="45" fill="white"/>
+                <text x="100" y="115" font-size="50" text-anchor="middle" fill="black" font-family="Arial" font-weight="bold">?</text>
+                </svg>`;
 
     // Simulate "rolling" time
     setTimeout(() => {
@@ -87,7 +92,42 @@ function rollDiceUI() {
         
         // Stop animation and show result
         diceEl.classList.remove('rolling');
-        diceEl.innerText = result;
+
+        if (result === 8) {
+            diceEl.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="width: 100%">
+                <circle cx="100" cy="100" r="94" fill="black" stroke="#999" stroke-width="2"/>
+                <circle cx="100" cy="100" r="45" fill="white"/>
+                <text x="100" y="115" font-size="50" text-anchor="middle" fill="black" font-family="Arial" font-weight="bold">8</text>
+                </svg>`;
+        } else if (result === 9) {
+            diceEl.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="width: 100%">
+                <defs>
+                    <clipPath id="clip">
+                    <circle cx="100" cy="100" r="94"/>
+                    </clipPath>
+                </defs>
+                <circle cx="100" cy="100" r="94" fill="white" stroke="#999" stroke-width="2"/>
+                <rect x="0" y="45" width="200" height="110" fill="#FDD017" clip-path="url(#clip)"/>
+                <circle cx="100" cy="100" r="45" fill="white"/>
+                <text x="100" y="115" font-size="50" text-anchor="middle" fill="black" font-family="Arial" font-weight="bold">9</text>
+                </svg>`;
+        } else {
+            diceEl.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="width: 100%">
+            <defs>
+                <clipPath id="clip">
+                <circle cx="100" cy="100" r="94"/>
+                </clipPath>
+            </defs>
+            <circle cx="100" cy="100" r="94" fill="white" stroke="#999" stroke-width="2"/>
+            <rect x="0" y="45" width="200" height="110" fill="#2B65EC" clip-path="url(#clip)"/>
+            <circle cx="100" cy="100" r="45" fill="white"/>
+            <text x="100" y="115" font-size="50" text-anchor="middle" fill="black" font-family="Arial" font-weight="bold">10</text>
+            </svg>`;
+        }
+
         
     }, 900);
 }
