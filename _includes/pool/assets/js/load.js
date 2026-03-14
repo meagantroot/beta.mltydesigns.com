@@ -7,7 +7,9 @@ function loadGame() {
         if (!gameState.table) gameState.table = Array.from({ length: 15 }, (_, i) => ({
             id: i + 1, state: 'active'
         }));
-        if (!localStorage.theme) { localStorage.setItem('theme', 'light'); }
+        if (!localStorage.getItem('theme')) {
+            localStorage.setItem('theme', 'light');
+        }
         showGameUI();
     }
 }
