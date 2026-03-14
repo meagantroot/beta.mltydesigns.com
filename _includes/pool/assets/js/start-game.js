@@ -7,6 +7,11 @@ if (!gameState) {
     gameState = {}; 
 }
 
+// Set Theme Default
+if (!localStorage.getItem('theme')) {
+    localStorage.setItem('theme', 'light');
+}
+
 // Setup Game Counters
 gameState.currentInningIndex = 0;
 gameState.rackShotCount = 0;

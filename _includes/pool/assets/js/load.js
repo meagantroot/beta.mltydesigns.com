@@ -1,15 +1,14 @@
 // Load Game
 
 function loadGame() {
+
+    
     const saved = localStorage.getItem('pool_score_data');
     if (saved) {
         gameState = JSON.parse(saved);
         if (!gameState.table) gameState.table = Array.from({ length: 15 }, (_, i) => ({
             id: i + 1, state: 'active'
         }));
-        if (!localStorage.getItem('theme')) {
-            localStorage.setItem('theme', 'light');
-        }
         showGameUI();
     }
 }
@@ -17,6 +16,7 @@ function loadGame() {
 // Render Game UI
 
 function render() {
+
     const container = document.getElementById('player-container');
     if (!gameState || !container) return;
 
