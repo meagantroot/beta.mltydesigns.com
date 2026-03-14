@@ -69,7 +69,6 @@ if (is8Break || isBnR) {
     if(is8Break) {
         award(0,'8 on the Break!');
     } else {
-
         award(0,'Break and Run!');      
     }
 } 
