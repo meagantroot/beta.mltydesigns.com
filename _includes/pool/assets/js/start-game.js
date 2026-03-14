@@ -1,5 +1,10 @@
 // This function starts the game
 
+document.addEventListener('gesturestart', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
+
 let gameState = null;
 
 // Ensure gameState exists before setting properties
