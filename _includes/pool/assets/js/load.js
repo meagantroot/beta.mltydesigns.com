@@ -101,9 +101,9 @@ function render() {
             }
 
             return `
-            <div class="col-sm-12 col-md-6 mb-2">
+            <div class="col-sm-12 col-md-6 mb-1 mt-1">
                 <div class="card border-${gameState.currentTurn === i ? 'success' : 'secondary'}">
-                    <div class="card-body">
+                    <div class="card-body p-1">
                         <div class="d-flex justify-content-between align-items-center mb-0">
                             <h5 class="m-0">${p.name}</h5>
                             <button id="timeout-btn-${i}" class="btn btn-sm btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#timeout-modal" onclick="useTimeout(${i})" ${isDisabled}>
