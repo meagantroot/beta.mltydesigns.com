@@ -254,6 +254,24 @@
 </div>
 
 
+<!-- Orientation Warning Offcanvas -->
+
+<div class="offcanvas offcanvas-top h-100" tabindex="-1" id="orientationOffcanvas" data-bs-backdrop="static" data-bs-keyboard="false" style="border:none;">
+  <div class="offcanvas-body d-flex flex-column align-items-center justify-content-center text-center">
+    <div class="mb-4">
+      <!-- Rotate icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="86" height="86" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+        <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+      </svg>
+    </div>
+    <h2 class="fw-bold">Please Rotate Your Device</h2>
+    <p class="lead">This app is designed to be used in portrait mode for the best experience.</p>
+  </div>
+</div>
+
+
+
 <!-- <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas" onclick="award(0, '9-ball')" data-bs-target="#awardOffcanvas" aria-controls="awardOffcanvas">🎉 Award Trigger</button> -->
 
 
@@ -263,6 +281,9 @@
 
     // Include Custom Bootstrap
     {% include assets/js/bootstrap.bundle.min.js %}
+
+    // Include Window Settings
+    {% include pool/assets/js/display.js %}
 
     // Include Game Rules
     {% include pool/assets/js/rules.js %}
