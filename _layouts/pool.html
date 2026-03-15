@@ -195,8 +195,14 @@
       <div class="card mb-3">
         <div class="card-body">
             <h3 class="heading">About This App</h3>
+            <p>The Practice App is a progressive web based scoring app for 8, 9 and 10 ball pool. To preserve priviacy and improve speed, scoring data is stored locally. This means your data never leaves your device.</p>
+            <!-- PWA Install Banner -->
+
+            <div id="pwa-install-banner"></div>
+
+            <h5 class="heading mb-0">From the Creator</h5>
             <p>Hello! I'm Meagan Truglio the creator of the practice app. I'm a web developer, systems administrator and pool player based in San Diego. I built this app because wanted to track my practice sessions with fellow community members and measure performance over time. Three key features I wanted to include were multiple game modes, all user data stored on user device, and the ability to score multiple games in airplane mode or without internet.</p>
-            <h4 class="text-center mb-0">Let's Connect!</h4>
+            <h5 class="text-center mb-0">Let's Connect!</h5>
             {% include pool-social.html %}
             <p class="text-center mt-3 mb-1">I hope you are enjoying the app.<br>Buy me a coffee if want to support my work on this project.</p>
             <div class="d-flex justify-content-center mt-0">
@@ -285,7 +291,6 @@
 </div>
 
 
-
 <!-- <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas" onclick="award(0, '9-ball')" data-bs-target="#awardOffcanvas" aria-controls="awardOffcanvas">🎉 Award Trigger</button> -->
 
 
@@ -343,6 +348,9 @@
 
     // Include Award Logic
     {% include pool/assets/js/award.js %}
+
+    // Include PWA Install Logic
+    {% include pool/assets/js/pwa.js %}
 
   </script>
 
