@@ -28,7 +28,7 @@ function archiveMatch() {
 }
 
 function quitMatchEarly() {
-    if (confirm("Are you sure you want to quit the match early? Match data will be lost. Are you sure you want to proceed?")) {
+    if (confirm("Match data will be lost if you quit the match early.\n\nDiscard match data and exit to the start menu?")) {
         resetGame();
     }
 }
