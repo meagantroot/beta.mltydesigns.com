@@ -57,15 +57,15 @@ function render() {
         <!-- Table Controls -->
         <div style="padding:4px; text-align:center; max-width:390px; margin-left:auto; margin-right:auto;">
             ${ballGrid}
-            <div class="controls mt-3">
-                <button class="btn btn-outline-primary" onclick="undoInning()">Undo</button>
-                <button class="btn btn-info" onclick="handleTurn('breakAndRun')" ${(gameState.rackShotCount > 0) ? 'disabled' : ''}>Break & Run</button>
-                <button class="btn btn-danger" onclick="handleTurn('scratch')">Scratch</button>
-                <button class="btn btn-warning" onclick="handleTurn('safety')">Safety</button>
+            <div class="row mt-2 g-1">
+                <div class="col-sm-2 w-25"><button class="btn btn-outline-primary w-100" onclick="undoInning()">Undo</button></div>
+                <div class="col-sm-4 w-25"><button class="btn btn-outline-danger w-100" onclick="quitMatchEarly()">Quit</button></div>
+                <div class="col-sm-6 w-50"><button class="btn btn-info w-100" onclick="handleTurn('breakAndRun')" ${(gameState.rackShotCount > 0) ? 'disabled' : ''}>Break & Run</button></div>
             </div>
-            <div class="mt-3">
-                <button class="btn btn-outline-danger w-50" onclick="resetGame()">Quit Match</button>
-                <button class="btn btn-success w-100" onclick="handleTurn('score')">Next Turn</button>
+            <div class="row mt-2 g-1 w-100">
+                <div class="col w-25"><button class="btn btn-danger w-100" onclick="handleTurn('scratch')">Scratched</button></div>
+                <div class="col w-25"><button class="btn btn-warning w-100" onclick="handleTurn('safety')">Safety</button></div>
+                <div class="col w-25"><button class="btn btn-success w-100" onclick="handleTurn('score')">Turn Over</button></div>
             </div>
         </div>
     </div>
@@ -82,21 +82,21 @@ function render() {
                 const inn = p.innings[idx] || { balls: [], points: 0, action: 'waiting' };
                 
                 // Style for specialized rows
-                const isWaiting = inn.action === 'waiting';
+                // const isWaiting = inn.action === 'waiting';
                 const bgStyle = inn.action === 'safety' ? 'background:#fff3cd;' : (inn.action === 'scratch' ? 'background:#f8d7da;' : '');
 
                 // Logic for badges (Snap, BR, Defense, Scratch)
                 const badges = `
                     ${inn.action === 'safety' ? '<span class="badge bg-warning text-dark">Safe</span>' : ''}
                     ${inn.action === 'scratch' ? '<span class="badge bg-danger">Foul</span>' : ''}
-                    ${inn.isBR ? '<span class="badge bg-info">BR</span>' : ''}
+                    ${inn.isBR  === true ? '<span class="badge bg-info">BR</span>' : ''}
                     ${inn.isSnap ? `${gameState.mode === '8-ball' ? '<span class="badge bg-primary">8ob</span>' : '<span class="badge bg-warning">9os</span>'}` : ''}
                 `;
                 rows += `
                 <tr style="${bgStyle}">
                     <td class="text-muted">${idx + 1}</td>
                     <td>
-                    ${inn.balls.length > 0 
+                    ${inn.balls.length > 0 && inn.isBR !== true
                         ? inn.balls.map(ball => getBallSvg(ball)).join('') 
                         : '-'} 
                     ${badges}

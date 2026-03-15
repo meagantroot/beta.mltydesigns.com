@@ -27,6 +27,12 @@ function archiveMatch() {
     localStorage.setItem('pool_match_history', JSON.stringify(history.slice(0, 50)));
 }
 
+function quitMatchEarly() {
+    if (confirm("Are you sure you want to quit the match early? Match data will be lost. Are you sure you want to proceed?")) {
+        resetGame();
+    }
+}
+
 function resetGame() {
 
     const winner = gameState.players.find(player => player.score >= player.target);
