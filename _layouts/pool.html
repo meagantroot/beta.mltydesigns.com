@@ -156,7 +156,7 @@
         <div class="card-body">
           <div class="row justify-content-between">
       <div class="col-sm-12 col-md-6 align-self-start">
-          <h4 class="card-title text-right">Display Mode</h4>
+          <h3 class="card-title text-right">Display Mode</h3>
           <div class="form-check form-switch ms-auto m-2">
             <label class="form-check-label" for="darkModeToggle">
             <input class="form-check-input" type="checkbox" id="darkModeToggle" style="margin-right:4px;">
@@ -176,10 +176,9 @@
             </label>
           </div>
           <small>For better battery life, dark mode is recommended.</small>
-        <div class="align-self-start"><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="meaganltruglio" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></div>
       </div>
           <div class="col-sm-12 col-md-6">
-            <h5 class="card-title mt-3">Can't Decide What to Play?</h5>
+            <h3 class="card-title mt-3">Can't Decide What to Play?</h3>
              <p class="mt-2 text-muted small">Tap the ball to get a random suggestion</p>
                 <div class="dice-container text-left">
                 <p class="mb-0"><span id="pool-dice" class="dice" onclick="rollDiceUI()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="width: 100%">
@@ -193,6 +192,20 @@
           </div>
     </div>
   </div>
+      <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="heading">About This App</h3>
+            <p>Hello! I'm Meagan Truglio the creator of the practice app. I'm a web developer, systems administrator and pool player based in San Diego. I built this app because wanted an app to track my practice sessions with fellow community members and measure performance over time. Three key features I wanted to include were multiple game modes, all user data stored on user device, and the ability to score multiple games in airplane mode or without internet.</p>
+            <p class="text-center mb-0">Let's connect!<br>I'm currently looking for the next step in my career.</p>
+            {% include social.html %}
+            <p class="text-center mt-3 mb-1">I hope you are enjoying the app.<br>Buy me a coffee if want to support my work on this project.</p>
+            <div class="d-flex justify-content-center mt-0">
+              <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="meaganltruglio" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" >
+              </script>
+            </div>
+          </div>
+      </div>
+
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Local Storage<br /><span id="storage-text">0.00 MB</span></h4>
@@ -207,7 +220,7 @@
               <p class="mb-0">This app does not use a centralized server to store past games; all your data is on your
                 device. With great power comes great responsibility; best keep a backup your data!</p>
               <button class="btn btn-info" onclick="downloadBackup()">Export Data</button>
-            </div>
+            </div>  
             <div class="alert alert-danger mt-3">
               <h4 class="alert-heading">Danger Zone!</h4>
               <p class="mb-0">Restoring data from an export file will overwrite all existing data on this device. It's
