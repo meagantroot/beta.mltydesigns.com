@@ -312,3 +312,7 @@ input[type="text"] {
 
 .bmc-btn-container { text-align:left; margin-top: 22px}
 .pool-dice { max-width:100%; margin-left: 0; margin-right:auto; }
+
+/* PWA CSS */
+
+#iosInstall li { margin-bottom: 4px; }
