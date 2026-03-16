@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateSkillLimits() {
     const is9Ball = document.getElementById('gamemode9').checked;
     const newMin = is9Ball ? 1 : 2;
-    const newMax = is9Ball ? 9 : 8;
+    const newMax = is9Ball ? 9 : 7;
 
     const ids = ['p1Skill', 'p2Skill'];
 
