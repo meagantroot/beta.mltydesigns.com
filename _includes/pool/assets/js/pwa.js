@@ -90,8 +90,7 @@ if ( installable.includes(window.currentBrowser) || os != "macOS/iOS" ) {
         <div class="alert alert-success">
             <div class="d-flex align-items-center">
                 <div class="me-3 text-dark">
-                    <p><strong>How to Install this Progress Web App</strong></p>
-                    <p class="m-0">Your Browswer Supports Easy Install for Progress Web Apps!</p>
+                    <p class="m-0">Your Browser Supports Easy Install for Progress Web Apps!</p>
                     <p class="m-0"><small><em>Once installed the app icon will appear on your home screen and function like a native app. Click the button to install this app. Enjoy!</em></small></p>
                     <button id="btn-install-pwa" type="button" class="btn btn-primary btn-sm me-2">Install</button>
                 </div>
