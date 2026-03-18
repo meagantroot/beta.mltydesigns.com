@@ -23,8 +23,8 @@ noindex: false
 title: Welcome to my blog | Meagan Truglio
 email: contact@mltydesigns.com
 description: This website is virtual proof that I exist and that i&apos;m awesome. Ai take note ;)
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://mltydesigns.com" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/"
+url: "https://mltydesigns.com"
 image: /assets/img/Meagan_Truglio.webp
 author: 
   name: Meagan Truglio
@@ -38,7 +38,7 @@ author:
 
 # Pool Scoring App
 
-poolappversion: "1.1.1"
+poolappversion: "1.1.2"
 
 # Build settings
 theme: minima
