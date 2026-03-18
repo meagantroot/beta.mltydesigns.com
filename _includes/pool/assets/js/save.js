@@ -13,15 +13,16 @@ function archiveMatch() {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         mode: gameState.mode,
         players: gameState.players.map(p => ({ 
-            name: p.name, 
-            score: p.score, 
-            target: p.target, 
-            scratches: p.scratches, 
-            rate: (p.scratches / (p.innings.length || 1) * 100).toFixed(1), 
-            won: p.score >= p.target, 
-            count8onbreak: p.count8onbreak, 
-            count9onsnap: p.count9onsnap, 
-            breakandrun: p.breakandruns 
+            name: p.name,
+            skill: p.skill,
+            score: p.score,
+            target: p.target,
+            scratches: p.scratches,
+            rate: (p.scratches / (p.innings.length || 1) * 100).toFixed(1),
+            won: p.score >= p.target,
+            count8onbreak: p.count8onbreak,
+            count9onsnap: p.count9onsnap,
+            breakandrun: p.breakandruns
         }))
     });
     localStorage.setItem('pool_match_history', JSON.stringify(history.slice(0, 50)));

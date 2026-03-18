@@ -12,9 +12,8 @@
           <div class="col">
             <!-- Restricted to letters, numbers, and spaces only -->
              <label for="p1Name">Enter Name For Player 1:</label>
-            <input type="text" id="p1Name" value="Player 1" pattern="[a-zA-Z0-9 ]+"
-              title="Only alphanumeric characters allowed" style="width:100%" class="mb-2">
-            <label for="p1Skill" class="form-label">Set Player 1 Skill Level: <b id="p1skillValue">5</b></label>
+            <input type="text" id="p1Name" value="" placeholder="Player Name" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
+            <label for="p1Skill" class="form-label">Skill Level: <b id="p1skillValue">5</b></label>
             <input id="p1Skill" type="range" class="form-range mb-0" min="2" max="8" step="1" value="5">
           </div>
           </div>
@@ -22,9 +21,8 @@
           <div class="col">
             <!-- Restricted to letters, numbers, and spaces only -->
              <label for="p2Name">Enter Name For Player 2:</label>
-            <input type="text" id="p2Name" value="Player 2" pattern="[a-zA-Z0-9 ]+"
-              title="Only alphanumeric characters allowed" style="width:100%" class="mb-2">
-            <label for="p2Skill" class="form-label">Set Player 2 Skill Level: <b id="p2skillValue">5</b></label>
+            <input type="text" id="p2Name" value="" placeholder="Player Name" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
+            <label for="p2Skill" class="form-label">Skill Level: <b id="p2skillValue">5</b></label>
             <input id="p2Skill" type="range" class="form-range mb-0" min="2" max="7" step="1" value="5">
           </div>
           </div>
@@ -110,10 +108,8 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
     </div>
     <div class="offcanvas-body">
-      <div class="card">
-        <div class="card-body">
-          <div id="history-list"></div>
-        </div>
+      <div class="container">
+        <div id="history-list"></div>
       </div>
     </div>
   </div>
