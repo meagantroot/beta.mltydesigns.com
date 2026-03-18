@@ -28,15 +28,15 @@ window.onload = function() { loadGame(); displayHistory(); updateLifetimeStats()
 
 function startGame() {
 
-    // 1. Get the Name inputs (for the text)
+    // Get the Name inputs
     const p1NameInput = document.getElementById('p1Name');
     const p2NameInput = document.getElementById('p2Name');
-    
-    // 2. Get the Skill inputs (for the numbers)
+
+    // Get the Skill inputs
     const p1SkillInput = document.getElementById('p1Skill');
     const p2SkillInput = document.getElementById('p2Skill');
 
-    // Check validity on all 4 if you want to be safe
+    // Check validity
     if (!p1NameInput.checkValidity() || !p2NameInput.checkValidity()) {
         p1NameInput.reportValidity() || p2NameInput.reportValidity();
         return;
@@ -45,13 +45,15 @@ function startGame() {
     const clean = (str) => {
         const div = document.createElement('div');
         div.textContent = str;
-        return div.innerHTML;
+        return div.innerText;
     };
 
 
     const mode = document.querySelector('input[name="gameMode"]:checked').value;
     const p1S = parseInt(p1SkillInput.value);
     const p2S = parseInt(p2SkillInput.value);
+
+    if ( clean(p1NameInput.value) === "" || clean(p2NameInput.value) === "") { alert("Please Enter a Player Name"); location.reload(); exit; }
 
     // Skill 1-3 = 2 timeouts, 4+ = 1 timeout
     const getInitialTimeouts = (skill) => (skill <= 3 ? 2 : 1);
