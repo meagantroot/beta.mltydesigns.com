@@ -4,31 +4,58 @@
 {% include head.html %}
 <body data-font="Neucha|Cabin+Sketch">
 <main class="container">
-  <div id="setup-form" class="card">
-    <div class="card-body">
-      <h2 class="card-title text-center">Match Setup</h2>
-      <div class="card-body p-0">
+  <div id="setup-form" class="container">
+    <div class="body">
+      <h2 class="title text-center">Match Setup</h2>
+      <div class="body p-0">
         <div class="row">
-          <div class="col">
-            <!-- Restricted to letters, numbers, and spaces only -->
-             <label for="p1Name">Enter Name For Player 1:</label>
-            <input type="text" id="p1Name" value="" placeholder="Player Name" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
-            <label for="p1Skill" class="form-label">Skill Level: <b id="p1skillValue">5</b></label>
-            <input id="p1Skill" type="range" class="form-range mb-0" min="2" max="8" step="1" value="5">
+          <div class="col mb-4">
+            <input type="text" id="p1Name" value="" placeholder="Enter Name For Player 1" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
+            <div class="row align-items-center">
+                <label for="p1Skill" class="col-3 col-form-label">Skill Level: <b id="p1skillValue">4</b></label>
+                <div class="col-9">
+                    <input id="p1Skill" type="range" class="form-range" min="2" max="7" step="1" value="4">
+                </div>
+            </div>            
           </div>
           </div>
           <div class="row">
           <div class="col">
-            <!-- Restricted to letters, numbers, and spaces only -->
-             <label for="p2Name">Enter Name For Player 2:</label>
-            <input type="text" id="p2Name" value="" placeholder="Player Name" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
-            <label for="p2Skill" class="form-label">Skill Level: <b id="p2skillValue">5</b></label>
-            <input id="p2Skill" type="range" class="form-range mb-0" min="2" max="7" step="1" value="5">
+            <input type="text" id="p2Name" value="" placeholder="Enter Name For Player 2" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
+            <div class="row align-items-center">
+                <label for="p2Skill" class="col-3 col-form-label">Skill Level: <b id="p2skillValue">4</b></label>
+                <div class="col-9">
+                  <input id="p2Skill" type="range" class="form-range" min="2" max="7" step="1" value="4">
+                </div>
+            </div>
+            <!-- <input id="p2Skill" type="range" class="form-range" min="100" max="850" step="1" value="550"> -->
           </div>
           </div>
         </div>
       </div>
-      <div class="m-2">
+      <div class="row">
+        <div class="col-12 mb-4 pt-3">
+          <h4>Game Mode</h4>
+          <div class="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="gameStyle" id="gameStyleRace" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="gameStyleRace">Point Race</label>
+            <input type="radio" class="btn-check" name="gameStyle" id="gameStyleSingle" autocomplete="off">
+            <label class="btn btn-outline-primary" for="gameStyleSingle">Single Rack</label>
+          </div>
+        </div>
+        <!-- <div class="col-6 mb-4 pt-3"> -->
+          <!-- <h3>Skill Raiting Mode</h3>
+          <div class="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradiob" id="btnradio4" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio4">APA</label>
+            <input type="radio" class="btn-check" name="btnradiob" id="btnradio5" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio5">Fargo</label>
+            <input type="radio" class="btn-check" name="btnradiob" id="btnradio6" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio6">Off</label>
+          </div> -->
+        <!-- </div> -->
+      </div>
+      <div class="m-0">
         <div class="btn-group w-100" role="group" aria-label="Select Game Mode">
           <input type="radio" class="btn-check" name="gameMode" id="gamemode8" autocomplete="off" value="8-ball"
             checked>
@@ -42,24 +69,24 @@
               data-id="10">10</span> 10-Ball</label>
         </div>
       </div>
-      <div class="d-grid gap-2 m-2">
-      <button onclick="startGame()" class="btn btn-success">Start Match</button>
+      <div class="d-grid gap-2 m-0 w-100">
+      <button onclick="startGame()" class="btn btn-success p-4 fs-4">Start Match</button>
       </div>
-      <div class="row m-2">
-        <div class="col-sm-4">
-          <button class="btn btn-info w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuPlayerStats"
+      <div class="row">
+        <div class="col-6 mt-2">
+          <button class="btn btn-info w-100 p-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuPlayerStats"
             aria-controls="menuPlayerStats">
             Player Stats
           </button>
         </div>
-        <div class="col-sm-4">
-          <button class="btn btn-outline-dark w-100" type="button" data-bs-toggle="offcanvas"
+        <div class="col-6 mt-2">
+          <button class="btn btn-dark w-100 p-3" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#menuMatchHistory" aria-controls="menuMatchHistory">
             Match History
           </button>
         </div>
-        <div class="col-sm-4">
-          <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuSettings"
+        <div class="col-sm-4 mt-2 w-100">
+          <button class="btn btn-primary w-100 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuSettings"
             aria-controls="menuSettings">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
               <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
