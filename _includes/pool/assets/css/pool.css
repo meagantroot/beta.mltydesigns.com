@@ -321,3 +321,15 @@ input[type="text"] {
 /* PWA CSS */
 
 #iosInstall li { margin-bottom: 4px; }
+
+html, body {
+  overscroll-behavior-y: contain; /* Prevents native pull-to-refresh on some devices */
+  margin: 0;
+}
+
+#refresh-indicator {
+  height: 50px;
+  margin-top: -50px; /* Hide above the screen */
+  text-align: center;
+  transition: transform 0.2s;
+}

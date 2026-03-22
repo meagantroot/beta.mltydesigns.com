@@ -251,3 +251,33 @@ window.addEventListener('appinstalled', () => {
 
 }
 
+
+let startY = 0;
+
+window.addEventListener('touchstart', (e) => {
+    // Only track if we are at the very top of the page
+    if (window.scrollY === 0) {
+        startY = e.touches[0].pageY;
+    }
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+    const currentY = e.touches[0].pageY;
+    const distance = currentY - startY;
+
+    if (window.scrollY === 0 && distance > 0) {
+        // Optional: Move a visual indicator or the body down as they pull
+        document.body.style.transform = `translateY(${Math.min(distance / 2, 60)}px)`;
+    }
+}, { passive: true });
+
+window.addEventListener('touchend', (e) => {
+    const distance = e.changedTouches[0].pageY - startY;
+
+    if (window.scrollY === 0 && distance > 150) { // Threshold to trigger
+        location.reload(); // Hard refresh the page
+    } else {
+        // Snap back if threshold wasn't met
+        document.body.style.transform = 'translateY(0)';
+    }
+});
