@@ -147,6 +147,7 @@ function getRemainingGroupBalls(player) {
 
 function handle9Ball(action) {
     const { p, rules, pocketed, madeMoneyBall } = getTurnContext();
+    const isSingleGame = document.getElementById('gameStyleSingle').checked;
     
     // Safely check shot count, defaulting to 0 if undefined for any reason
     const currentShot = gameState.rackShotCount || 0;
@@ -191,11 +192,22 @@ function handle9Ball(action) {
     } 
     else if (madeMoneyBall) {
         p.racksWon++;
-        pts = calculatePoints(pocketed, rules);
+        
+        if (isSingleGame) {
+            pts = p.target; 
+        } else {
+            pts = calculatePoints(pocketed, rules);
+        }
+        
         resetRack = true;
-    } 
+    }
     else {
-        pts = calculatePoints(pocketed, rules);
+        
+        if (isSingleGame) {
+            pts = 0; 
+        } else {
+            pts = calculatePoints(pocketed, rules);
+        }
     }
 
     // Increment the counter so subsequent shots in this rack aren't "Snaps"
