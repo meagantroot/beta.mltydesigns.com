@@ -169,7 +169,15 @@ function handle9Ball(action) {
         
         if (isSnap) {
             // Include value of all pocketed balls + 2 bonus points
-            pts = calculatePoints(pocketed, rules);
+            // pts = calculatePoints(pocketed, rules);
+            
+            if (isSingleGame) {
+                respotBall(9);
+                alert("9-ball spotted. Continue Shooting.");
+            } else {
+                pts = calculatePoints(pocketed, rules);
+            }
+
             // alert("🚀 9-on-the-Snap!");
             const awardCanvasElement = document.getElementById('awardOffcanvas');
             const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(awardCanvasElement);
