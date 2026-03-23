@@ -10,7 +10,7 @@ redirect_from:
 
 ## About Me
 
-Experienced IT professional with over a decade of hands-on expertise in web development, Systems Administration, and digital compliance. I have a proven track record of managing complex, secure hosting environments and leading a small cross-functional team to deliver high-performance, accessible, and compliant web solutions. I'm skilled in Linux server administration, WordPress development, and implementing privacy and accessibility standards such as PCI-DSS, GDPR, CCPA, and ADA/WCAG. Passionate about supporting mission-driven organizations through scalable technology solutions. Im my spare time, I enjoy gardening and shooting billiards.
+I am a Web Developer and Cybersecurity professional with over a decade of experience building and securing digital infrastructure. My background is rooted in full-stack development and systems hardening, where I specialized in architecting PCI-DSS compliant Linux environments and delivering high-performance, SEO-optimized web solutions. Recently, I’ve transitioned into an intensive period of security-focused professional development, building a dedicated home lab to master Hyper-V and KVM virtualization while earning five key industry certifications, including CompTIA Security+ and ISC2 CC. I bridge the gap between clean, functional web design and rigorous information security, ensuring that every deployment is as resilient as it is user-friendly. In my spare time, I enjoy gardening and shooting pool.
 
 ### My Certifications
 
