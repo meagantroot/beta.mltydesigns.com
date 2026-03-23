@@ -5,7 +5,18 @@ function displayHistory() {
     const container = document.getElementById('history-list');
     
     // Get the search term from the input field
-    const searchTerm = document.getElementById('historySearch')?.value.toLowerCase() || "";
+    // const searchTerm = document.getElementById('historySearch')?.value.toLowerCase() || "";
+
+// Clean the input as soon as you grab it
+const rawInput = document.getElementById('historySearch')?.value || "";
+const searchTermStrip = rawInput
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]/g, "") // Whitelist: Keep only letters, numbers, and spaces
+    .trim();
+
+const searchTerm = DOMPurify.sanitize(searchTermStrip);
+
+    // console.log(searchTerm);
 
     // 1. Filter the history array based on names or mode
     const filteredHistory = h.filter(m => {
@@ -72,5 +83,5 @@ function displayHistory() {
     }).join('');
 
     // 3. Render output or a "Not Found" message
-    container.innerHTML = htmlOutput || `<div class="p-3 text-center text-muted">No matches found matching "${searchTerm}"</div>`;
+    container.innerHTML = htmlOutput || `<div class="p-3 text-center text-muted">No players found matching that name.</div>`;
 }
