@@ -68,37 +68,35 @@ gameState = {
     table: Array.from({length: 15}, (_, i) => ({ id: i + 1, state: 'active' })),
     players: [
         { 
-            name: clean(p1NameInput.value), 
-            skill: p1S, 
-            // Player 1's target is found by Row (Opponent Skill) and Column (Own Skill)
-            target: isSingleGame ? 1 : (WIN_CHARTS[mode][p2S] && WIN_CHARTS[mode][p2S][p1S]) || (WIN_CHARTS[mode][p1S]) || 10, 
-            score: 0, 
-            racksWon: 0, 
-            defensiveShots: 0, 
+            name: clean(p1NameInput.value),
+            skill: p1S,
+            target: isSingleGame ? 1 : (WIN_CHARTS[mode][p2S] && WIN_CHARTS[mode][p2S][p1S]) || (WIN_CHARTS[mode][p1S]),
+            score: 0,
+            racksWon: 0,
+            defensiveShots: 0,
             scratches: 0,
             count9onsnap: 0,
             count8onbreak: 0,
             breakandruns: 0,
             errors: 0,
             timeouts: getInitialTimeouts(p1S),
-            innings: [], 
+            innings: [],
             group: null 
         },
         { 
-            name: clean(p2NameInput.value), 
-            skill: p2S, 
-            // Player 2's target uses Player 1's skill as the row lookup
-            target: isSingleGame ? 1 : (WIN_CHARTS[mode][p1S] && WIN_CHARTS[mode][p1S][p2S]) || (WIN_CHARTS[mode][p2S]) || 10, 
-            score: 0, 
-            racksWon: 0, 
-            defensiveShots: 0, 
+            name: clean(p2NameInput.value),
+            skill: p2S,
+            target: isSingleGame ? 1 : (WIN_CHARTS[mode][p1S] && WIN_CHARTS[mode][p1S][p2S]) || (WIN_CHARTS[mode][p2S]),
+            score: 0,
+            racksWon: 0,
+            defensiveShots: 0,
             scratches: 0,
             count9onsnap: 0,
             count8onbreak: 0,
             breakandruns: 0,
             errors: 0,
             timeouts: getInitialTimeouts(p2S),
-            innings: [], 
+            innings: [],
             group: null 
         }
     ]
