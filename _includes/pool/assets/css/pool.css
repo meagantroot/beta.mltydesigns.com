@@ -339,7 +339,7 @@ input[type="text"] {
     justify-content: center;
 }
 
-.chart-inner {
+[data-bs-theme="light"] .chart-inner {
     width: 80px;
     height: 80px;
     background: white;
@@ -351,3 +351,14 @@ input[type="text"] {
     font-size: 1.2rem;
 }
 
+[data-bs-theme="dark"] .chart-inner {
+    width: 80px;
+    height: 80px;
+    background: #212529;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
