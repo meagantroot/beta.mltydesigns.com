@@ -1,20 +1,17 @@
 // Player Stats
 
 function updateLifetimeStats() {
+    // const h = JSON.parse(localStorage.getItem('pool_match_history') || '[]');
+    // const container = document.getElementById('lifetime-stats-content');
+
+    // if (h.length === 0) {
+    //     container.innerText = "No match history available.";
+    //     return;
+    // }
 
     const h = JSON.parse(localStorage.getItem('pool_match_history') || '[]');
     const container = document.getElementById('lifetime-stats-content');
-
-    const rawInput = document.getElementById('playerSearch')?.value || "";
-    const searchTermStrip = rawInput
-        .toLowerCase()
-        .replace(/[^a-z0-9 ]/g, "") // Whitelist: Keep only letters, numbers, and spaces
-        .trim();
-
-    // Include DomPurify
-const searchTerm = DOMPurify.sanitize(searchTermStrip);
-
-    // console.log(searchTerm);
+    const searchTerm = document.getElementById('playerSearch')?.value.toLowerCase() || "";
 
     if (h.length === 0) {
         container.innerHTML = "No match history available.";
@@ -37,6 +34,11 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
             statsByPlayer[name].snap9 += parseInt(p.count9onsnap || 0);
         });
     });
+
+    // Convert the stats object into an array of HTML strings using the name and the stats (s)
+    // const htmlArray = Object.entries(statsByPlayer).map(([name, s], index) => {
+    //     const winRate = ((s.wins / s.games) * 100).toFixed(1);
+    //     const avgScratches = (s.scratches / s.games).toFixed(1);
 
     const htmlArray = Object.entries(statsByPlayer)
         .filter(([name]) => name.toLowerCase().includes(searchTerm)) // The Filter Step
