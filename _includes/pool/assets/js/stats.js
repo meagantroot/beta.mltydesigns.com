@@ -1,25 +1,31 @@
 // Player Stats
 
 function updateLifetimeStats() {
+    // const h = JSON.parse(localStorage.getItem('pool_match_history') || '[]');
+    // const container = document.getElementById('lifetime-stats-content');
+
+    // if (h.length === 0) {
+    //     container.innerText = "No match history available.";
+    //     return;
+    // }
+
     const h = JSON.parse(localStorage.getItem('pool_match_history') || '[]');
+    const container = document.getElementById('lifetime-stats-content');
+    const searchTerm = document.getElementById('playerSearch')?.value.toLowerCase() || "";
+
     if (h.length === 0) {
-        document.getElementById('lifetime-stats-content').innerHTML = "No match history available.";
+        container.innerHTML = "No match history available.";
         return;
     }
 
-    // Group stats by player name
     const statsByPlayer = {};
 
     h.forEach(m => {
         m.players.forEach(p => {
             const name = p.name || "Unknown Player";
-
-            // Initialize player object if first time seeing them
             if (!statsByPlayer[name]) {
                 statsByPlayer[name] = { wins: 0, games: 0, scratches: 0, bnr: 0, snap9: 0, break8: 0 };
             }
-
-            // Accumulate stats
             statsByPlayer[name].games++;
             if (p.won) statsByPlayer[name].wins++;
             statsByPlayer[name].scratches += parseInt(p.scratches || 0);
@@ -29,19 +35,73 @@ function updateLifetimeStats() {
         });
     });
 
-    // Generate HTML List
-    let html = "";
-    for (const [name, s] of Object.entries(statsByPlayer)) {
-        const winRate = ((s.wins / s.games) * 100).toFixed(1);
-        const avgScratches = (s.scratches / s.games).toFixed(1);
+    // Convert the stats object into an array of HTML strings using the name and the stats (s)
+    // const htmlArray = Object.entries(statsByPlayer).map(([name, s], index) => {
+    //     const winRate = ((s.wins / s.games) * 100).toFixed(1);
+    //     const avgScratches = (s.scratches / s.games).toFixed(1);
 
-        // For a standard pool set (balls 1 through 15)
-        const min = 1;
-        const max = 15;
-        const randomBall = Math.floor(Math.random() * (max - min + 1)) + min;
+    const htmlArray = Object.entries(statsByPlayer)
+        .filter(([name]) => name.toLowerCase().includes(searchTerm)) // The Filter Step
+        .map(([name, s], index) => {
+            const winRate = ((s.wins / s.games) * 100).toFixed(1);
+            const avgScratches = (s.scratches / s.games).toFixed(1);
 
-        html += `<tr><td>${name}</td><td class="text-center">${winRate}%</td><td class="text-center">${avgScratches}</td><td class="text-center">${s.bnr}</td><td class="text-center">${s.break8}</td><td class="text-center">${s.snap9}</td><td class="text-center">${s.games}</td></tr>`;
-    }
+        return `
+          <div class="accordion-item" id="player-container-${index}">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" 
+                      data-bs-toggle="collapse" 
+                      data-bs-target="#player-collapse-${index}" 
+                      aria-expanded="false" 
+                      aria-controls="player-collapse-${index}">
+                ${name}
+              </button>
+            </h2>
+            <div id="player-collapse-${index}" class="accordion-collapse collapse" data-bs-parent="#lifetime-stats-content">
+              <div class="accordion-body">
+                <h3>Games Played: ${s.games}</h3>
+                <div class="row">
 
-    document.getElementById('lifetime-stats-content').innerHTML = html;
+                    <div class="p-3 text-center" style="width: 50%;">
+                        <h5>Win Rate</h5>
+                        <!-- The circular chart -->
+                        <div class="win-rate-chart mx-auto" style="--percentage: ${winRate}%;">
+                            <div class="chart-inner">${winRate}%</div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 text-center" style="width: 50%;">
+                        <h5>Scratch Rate</h5>
+                        <!-- The circular chart -->
+                        <div class="win-rate-chart mx-auto" style="--percentage: ${avgScratches}%;">
+                            <div class="chart-inner">${avgScratches}%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col p-1">
+                    <p class="text-center w-100 mb-0">Break & Run</p>
+                    <button type="button" class="btn btn-primary disabled text-center w-100 p-3">${s.bnr}</button>
+                    </div>
+                    
+                    <div class="col p-1">
+                    <p class="text-center w-100 mb-0">8 on the Break</p>
+                    <button type="button" class="btn btn-primary disabled text-center w-100 p-3">${s.break8}</button>
+                    </div>
+                    
+                    <div class="col p-1">
+                    <p class="text-center w-100 mb-0">9 on the Snap</p>
+                    <button type="button" class="btn btn-primary disabled text-center w-100 p-3">${s.bnr}</button>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+          </div>`;
+    });
+
+    // Now htmlArray exists here and can be joined
+    // container.innerHTML = htmlArray.join('');
+    container.innerHTML = htmlArray.length > 0 ? htmlArray.join('') : "No players found matching that name.";
 }
