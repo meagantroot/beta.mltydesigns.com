@@ -8,4 +8,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.1 - 2026-03-12
 - Initial project release.
-- [a1b2c3d]: https://github.com
+- [0a92fd5]: https://github.com
