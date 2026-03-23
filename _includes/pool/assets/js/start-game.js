@@ -28,38 +28,26 @@ window.onload = function() { loadGame(); displayHistory(); updateLifetimeStats()
 
 function startGame() {
 
-    // // Get the Skill inputs
-    const p1SkillInput = document.getElementById('p1Skill');
-    const p2SkillInput = document.getElementById('p2Skill');
-
     // Get the Name inputs
     const p1NameInput = document.getElementById('p1Name');
     const p2NameInput = document.getElementById('p2Name');
 
-    // Check HTML5 validity (patterns, required, etc.)
+    // Get the Skill inputs
+    const p1SkillInput = document.getElementById('p1Skill');
+    const p2SkillInput = document.getElementById('p2Skill');
+
+    // Check validity
     if (!p1NameInput.checkValidity() || !p2NameInput.checkValidity()) {
         p1NameInput.reportValidity() || p2NameInput.reportValidity();
         return;
     }
 
-    // Use DOMPurify to clean the strings
-    const p1Name = DOMPurify.sanitize(p1NameInput.value);
-    const p2Name = DOMPurify.sanitize(p2NameInput.value);
-
-    // ONLY letters and numbers (no symbols at all)
-    const p1Clean = p1Name.replace(/[^a-z0-9 ]/gi, '');
-    const p2Clean = p2Name.replace(/[^a-z0-9 ]/gi, '');
-
-    // Now use p1Clean and p2Clean in your app
-    console.log("Safe Names:", p1Clean, p2Clean);
-
-    // alpha only DomPurify
     const clean = (str) => {
-        // Strip everything except letters, numbers, and spaces
-        const alphaOnly = str.replace(/[^a-z0-9 ]/gi, "");
-        // Sanitize just to be 100% safe from XSS
-        return DOMPurify.sanitize(alphaOnly);
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerText;
     };
+
 
     const mode = document.querySelector('input[name="gameMode"]:checked').value;
     const p1S = parseInt(p1SkillInput.value);

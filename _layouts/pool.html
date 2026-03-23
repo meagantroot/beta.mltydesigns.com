@@ -103,7 +103,7 @@
     <div class="offcanvas-body">
       <div class="container">
           <div class="mb-3">
-            <input type="text" id="playerSearch" class="form-control" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" placeholder="Search by player name..." onkeyup="updateLifetimeStats()">
+            <input type="text" id="playerSearch" class="form-control" placeholder="Search by player name..." onkeyup="updateLifetimeStats()">
           </div>
           <div class="accordion" id="lifetime-stats-content"></div>
         </div>
@@ -122,7 +122,7 @@
     <div class="offcanvas-body">
       <div class="container">
         <div class="mb-3">
-          <input type="text" id="historySearch" class="form-control" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" placeholder="Search by player name or game mode..." onkeyup="displayHistory()">
+          <input type="text" id="historySearch" class="form-control" placeholder="Search by player name or game mode..." onkeyup="displayHistory()">
         </div>
         <div id="history-list"></div>
       </div>
@@ -292,9 +292,6 @@
     <p class="lead">This app is designed to be used in portrait mode for the best experience.</p>
   </div>
 </div>
-
-<!-- Include DomPurify -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.7/purify.min.js"></script>
 
   <script type="text/javascript">
 
