@@ -94,7 +94,7 @@ function render() {
                 `;
                 rows += `
                 <tr style="${bgStyle}">
-                    <td class="text-muted">${idx + 1}</td>
+                    <td class="text-muted">${idx}</td>
                     <td>
                     ${inn.balls.length > 0 && inn.isBR !== true
                         ? inn.balls.map(ball => getBallSvg(ball)).join('') 
