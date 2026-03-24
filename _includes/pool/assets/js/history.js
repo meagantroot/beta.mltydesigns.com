@@ -18,7 +18,7 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
 
     // console.log(searchTerm);
 
-    // 1. Filter the history array based on names or mode
+    // Filter the history array based on names or mode
     const filteredHistory = h.filter(m => {
         const player1 = m.players[0].name.toLowerCase();
         const player2 = m.players[1].name.toLowerCase();
@@ -29,7 +29,7 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
                mode.includes(searchTerm);
     });
 
-    // 2. Map the filtered array to HTML
+    // Map the filtered array to HTML
     const htmlOutput = filteredHistory.map((m, index) => {
         return `
         <div class="accordion accordion-flush list-group mb-1" id="accordion-${index}">
@@ -82,6 +82,6 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
         </div>`;
     }).join('');
 
-    // 3. Render output or a "Not Found" message
+    // Render output or a "Not Found" message
     container.innerHTML = htmlOutput || `<div class="p-3 text-center text-muted">No players found matching that name.</div>`;
 }
