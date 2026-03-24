@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## v1.1.10 - 2026-03-23
 - Security: Added DomPurify. [c2e29ae] - ([@meagantroot])
 - Security: Added XSS protections to form inputs. [c2e29ae] - ([@meagantroot])
-- Update: Set 10-ball to use APA style 8-Ball handicaps. [c2e29ae] - ([@meagantroot])
+- Update: Set 10-ball to use APA style 8-ball handicaps. [c2e29ae] - ([@meagantroot])
 
 ## v1.1.9 - 2026-03-23
 - Update: Content Update [8145d8a] - ([@meagantroot])
@@ -20,7 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Update: Redesigned the player stats UI. [4ef5ecf] - ([@meagantroot])
 
 ## v1.1.7 - 2026-03-22
-- Update: 10-Ball scoring experiment. [725a7d8] - ([@meagantroot])
+- Update: 10-ball scoring experiment. [725a7d8] - ([@meagantroot])
 
 ## v1.1.6 - 2026-03-22
 - Reverted: Failed version do not use.
@@ -32,7 +32,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Dev version not published.
 
 ## v1.1.3 - 2026-03-21
-- Added: Implemented official APA style 8-Ball handicaps. [73c5e33] - ([@meagantroot])
+- Added: Implemented official APA style 8-ball handicaps. [73c5e33] - ([@meagantroot])
 
 ## v1.1.2 - 2026-03-18
 - Update: Code comments [546cada] - ([@meagantroot])
