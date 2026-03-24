@@ -2,8 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## v1.1.11 - 2026-03-24
 - Innings now start at 0. [769a3c2] - ([@meagantroot])
 
