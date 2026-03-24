@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.11 - 2026-03-24
+- Innings now start at 0. [769a3c2] - ([@meagantroot])
+
 ## v1.1.10 - 2026-03-23
 - Security: Added DomPurify. [c2e29ae] - ([@meagantroot])
 - Security: Added XSS protections to form inputs. [c2e29ae] - ([@meagantroot])
@@ -43,6 +46,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Initial project release [0a92fd5] - ([@meagantroot])
 
 
+[769a3c2]: https://github.com/meagantroot/mltydesigns.com/pull/16/commits/769a3c2a172d92e2dd42cbf661dc271319b88a84
 [c2e29ae]: https://github.com/meagantroot/mltydesigns.com/pull/13/commits/c2e29ae9bc04ad14358986fe2182966f76d22589
 [8145d8a]: https://github.com/meagantroot/mltydesigns.com/pull/12/commits/8145d8a8e067db69afd3573d6df85e3d063385a9
 [4ef5ecf]: https://github.com/meagantroot/mltydesigns.com/pull/11/commits/4ef5ecf6f21e9353249459f3cac07b476a977800
