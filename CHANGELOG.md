@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## v1.1.10 - 2026-03-23
 - Security: Added DomPurify. [c2e29ae] - ([@meagantroot])
 - Security: Added XSS protections to form inputs. [c2e29ae] - ([@meagantroot])
-- Update: Set 10-ball to use APA style 8-Ball handicaps. [c2e29ae] - ([@meagantroot])
+- Update: Set 10-ball to use APA style 8-ball handicaps. [c2e29ae] - ([@meagantroot])
 
 ## v1.1.9 - 2026-03-23
 - Update: Content Update [8145d8a] - ([@meagantroot])
