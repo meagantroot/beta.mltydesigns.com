@@ -14,8 +14,6 @@ function updateLifetimeStats() {
     // Include DomPurify
 const searchTerm = DOMPurify.sanitize(searchTermStrip);
 
-    // console.log(searchTerm);
-
     if (h.length === 0) {
         container.innerHTML = "No match history available.";
         return;
@@ -39,7 +37,7 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
     });
 
     const htmlArray = Object.entries(statsByPlayer)
-        .filter(([name]) => name.toLowerCase().includes(searchTerm)) // The Filter Step
+        .filter(([name]) => name.toLowerCase().includes(searchTerm))
         .map(([name, s], index) => {
             const winRate = ((s.wins / s.games) * 100).toFixed(1);
             const avgScratches = (s.scratches / s.games).toFixed(1);
@@ -59,7 +57,6 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
               <div class="accordion-body">
                 <h3>Games Played: ${s.games}</h3>
                 <div class="row">
-
                     <div class="p-3 text-center" style="width: 50%;">
                         <h5>Win Rate</h5>
                         <!-- The circular chart -->
@@ -67,7 +64,6 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
                             <div class="chart-inner">${winRate}%</div>
                         </div>
                     </div>
-
                     <div class="p-3 text-center" style="width: 50%;">
                         <h5>Scratch Rate</h5>
                         <!-- The circular chart -->
@@ -77,29 +73,22 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col p-1">
                     <p class="text-center w-100 mb-0">Break & Run</p>
                     <button type="button" class="btn btn-primary disabled text-center w-100 p-3">${s.bnr}</button>
                     </div>
-                    
                     <div class="col p-1">
                     <p class="text-center w-100 mb-0">8 on the Break</p>
                     <button type="button" class="btn btn-primary disabled text-center w-100 p-3">${s.break8}</button>
                     </div>
-                    
                     <div class="col p-1">
                     <p class="text-center w-100 mb-0">9 on the Snap</p>
                     <button type="button" class="btn btn-primary disabled text-center w-100 p-3">${s.bnr}</button>
                     </div>
-
                 </div>
               </div>
             </div>
           </div>`;
     });
-
-    // Now htmlArray exists here and can be joined
-    // container.innerHTML = htmlArray.join('');
     container.innerHTML = htmlArray.length > 0 ? htmlArray.join('') : "No players found matching that name.";
 }
