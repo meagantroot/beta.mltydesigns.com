@@ -25,7 +25,6 @@ window.onload = function() { loadGame(); displayHistory(); updateLifetimeStats()
 
 
 // Start Game
-
 function startGame() {
 
     // // Get the Skill inputs
@@ -113,7 +112,6 @@ gameState = {
         }
     ]
 };
-
     saveGame(); 
     showGameUI();
 }
