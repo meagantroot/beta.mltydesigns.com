@@ -46,7 +46,7 @@ All notable changes to this project will be documented in this file.
 ## v1.1 - 2026-03-12
 - Initial project release [0a92fd5] - ([@meagantroot])
 
-[be1d884]: https://github.com/meagantroot/mltydesigns.com/pull/16/commits/be1d884d334b1d8375758e8c0ce899afd9efd92c
+[be1d884]: https://github.com/meagantroot/mltydesigns.com/pull/17/commits/be1d884d334b1d8375758e8c0ce899afd9efd92c
 [769a3c2]: https://github.com/meagantroot/mltydesigns.com/pull/16/commits/769a3c2a172d92e2dd42cbf661dc271319b88a84
 [c2e29ae]: https://github.com/meagantroot/mltydesigns.com/pull/13/commits/c2e29ae9bc04ad14358986fe2182966f76d22589
 [8145d8a]: https://github.com/meagantroot/mltydesigns.com/pull/12/commits/8145d8a8e067db69afd3573d6df85e3d063385a9
