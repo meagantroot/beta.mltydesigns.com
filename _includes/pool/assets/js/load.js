@@ -25,16 +25,25 @@ function render() {
     const active = gameState.players[gameState.currentTurn];
     const rules = GAME_RULES[gameState.mode];
 
-    const ballGrid = `
-    <div class="row row-cols-5 g-1"> 
-        ${gameState.table.slice(0, rules.maxBalls).map(b => `
+const ballGrid = `
+<div class="row row-cols-5 g-1"> 
+    ${gameState.table.slice(0, rules.maxBalls).map(b => {
+        // Define what icon to show based on the state
+        const statusIcon = (b.state === 'selected' || b.state === 'pocketed') ? '✓' : 
+                           (b.state === 'killed' || b.state === 'dead') ? '✕' : 
+                           b.id;
+
+        const ballStatus = b.state === 'dead' || b.state === 'pocketed' ? 'disabled': '';
+
+        return `
             <div class="col">
-                <div class="ball ${b.state}" onclick="toggleBall(${b.id})" data-id="${b.id}">
-                    ${b.id}
-                </div>
+                <button class="ball ${b.state}" onclick="toggleBall(${b.id})" data-id="${b.id}" ${ballStatus}>
+                    ${statusIcon}
+                </button>
             </div>
-        `).join('')}
-    </div>`;
+        `;
+    }).join('')}
+</div>`;
 
     container.innerHTML = `
     <div class="card">
@@ -195,23 +204,12 @@ const getBallSvg = (ball) => {
         `;
     }
 
-
-
-    // return `
-    // <svg width="24" height="24" viewBox="0 0 24 24" style="display:inline-block; vertical-align:middle;">
-    //     <circle cx="12" cy="12" r="10" fill="white" stroke="#000" stroke-width="0.5" />
-    //     ${isStriped 
-    //         ? `<rect x="2" y="7" width="20" height="10" fill="${color}" />` 
-    //         : `<circle cx="12" cy="12" r="10" fill="${color}" />`
-    //     }
-    //     <text x="12" y="16" text-anchor="middle" fill="${textColor}" font-size="10" font-weight="bold">${ball}</text>
-    // </svg>`;
 };
 
 // Celebrate!
 
     function launchConfetti() {
-        // 1. More pieces
+        // Set pieces
         const count = 500; 
         const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#ced6e0', '#e84393', '#74b9ff'];
         
@@ -237,7 +235,7 @@ const getBallSvg = (ball) => {
 
             document.body.appendChild(confetti);
 
-            // 2. Longer duration (3-5 seconds)
+            // Set duration
             const duration = 3000 + Math.random() * 2000;
 
             const animation = confetti.animate([

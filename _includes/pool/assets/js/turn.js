@@ -25,11 +25,11 @@ function handleTurn(action) {
 }
 
 function getActiveBallCount() {
-    return gameState.table.filter(b => b.state === 'dead').length;
+    return gameState.table.filter(b => b.state === 'killed').length;
 }
 
 function getPocketedBallCount() {
-    return gameState.table.filter(b => b.state === 'pocketed').length;
+    return gameState.table.filter(b => b.state === 'selected').length;
 }
 
 // 8-Ball Logic
@@ -285,8 +285,8 @@ function getTurnContext() {
         p: gameState.players[gameState.currentTurn],
         opponent: gameState.players[gameState.currentTurn === 0 ? 1 : 0],
         rules: rules,
-        pocketed: gameState.table.filter(b => b.state === 'pocketed').map(b => b.id),
-        madeMoneyBall: gameState.table.some(b => b.id === rules.moneyBall && b.state === 'pocketed')
+        pocketed: gameState.table.filter(b => b.state === 'selected').map(b => b.id),
+        madeMoneyBall: gameState.table.some(b => b.id === rules.moneyBall && b.state === 'selected')
     };
 }
 
@@ -349,6 +349,7 @@ function finalizeTurn(action, pts, resetRack, earlyLoss = false, isBR = false, i
         if (earlyLoss) switchTurn();
     } else {
         markBallsDead();
+        markBallsPocketed();
         
         // Standard Inning logic: Inning row increments after the second player finishes
         if (gameState.currentTurn === 1) {
@@ -389,9 +390,16 @@ function respotBall(id) {
 
 function markBallsDead() {
     gameState.table.forEach(b => {
-        if (b.state === 'pocketed') b.state = 'dead';
+        if (b.state === 'killed') b.state = 'dead';
     });
 }
+
+function markBallsPocketed() {
+    gameState.table.forEach(b => {
+        if (b.state === 'selected') b.state = 'pocketed';
+    });
+}
+
 
 function switchTurn() {
     gameState.currentTurn = (gameState.currentTurn === 0) ? 1 : 0;
