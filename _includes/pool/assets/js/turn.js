@@ -35,7 +35,7 @@ function getPocketedBallCount() {
 // 8-Ball Logic
 
 function handle8Ball(action) {
-    const { p, opponent, rules, pocketed, madeMoneyBall } = getTurnContext();
+    const { p, opponent, pocketed, madeMoneyBall } = getTurnContext();
     
     // A 'Break Shot' is defined as a shot where NO balls have been moved to 'dead' yet in the current rack.
     // const isBreakShot = gameState.table.every(b => b.state !== 'dead');
@@ -113,22 +113,27 @@ else {
 
 // 8-Ball Helpers
 
-function assign8BallGroups(pocketed, p, opponent) {
-    for (let id of pocketed) {
-        // Solids are balls 1-7
-        if (id >= 1 && id <= 7) { 
-            p.group = 'Solids'; 
-            opponent.group = 'Stripes'; 
-            alert(`${p.name} is Solids!`);
-            break; 
-        }
-        // Stripes are balls 9-15
-        if (id >= 9 && id <= 15) { 
-            p.group = 'Stripes'; 
-            opponent.group = 'Solids'; 
-            alert(`${p.name} is Stripes!`);
-            break; 
-        }
+function assign8BallGroups(selected, p, opponent) {
+    let solidsCount = 0;
+    let stripesCount = 0;
+
+    for (let id of selected) {
+        if (id >= 1 && id <= 7) solidsCount++;
+        if (id >= 9 && id <= 15) stripesCount++;
+    }
+
+    // Only assign if one count is strictly higher than the other
+    if (solidsCount > stripesCount) {
+        p.group = 'Solids';
+        opponent.group = 'Stripes';
+        alert(`${p.name} pocketed more solids and is now Solids!`);
+    } else if (stripesCount > solidsCount) {
+        p.group = 'Stripes';
+        opponent.group = 'Solids';
+        alert(`${p.name} pocketed more stripes and is now Stripes!`);
+    } else {
+        // It's a tie (e.g., 1 solid and 1 stripe) or nothing was pocketed
+        // Groups remain undefined/open
     }
 }
 

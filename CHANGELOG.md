@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## v1.1.13 - 2026-04-01
+- Improved 8-ball Solids/Stripes Logic. [] - ([@meagantroot])
+
 ## v1.1.12 - 2026-04-01
 - Improved Ball Toggle Logic and styling. [be1d884] - ([@meagantroot])
 
