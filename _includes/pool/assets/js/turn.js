@@ -126,11 +126,11 @@ function assign8BallGroups(selected, p, opponent) {
     if (solidsCount > stripesCount) {
         p.group = 'Solids';
         opponent.group = 'Stripes';
-        alert(`${p.name} pocketed more solids and is now Solids!`);
+        alert(`${p.name} is Solids!`);
     } else if (stripesCount > solidsCount) {
         p.group = 'Stripes';
         opponent.group = 'Solids';
-        alert(`${p.name} pocketed more stripes and is now Stripes!`);
+        alert(`${p.name} is Stripes!`);
     } else {
         // It's a tie (e.g., 1 solid and 1 stripe) or nothing was pocketed
         // Groups remain undefined/open
