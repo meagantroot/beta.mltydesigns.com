@@ -68,17 +68,35 @@ input[type="text"] {
     box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.1);
 }
 
+.ball.selected {
+    transform: scale(.75);
+    box-shadow: 0 0 15px var(--warning);
+    border-color: #000;
+    z-index: 2;
+}
+
+.ball.killed {
+    transform: scale(.75);
+    box-shadow: 0 0 15px var(--danger);
+    border-color: #000;
+    z-index: 2;
+}
+
 .ball.pocketed {
     transform: scale(.75);
     box-shadow: 0 0 15px var(--success);
     border-color: #000;
     z-index: 2;
     opacity: 50%;
+    cursor: not-allowed;
 }
 
 .ball.dead {
-    opacity: 0.15;
-    filter: grayscale(1);
+    transform: scale(.75);
+    box-shadow: 0 0 15px var(--danger);
+    border-color: #000;
+    z-index: 2;
+    opacity: 50%;
     cursor: not-allowed;
 }
 
