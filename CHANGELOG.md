@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## v1.1.12 - 2026-03-24
+## v1.1.12 - 2026-04-01
 - Improved Ball Toggle Logic and styling. [be1d884] - ([@meagantroot])
 
 ## v1.1.11 - 2026-03-24
