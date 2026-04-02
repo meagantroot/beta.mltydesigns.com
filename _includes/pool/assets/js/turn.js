@@ -37,47 +37,45 @@ function getPocketedBallCount() {
 function handle8Ball(action) {
     const { p, opponent, pocketed, madeMoneyBall } = getTurnContext();
     
-    // A 'Break Shot' is defined as a shot where NO balls have been moved to 'dead' yet in the current rack.
-    // const isBreakShot = gameState.table.every(b => b.state !== 'dead');
-
-    // Safely check shot count, defaulting to 0 if undefined for any reason
     const currentShot = gameState.rackShotCount || 0;
     const isBreakShot = (currentShot === 0);
 
-    // const is8Break = (madeMoneyBall && action !== 'scratch' && isBreakShot);
-
     const containsEight = pocketed.includes(8);
-    const is8Break = (containsEight && action !== 'scratch' && isBreakShot);
-    const isBnR = (action === 'breakAndRun' && isBreakShot);
+
+    // Define the ball groups
+    const solids = [1, 2, 3, 4, 5, 6, 7];
+    const stripes = [9, 10, 11, 12, 13, 14, 15];
+
+    // Check if the pocketed list contains every ball from either group + the 8 ball
+    const clearedSolids = solids.every(b => pocketed.includes(b)) && containsEight;
+    const clearedStripes = stripes.every(b => pocketed.includes(b)) && containsEight;
+    
+    // Replacement condition for Break and Run
+    const isBnR = (clearedSolids || clearedStripes) && isBreakShot;
+
+    const is8Break = (containsEight && action !== 'scratch' && isBreakShot && !isBnR);
     
     let resetRack = false;
     let earlyLoss = false;
     let pts = 0;
 
-if (is8Break || isBnR) {
-    p.racksWon++;
-    pts = 1; // 8-ball is scored by racks
-    p.count8onbreak += is8Break ? 1 : 0;
-    p.breakandruns += isBnR ? 1 : 0;
-    resetRack = true;
-    // alert(is8Break ? "💥 8-on-the-Break!" : "🚀 Break and Run!");
+    if (is8Break || isBnR) {
+        p.racksWon++;
+        pts = 1; 
+        p.count8onbreak += is8Break ? 1 : 0;
+        p.breakandruns += isBnR ? 1 : 0;
+        resetRack = true;
 
-    const awardCanvasElement = document.getElementById('awardOffcanvas');
-    const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(awardCanvasElement);
-    bsOffcanvas.show();
-    
-    if(is8Break) {
-        award(0,'8 on the Break!');
+        const awardCanvasElement = document.getElementById('awardOffcanvas');
+        const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(awardCanvasElement);
+        bsOffcanvas.show();
+        
+        if(is8Break) {
+            award(0, '8 on the Break!');
+        } else {
+            award(0, 'Break and Run!'); // Updated text     
+        }
     } else {
-        award(0,'Break and Run!');      
-    }
-} 
-else if (action === 'breakAndRun' && !isBreakShot) {
-    // Optional: Alert the user if they try to BnR after the break
-    alert("Break and Run can only be claimed on the opening shot.");
-    return; 
-}
-else {
     // Group Assignment Logic
     if (pocketed.length > 0 && !p.group && action !== 'scratch') {
         assign8BallGroups(pocketed, p, opponent);
@@ -107,7 +105,7 @@ else {
     gameState.rackShotCount++;
 
     // Finalize stats and move to the next turn
-    finalizeTurn(action, pts, resetRack, earlyLoss, (action === 'breakAndRun'), is8Break);
+    finalizeTurn(action, pts, resetRack, earlyLoss, isBnR, is8Break);
 
 }
 
@@ -126,11 +124,11 @@ function assign8BallGroups(selected, p, opponent) {
     if (solidsCount > stripesCount) {
         p.group = 'Solids';
         opponent.group = 'Stripes';
-        alert(`${p.name} is Solids!`);
+        alert(`${p.name} pocketed more solids and is now Solids!`);
     } else if (stripesCount > solidsCount) {
         p.group = 'Stripes';
         opponent.group = 'Solids';
-        alert(`${p.name} is Stripes!`);
+        alert(`${p.name} pocketed more stripes and is now Stripes!`);
     } else {
         // It's a tie (e.g., 1 solid and 1 stripe) or nothing was pocketed
         // Groups remain undefined/open
@@ -154,18 +152,25 @@ function handle9Ball(action) {
     const { p, rules, pocketed, madeMoneyBall } = getTurnContext();
     const isSingleGame = document.getElementById('gameStyleSingle').checked;
     
-    // Safely check shot count, defaulting to 0 if undefined for any reason
     const currentShot = gameState.rackShotCount || 0;
     const isBreakShot = (currentShot === 0);
     
     const containsNine = pocketed.includes(9);
-    const isSnap = (containsNine && action !== 'scratch' && isBreakShot);
     
-    // Strictly trigger Break and Run ONLY if it's the break shot
-    const isBnR = (action === 'breakAndRun' && isBreakShot);
+    // 1. Define the full set of balls for 9-ball
+    const nineBallSet = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    // 2. Check if every ball in the set is in the 'pocketed' array
+    const tableCleared = nineBallSet.every(ball => pocketed.includes(ball));
+
+    // Update isBnR to trigger on a table clear instead of the 'breakAndRun' action
+    const isBnR = tableCleared;
+
+    const isSnap = (containsNine && action !== 'scratch' && !isBnR && isBreakShot);
 
     let resetRack = false;
     let pts = 0;
+
 
     if (isSnap || isBnR) {
         p.racksWon++;
@@ -253,7 +258,7 @@ function handle10Ball(action) {
     let resetRack = false;
     let pts = 0;
 
-    if (action === 'breakAndRun' && isBreakShot) {
+    if (getPocketedBallCount() === 10 && isBreakShot) {
         p.racksWon++;
         pts = 1; // This adds the 1 point
             const awardCanvasElement = document.getElementById('awardOffcanvas');
@@ -281,6 +286,8 @@ function handle10Ball(action) {
     finalizeTurn(action, pts, resetRack);
     // console.log("Full Game State:", gameState);
 }
+
+
 
 // Shared Helpers
 
