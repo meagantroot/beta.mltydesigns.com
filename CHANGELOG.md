@@ -3,17 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 ## v1.1.14 - 2026-04-01
-- Added automatic break and run detection logic. [6ab4847] - ([@meagantroot])
-- Removed break and run button. [6ab4847] - ([@meagantroot])
+- Added: automatic break and run detection logic. [6ab4847] - ([@meagantroot])
+- Removed: break and run button. [6ab4847] - ([@meagantroot])
 
 ## v1.1.13 - 2026-04-01
-- Improved 8-ball Solids/Stripes Logic. [c7ac628] - ([@meagantroot])
+- Improved: 8-ball Solids/Stripes Logic. [c7ac628] - ([@meagantroot])
 
 ## v1.1.12 - 2026-04-01
-- Improved Ball Toggle Logic and styling. [be1d884] - ([@meagantroot])
+- Improved: Ball Toggle Logic and styling. [be1d884] - ([@meagantroot])
 
 ## v1.1.11 - 2026-03-24
-- Innings now start at 0. [769a3c2] - ([@meagantroot])
+- Fixed: Innings now start at 0. [769a3c2] - ([@meagantroot])
 
 ## v1.1.10 - 2026-03-23
 - Security: Added DomPurify. [c2e29ae] - ([@meagantroot])
