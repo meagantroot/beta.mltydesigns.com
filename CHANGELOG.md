@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## v1.1.14 - 2026-04-01
+- Added automatic break and run detection logic. [6ab4847] - ([@meagantroot])
+- Removed break and run button. [6ab4847] - ([@meagantroot])
+
 ## v1.1.13 - 2026-04-01
 - Improved 8-ball Solids/Stripes Logic. [c7ac628] - ([@meagantroot])
 
@@ -49,7 +53,7 @@ All notable changes to this project will be documented in this file.
 ## v1.1 - 2026-03-12
 - Initial project release [0a92fd5] - ([@meagantroot])
 
-
+[6ab4847]: https://github.com/meagantroot/mltydesigns.com/pull/19/commits/6ab4847c3b581cfdf5bfc63c9d1e59b1f1d78edc
 [c7ac628]: https://github.com/meagantroot/mltydesigns.com/commit/c7ac6285827bbdbe6d9e13df5ed9db1a028a1be6
 [be1d884]: https://github.com/meagantroot/mltydesigns.com/pull/17/commits/be1d884d334b1d8375758e8c0ce899afd9efd92c
 [769a3c2]: https://github.com/meagantroot/mltydesigns.com/pull/16/commits/769a3c2a172d92e2dd42cbf661dc271319b88a84
