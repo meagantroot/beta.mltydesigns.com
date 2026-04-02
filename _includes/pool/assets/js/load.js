@@ -66,15 +66,16 @@ const ballGrid = `
         <!-- Table Controls -->
         <div style="padding:4px; text-align:center; max-width:390px; margin-left:auto; margin-right:auto;">
             ${ballGrid}
-            <div class="row mt-2 g-1">
-                <div class="col-sm-2 w-25"><button class="btn btn-outline-primary w-100" onclick="undoInning()">Undo</button></div>
-                <div class="col-sm-4 w-25"><button class="btn btn-outline-danger w-100" onclick="quitMatchEarly()">Quit</button></div>
-                <div class="col-sm-6 w-50"><button class="btn btn-info w-100" onclick="handleTurn('breakAndRun')" ${(gameState.rackShotCount > 0) ? 'disabled' : ''}>Break & Run</button></div>
+            <div class="row mt-0 g-1">
+                <div class="col-sm-4 w-50"><button class="btn btn-outline-danger w-100" onclick="quitMatchEarly()">Quit</button></div>
+                <div class="col-sm-2 w-50"><button class="btn btn-outline-primary w-100" onclick="undoInning()">Undo</button></div>
             </div>
-            <div class="row mt-2 g-1 w-100">
-                <div class="col w-25"><button class="btn btn-danger w-100" onclick="handleTurn('scratch')">Scratched</button></div>
-                <div class="col w-25"><button class="btn btn-warning w-100" onclick="handleTurn('safety')">Safety</button></div>
-                <div class="col w-25"><button class="btn btn-success w-100" onclick="handleTurn('score')">Turn Over</button></div>
+            <div class="row mt-0 g-1 w-100">
+                <div class="col w-50"><button class="btn btn-danger w-100" onclick="handleTurn('scratch')">Scratched</button></div>
+                <div class="col w-50"><button class="btn btn-warning w-100" onclick="handleTurn('safety')">Safety</button></div>
+            </div>
+            <div class="row mt-0 g-1 w-100">
+                <div class="col w-100"><button class="btn btn-success w-100" onclick="handleTurn('score')">Turn Over</button></div>
             </div>
         </div>
     </div>
