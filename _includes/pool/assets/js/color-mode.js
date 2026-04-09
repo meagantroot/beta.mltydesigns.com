@@ -1,12 +1,16 @@
 // Dark Mode Toggle
 
-const toggle = document.getElementById('darkModeToggle');
+const toggle = document.querySelectorAll('.darkModeToggle');
 const htmlElement = document.documentElement;
 
 // Function to apply theme
 const applyTheme = (theme) => {
     htmlElement.setAttribute('data-bs-theme', theme);
-    toggle.checked = (theme === 'dark');
+    
+    // CHANGE IS HERE: Use .forEach to update all checkboxes at once
+    toggle.forEach(el => {
+        el.checked = (theme === 'dark');
+    });
 };
 
 // Initial Load: Check localStorage, then OS preference
@@ -19,11 +23,13 @@ if (savedTheme) {
     applyTheme(systemDarkMode.matches ? 'dark' : 'light');
 }
 
-// Manual Toggle: Save choice to localStorage
-toggle.addEventListener('change', () => {
-    const newTheme = toggle.checked ? 'dark' : 'light';
-    applyTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+// Manual Toggle: This part was already correct in your snippet!
+toggle.forEach(toggle => {
+    toggle.addEventListener('change', () => {
+        const newTheme = toggle.checked ? 'dark' : 'light';
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
 });
 
 // System Change: Update only if user hasn't set a manual preference

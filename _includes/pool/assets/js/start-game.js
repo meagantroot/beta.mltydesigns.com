@@ -6,6 +6,7 @@ document.addEventListener('gesturestart', function(e) {
 
 
 let gameState = null;
+let mode;
 
 // Ensure gameState exists before setting properties
 if (!gameState) {
@@ -24,94 +25,184 @@ gameState.rackShotCount = 0;
 window.onload = function() { loadGame(); displayHistory(); updateLifetimeStats(); updateStorageMeter(); };
 
 
-// Start Game
-function startGame() {
+// 1. Move helper functions to the top so they are globally available
+const clean = (str) => {
+    if (!str) return "";
+    const alphaOnly = str.replace(/[^a-z0-9 ]/gi, "");
+    return DOMPurify.sanitize(alphaOnly);
+};
 
-    // // Get the Skill inputs
-    const p1SkillInput = document.getElementById('p1Skill');
-    const p2SkillInput = document.getElementById('p2Skill');
+// 2. Define your game state variable globally
+// let gameState = {};
 
-    // Get the Name inputs
+function setNames() {
     const p1NameInput = document.getElementById('p1Name');
     const p2NameInput = document.getElementById('p2Name');
 
-    // Check HTML5 validity (patterns, required, etc.)
-    if (!p1NameInput.checkValidity() || !p2NameInput.checkValidity()) {
-        p1NameInput.reportValidity() || p2NameInput.reportValidity();
-        return;
-    }
+    if (!p1NameInput.value || !p2NameInput.value) return;
 
-    // Use DOMPurify to clean the strings
-    const p1Name = DOMPurify.sanitize(p1NameInput.value);
-    const p2Name = DOMPurify.sanitize(p2NameInput.value);
+    // Update the labels in your radio button selection
+    document.getElementById('p1startsLabelText').textContent = clean(p1NameInput.value);
+    document.getElementById('p2startsLabelText').textContent = clean(p2NameInput.value);
+}
 
-    // ONLY letters and numbers (no symbols at all)
-    const p1Clean = p1Name.replace(/[^a-z0-9 ]/gi, '');
-    const p2Clean = p2Name.replace(/[^a-z0-9 ]/gi, '');
-
-    // Now use p1Clean and p2Clean in your app
-    console.log("Safe Names:", p1Clean, p2Clean);
-
-    // alpha only DomPurify
-    const clean = (str) => {
-        // Strip everything except letters, numbers, and spaces
-        const alphaOnly = str.replace(/[^a-z0-9 ]/gi, "");
-        // Sanitize just to be 100% safe from XSS
-        return DOMPurify.sanitize(alphaOnly);
-    };
-
+function startGame() {
+    // 1. Re-grab the Game Mode and Style (These were missing!)
     const mode = document.querySelector('input[name="gameMode"]:checked').value;
+    const isSingleGame = document.getElementById('gameStyleSingle').checked;
+
+    // 2. Grab and clean the names/skills
+    const p1NameInput = document.getElementById('p1Name');
+    const p2NameInput = document.getElementById('p2Name');
+    const p1SkillInput = document.getElementById('p1Skill');
+    const p2SkillInput = document.getElementById('p2Skill');
+    
+    const p1Clean = clean(p1NameInput.value) || "Player 1";
+    const p2Clean = clean(p2NameInput.value) || "Player 2";
     const p1S = parseInt(p1SkillInput.value);
     const p2S = parseInt(p2SkillInput.value);
 
-    if ( clean(p1NameInput.value) === "" || clean(p2NameInput.value) === "") { alert("Please Enter a Player Name"); location.reload(); exit; }
+    // 3. Check the Radio Buttons for the winner
+    const p1Starts = document.getElementById('p1Starts').checked;
 
-    // Skill 1-3 = 2 timeouts, 4+ = 1 timeout
+    let player1, player2;
+    if (p1Starts) {
+        player1 = { name: p1Clean, skill: p1S };
+        player2 = { name: p2Clean, skill: p2S };
+    } else {
+        player1 = { name: p2Clean, skill: p2S };
+        player2 = { name: p1Clean, skill: p1S };
+    }
+
+
+    // 4. Initialize...
+    console.log(`${player1.name} goes first!`);    // Skill 1-3 = 2 timeouts, 4+ = 1 timeout
     const getInitialTimeouts = (skill) => (skill <= 3 ? 2 : 1);
     
-    const isSingleGame = document.getElementById('gameStyleSingle').checked;
+    // const isSingleGame = document.getElementById('gameStyleSingle').checked;
 
 gameState = {
     mode: mode,
     currentTurn: 0,
+    currentInningIndex: 0,
+    currentRack: 1,
     rackShotCount: 0,
     history: [],
     table: Array.from({length: 15}, (_, i) => ({ id: i + 1, state: 'active' })),
     players: [
         { 
-            name: clean(p1NameInput.value),
-            skill: p1S,
-            target: isSingleGame ? 1 : (WIN_CHARTS[mode][p2S] && WIN_CHARTS[mode][p2S][p1S]) || (WIN_CHARTS[mode][p1S]),
+            name: clean(player1.name),
+            skill: player1.skill,
+            target: isSingleGame ? 1 : (WIN_CHARTS[mode][player2.skill] && WIN_CHARTS[mode][player2.skill][player1.skill]) || (WIN_CHARTS[mode][player1.skill]),
             score: 0,
             racksWon: 0,
             defensiveShots: 0,
             scratches: 0,
+            fouls: 0,
+            miscues: 0,
+            escapes: 0,
+            kickshots: 0,
             count9onsnap: 0,
             count8onbreak: 0,
             breakandruns: 0,
-            errors: 0,
-            timeouts: getInitialTimeouts(p1S),
-            innings: [],
+            timeouts: getInitialTimeouts(player1.skill),
             group: null 
         },
         { 
-            name: clean(p2NameInput.value),
-            skill: p2S,
-            target: isSingleGame ? 1 : (WIN_CHARTS[mode][p1S] && WIN_CHARTS[mode][p1S][p2S]) || (WIN_CHARTS[mode][p2S]),
+            name: clean(player2.name),
+            skill: player2.skill,
+            target: isSingleGame ? 1 : (WIN_CHARTS[mode][player1.skill] && WIN_CHARTS[mode][player1.skill][player2.skill]) || (WIN_CHARTS[mode][player2.skill]),
             score: 0,
             racksWon: 0,
             defensiveShots: 0,
             scratches: 0,
+            fouls: 0,
+            miscues: 0,
+            escapes: 0,
+            kickshots: 0,
             count9onsnap: 0,
             count8onbreak: 0,
             breakandruns: 0,
             errors: 0,
-            timeouts: getInitialTimeouts(p2S),
-            innings: [],
+            timeouts: getInitialTimeouts(player2.skill),
             group: null 
         }
-    ]
+    ],
+    innings: []
 };
+    console.log("Game Starting!", player1.name, "goes first.");
     saveGame(); 
     showGameUI();
+}
+
+function setNames() {
+    const p1NameInput = document.getElementById('p1Name');
+    const p2NameInput = document.getElementById('p2Name');
+    const p1SkillInput = document.getElementById('p1Skill');
+    const p2SkillInput = document.getElementById('p2Skill');
+    
+    // Note: If this is the first time running, p1Starts might be null. 
+    // We add a check to prevent errors.
+    const p1StartsBtn = document.getElementById('p1Starts');
+    const p1Selected = p1StartsBtn ? p1StartsBtn.checked : true;
+
+    if (!p1NameInput.checkValidity() || !p2NameInput.checkValidity()) {
+        p1NameInput.reportValidity() || p2NameInput.reportValidity();
+        return;
+    }
+
+    const clean = (str) => {
+        const alphaOnly = str.replace(/[^a-z0-9 ]/gi, "");
+        return DOMPurify.sanitize(alphaOnly);
+    };
+
+    const p1Clean = clean(p1NameInput.value);
+    const p2Clean = clean(p2NameInput.value);
+    const p1S = parseInt(p1SkillInput.value);
+    const p2S = parseInt(p2SkillInput.value);
+
+    // Validation check (Your requested reload logic)
+    if (p1Clean === "" || p2Clean === "") { 
+        alert("Please Enter a valid Player Name"); 
+        location.reload(); 
+        exit; 
+    }
+
+// 1. Update Radio Labels
+    const p1RadioLabel = document.getElementById('p1startsLabelText');
+    const p2RadioLabel = document.getElementById('p2startsLabelText');
+    if (p1RadioLabel) p1RadioLabel.textContent = p1Clean;
+    if (p2RadioLabel) p2RadioLabel.textContent = p2Clean;
+
+    // 2. Update Coin Flip UI labels with NULL-SAFETY checks
+    const elName = document.getElementById('coin-p1-name');
+    const elLabel1 = document.getElementById('coin-p1-label');
+    const elLabel2 = document.getElementById('coin-p2-label');
+    const elStatus = document.getElementById('coin-p1-status');
+
+    if (elName) elName.textContent = p1Clean;
+    if (elLabel1) elLabel1.textContent = p1Clean;
+    if (elLabel2) elLabel2.textContent = p2Clean;
+    if (elStatus) elStatus.textContent = p1Clean;
+
+    // 3. Set internal player objects
+    let player1, player2;
+    switch (p1Selected) {
+        case true:
+            player1 = { name: p1Clean, skill: p1S };
+            player2 = { name: p2Clean, skill: p2S };
+            break;
+        case false:
+            player1 = { name: p2Clean, skill: p2S };
+            player2 = { name: p1Clean, skill: p1S };
+            break;
+    }
+
+    // 4. TRIGGER THE OFFCANVAS MANUALLY
+    // This ensures it only opens if the validation above passed
+    const offcanvasElement = document.getElementById('shootsfirst');
+    if (offcanvasElement) {
+        const bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+        bsOffcanvas.show();
+    }
 }

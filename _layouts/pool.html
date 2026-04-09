@@ -2,24 +2,24 @@
 <html lang="en" data-bs-theme="light">
 {% include head.html %}
 <body data-font="Neucha|Cabin+Sketch">
-<main class="container">
+<main class="container m-0 p-0">
   <div id="setup-form" class="container">
-    <div class="body">
+    <div class="body m-0 p-0">
       <h2 class="title text-center">Match Setup</h2>
-      <div class="body p-0">
+      <div class="body">
         <div class="row">
-          <div class="col mb-4">
+          <div class="col mb-1">
             <input type="text" id="p1Name" value="" placeholder="Enter Name For Player 1" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
             <div class="row align-items-center">
                 <label for="p1Skill" class="col-4 col-form-label">Skill Level: <b id="p1skillValue">4</b></label>
                 <div class="col-8">
                     <input id="p1Skill" type="range" class="form-range" min="2" max="7" step="1" value="4">
                 </div>
-            </div>            
+            </div>
           </div>
           </div>
           <div class="row">
-          <div class="col">
+          <div class="col mb-0">
             <input type="text" id="p2Name" value="" placeholder="Enter Name For Player 2" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" style="width:100%" class="mb-2" required>
             <div class="row align-items-center">
                 <label for="p2Skill" class="col-4 col-form-label">Skill Level: <b id="p2skillValue">4</b></label>
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 mb-4 pt-3">
+        <div class="col-12 mb-0 pt-0">
           <div class="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
             <input type="radio" class="btn-check" name="gameStyle" id="gameStyleRace" autocomplete="off" checked>
             <label class="btn btn-outline-primary" for="gameStyleRace">Point Race</label>
@@ -55,23 +55,24 @@
               data-id="10">10</span> 10-Ball</label>
         </div>
       </div>
-      <div class="d-grid gap-2 m-0 w-100">
-      <button onclick="startGame()" class="btn btn-success p-4 fs-4">Start Match</button>
+      <div class="d-grid gap-1 m-0 w-100">
+      <!-- <button class="btn btn-success p-3 fs-4" data-bs-toggle="offcanvas" data-bs-target="#shootsfirst" onclick="setNames()">Start Match</button> -->
+        <button type="button" class="btn btn-success p-3 fs-4" onclick="setNames()">Start Match</button>
       </div>
       <div class="row">
-        <div class="col-6 mt-2">
+        <div class="col-6 mt-0">
           <button class="btn btn-info w-100 p-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuPlayerStats"
             aria-controls="menuPlayerStats">
             Player Stats
           </button>
         </div>
-        <div class="col-6 mt-2">
+        <div class="col-6 mt-0">
           <button class="btn btn-dark w-100 p-3" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#menuMatchHistory" aria-controls="menuMatchHistory">
             Match History
           </button>
         </div>
-        <div class="col-sm-4 mt-2 w-100">
+        <div class="col-sm-4 mt-0 w-100">
           <button class="btn btn-primary w-100 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuSettings"
             aria-controls="menuSettings">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
@@ -98,8 +99,8 @@
       <h2 class="offcanvas-title" id="menuPlayerStatsLabel">Player Stats</h2>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
     </div>
-    <div class="offcanvas-body">
-      <div class="container">
+    <div class="offcanvas-body m-1 p-1">
+      <div class="container p-0">
           <div class="mb-3">
             <input type="text" id="playerSearch" class="form-control" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" placeholder="Search by player name..." onkeyup="updateLifetimeStats()">
           </div>
@@ -117,12 +118,12 @@
       <h2 class="offcanvas-title" id="menuMatchHistoryLabel">Match History</h2>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
     </div>
-    <div class="offcanvas-body">
-      <div class="container">
+    <div class="offcanvas-body m-1 p-1">
+      <div class="container p-0">
         <div class="mb-3">
-          <input type="text" id="historySearch" class="form-control" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" placeholder="Search by player name or game mode..." onkeyup="displayHistory()">
+          <input type="text" id="historySearch" class="form-control" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" placeholder="Search by player name or game type..." onkeyup="displayHistory()">
         </div>
-        <div id="history-list"></div>
+        <div class="accordion" id="history-list"></div>
       </div>
     </div>
   </div>
@@ -165,7 +166,7 @@
           <h3 class="card-title text-right">Display Mode</h3>
           <div class="form-check form-switch ms-auto m-2">
             <label class="form-check-label" for="darkModeToggle">
-            <input class="form-check-input" type="checkbox" id="darkModeToggle" style="margin-right:4px;">
+            <input class="form-check-input darkModeToggle" type="checkbox" style="margin-right:4px;">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun-fill"
                 viewBox="0 0 16 16">
                 <path
@@ -212,6 +213,15 @@
               </script>
             </div>
           </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="heading">Glossary</h3>
+          <div class="mb-3">
+            <input type="text" class="form-control glossarySearch" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" placeholder="Search by term..." onkeyup="handleSearch(this)">
+          </div>
+          <div id="glossary-main"></div>  
+        </div>
       </div>
       <div class="card">
         <div class="card-body">
@@ -285,6 +295,164 @@
   </div>
 </div>
 
+<!-- In-Game Menu -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="ingameMenu" aria-labelledby="ingameMenuLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="ingameMenuLabel">Settings</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+  </div>
+  <div class="offcanvas-body">
+          <div class="col-sm-12 col-md-6 align-self-start">
+          <h3 class="card-title text-right">Display Mode</h3>
+          <div class="form-check form-switch ms-auto m-2">
+            <label class="form-check-label" for="ingamedarkModeToggle">
+            <input class="form-check-input darkModeToggle" type="checkbox" style="margin-right:4px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-moon-stars-fill" viewBox="0 0 16 16">
+                <path
+                  d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+                <path
+                  d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+              </svg>
+            </label>
+          </div>
+          <small>For better battery life, dark mode is recommended.</small>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-body">
+          <h3 class="card-title">Glossary</h3>
+          <div class="mb-3">
+            <input type="text" class="form-control glossarySearch" pattern="[a-zA-Z0-9 ]+" title="Only alphanumeric characters allowed" placeholder="Search by term..." onkeyup="handleSearch(this)">
+          </div>
+
+          <div id="glossary-ingame"></div>
+
+        </div>
+      </div>
+
+      <div class="alert alert-danger mt-3">
+        <h4 class="alert-heading">Danger Zone!</h4>
+        <p class="mb-0">Quitting the game will end the current match and cannot be undone.<br/><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+        </svg> No data will be saved.</p>
+        <button class="btn btn-danger" onclick="quitMatchEarly()" data-bs-dismiss="offcanvas" aria-label="Close">Quit Game</button>
+      </div>
+
+  </div>
+</div>
+
+<!-- Rock, Paper, Scissors, Lizard, Spock -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="rpsls" aria-labelledby="rpslsLabel">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" id="rpslsLabel">First Break Mini-Game</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="setNames()">X</button>
+  </div>
+  <div class="offcanvas-body">
+  <div class="game-card">
+      <h3 class="title text-center">Rock, Paper, Scissors, Lizard, Spock</h3>
+      <div class="container" id="rpsls-container"></div>
+  </div>
+  </div>
+</div>
+
+<!-- Coin Flip -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="coinflip" aria-labelledby="coinflipLabel">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" id="coinflipLabel">First Break Mini-Game</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="setNames()">X</button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="game-card">
+          <h3 class="title text-center">Flip a Coin</h3>
+          <h5 id="status-text" class="mt-0 text-center"><span id="coin-p1-status">Player 1</span> Chooses!</h5>
+          <div class="container mb-3">
+            <div class="row">
+              <div class="col">
+                <h4 class="mb-1">
+                  <p id="coin-p1-label">P1</p><p><strong id="p1-choice-text">...</strong></p>
+                </h4>
+              </div>
+
+              <div class="col text-end">
+                <h4 class="mb-1">
+                  <p id="coin-p2-label" style="text-align: end;">P2</p><p><strong id="p2-choice-text">...</strong></p>
+                </h4>
+              </div>
+            </div>
+            </div>
+      <div id="coin-element" class="coin">
+          <svg width="350" height="350" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="94" fill="#000000" stroke="#999" stroke-width="2"/><circle cx="100" cy="100" r="45" fill="white"/><text x="100" y="115" font-size="50" text-anchor="middle" fill="black" font-family="Arial" font-weight="bold">?</text></svg>
+      </div>
+
+      <!-- Player 1 Selection -->
+      <div id="p1-area" class="container mt-3">
+
+          <h5 class="text-center"><span id="coin-p1-name">Player 1</span>: Choose a Side</h5>
+          <div class="d-flex justify-content-center gap-2 mt-3">
+              <button class="btn btn-primary p-4 w-50" onclick="makePick('solids')">Solids</button>
+              <button class="btn btn-primary p-4 w-50" onclick="makePick('stripes')">Stripes</button>
+          </div>
+      </div>
+
+      <!-- Reveal Area -->
+      <div id="action-area" class="hidden">
+          <button id="flip-btn" class="btn btn-success w-100 fw-bold p-3" onclick="flipCoin()">Flip Coin</button>
+          <button id="reset-btn" class="btn btn-primary w-100 mt-2 hidden p-3" onclick="resetCoinGame()">Play Again</button>
+          <button id="start-match-btn" class="btn btn-success w-100 mt-2 hidden p-3" onclick="startGame()" data-bs-dismiss="offcanvas">Start Match</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Manual Selection -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="shootsfirstmanual" aria-labelledby="shootsfirstmanualLabel">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" id="shootsfirstmanualLabel">Who Won the Lag?</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="setNames()">X</button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="container mb-3">
+      <small class="form-text text-muted">You can also use this to quickly set who breaks first.</small>
+      <div class="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="whoStarts" id="p1Starts" autocomplete="off" checked="">
+        <label class="btn btn-outline-primary w-100 p-3" for="p1Starts"><span id="p1startsLabelText">Player 1</span></label>
+        <input type="radio" class="btn-check" name="whoStarts" id="p2Starts" autocomplete="off">
+        <label class="btn btn-outline-primary w-100 p-3" for="p2Starts"><span id="p2startsLabelText">Player 2</span></label>
+      </div>
+      <div class="container mt-3 p-0">
+        <button class="btn btn-success w-100 mt-2 p-4" onclick="startGame()" data-bs-dismiss="offcanvas">Start Match</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Who shoots first offcanvas -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="shootsfirst" aria-labelledby="shootsfirstLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="shootsfirstLabel">Who Shoots First?</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+  </div>
+  <div class="offcanvas-body">
+    <h3 class="title">How would you like to decide who breaks first?</h3>
+    <button class="btn btn-dark w-100 p-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#shootsfirstmanual" aria-controls="shootsfirstmanual">Lag</button>
+    <button class="btn btn-dark w-100 p-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#coinflip" aria-controls="coinflip">Flip a Coin</button>
+    <button class="btn btn-dark w-100 p-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#rpsls" aria-controls="rpsls" onclick="rpslsInit()">Rock Paper Scissors Lizard Spock</button>
+  </div>
+</div>
+
+
 <!-- Include DomPurify -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.7/purify.min.js"></script>
 
@@ -337,6 +505,15 @@
 
     // Include Award Logic
     {% include pool/assets/js/award.js %}
+
+    // Include Glossary Logic
+    {% include pool/assets/js/glossary.js %}
+
+    // Include RPSLS Logic
+    {% include pool/assets/js/rpsls.js %}
+
+    // Include Coin Flip Logic
+    {% include pool/assets/js/coinflip.js %}
 
     // Include PWA Install Logic
     {% include pool/assets/js/pwa.js %}
