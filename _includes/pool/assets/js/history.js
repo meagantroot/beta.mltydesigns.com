@@ -16,13 +16,14 @@ const searchTermStrip = rawInput
 
 const searchTerm = DOMPurify.sanitize(searchTermStrip);
 
-    // console.log(searchTerm);
-
     // Filter the history array based on names or mode
     const filteredHistory = h.filter(m => {
         const player1 = m.players[0].name.toLowerCase();
         const player2 = m.players[1].name.toLowerCase();
         const mode = m.mode.toLowerCase();
+        const id = m.matchId;
+
+            // console.log(m);
         
         return player1.includes(searchTerm) || 
                player2.includes(searchTerm) || 
@@ -30,57 +31,199 @@ const searchTerm = DOMPurify.sanitize(searchTermStrip);
     });
 
     // Map the filtered array to HTML
-    const htmlOutput = filteredHistory.map((m, index) => {
-        return `
-        <div class="accordion accordion-flush list-group mb-1" id="accordion-${index}">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed d-flex align-items-center" type="button" 
-                      data-bs-toggle="collapse" data-bs-target="#history-list-${index}">
-                <!-- Icon section -->
-                <div class="me-3">
-                    ${m.mode === '8-ball' ? `<div class="ball" data-id="8" style="margin-left: 0;">8</div>` : ''}
-                    ${m.mode === '9-ball' ? `<div class="ball" data-id="9" style="margin-left: 0;">9</div>` : ''}
-                    ${m.mode === '10-ball' ? `<div class="ball" data-id="10" style="margin-left: 0;">10</div>` : ''} 
-                </div>
 
-                <!-- Text section -->
-                <div class="text-start">
-                    <p class="m-0 p-0"><strong>${m.players[0].name} vs. ${m.players[1].name}</strong></p>
-                    <p class="m-0 p-0 text-muted"><small>${m.date} - ${m.time}</small></p>
-                    <p class="m-0 p-0 text-muted"><small>${m.mode}</small></p>
-                </div>
-              </button>
-            </h2>
-            <div id="history-list-${index}" class="accordion-collapse collapse" data-bs-parent="#accordion-${index}">
-              <div class="accordion-body">
-                    <div class="d-flex w-100 justify-content-between">
-                        <div class="col">
-                            <p class="text-start"><span class="h4">${m.players[0].name}</span><br><strong>${m.players[0].score}/${m.players[0].target}</strong></p>
-                            <p class="text-start">
-                            ${m.players[0].skill != null ? 'SL: '+ m.players[0].skill : ''}<br>
-                            Scratch Rate: ${m.players[0].rate}%<br>
-                            Break and Run: ${m.players[0].breakandrun}<br>
-                            ${m.mode === '8-ball' ? `8 on the Break: ${m.players[0].count8onbreak}` : ''}
-                            ${m.mode === '9-ball' ? `9 on the Snap: ${m.players[0].count9onsnap}` : ''}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p class="text-end"><span class="h4">${m.players[1].name}</span><br><strong>${m.players[1].score}/${m.players[1].target}</strong></p>
-                            <p class="text-end">
-                            ${m.players[1].skill != null ? 'SL: '+ m.players[1].skill : ''}<br>
-                            Scratch Rate: ${m.players[1].rate}%<br>
-                            Break and Run: ${m.players[1].breakandrun}<br>
-                            ${m.mode === '8-ball' ? `8 on the Break: ${m.players[1].count8onbreak}` : ''}
-                            ${m.mode === '9-ball' ? `9 on the Snap: ${m.players[1].count9onsnap}` : ''}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+const htmlOutput = filteredHistory.map((m, index) => {
+
+    // Check if we even have data
+    const hasInnings = m.inningdata && Object.keys(m.inningdata).length > 0;
+
+    // Map the rows (If hasInnings is true)
+let lastRack = null;
+
+const rows = hasInnings ? Object.values(m.inningdata)
+    .filter(inn => typeof inn === 'object' && inn !== null)
+    .map((inn, idx) => {
+        const p1Id = m.players[0].id !== undefined ? String(m.players[0].id) : "0";
+        const p2Id = m.players[1].id !== undefined ? String(m.players[1].id) : "1";
+
+        const p1Data = inn[p1Id] || { balls: [], points: 0 };
+        const p2Data = inn[p2Id] || { balls: [], points: 0 };
+
+let rackRow = '';
+const currentRack = inn[p1Id]?.rack ?? inn[p2Id]?.rack;
+
+if (currentRack != null && currentRack !== lastRack) {
+    lastRack = currentRack;
+
+    rackRow = `
+    <tr class="table-info m-0 p-0">
+        <td colspan="5" class="text-center" style="padding:1px; margin:0; line-height: 1.1em; font-size: 12px;">
+            <strong>Rack ${currentRack}</strong>
+        </td>
+    </tr>`;
+}
+// console.log(inn);
+
+function getBallSVG(ball) {
+    const colors = {
+        1: '#FFD700', 9: '#FFD700',
+        2: '#0055A4', 10: '#0055A4',
+        3: '#EF4135', 11: '#EF4135',
+        4: '#2E3192', 12: '#2E3192',
+        5: '#FF8C00', 13: '#FF8C00',
+        6: '#007A33', 14: '#007A33',
+        7: '#800020', 15: '#800020',
+        8: '#000000'
+    };
+
+    const color = colors[ball] || '#CCC';
+    const isStriped = ball > 8;
+
+    return `
+        <svg width="20" height="20" viewBox="0 0 100 100" 
+             style="display:inline-block; vertical-align:middle;">
+            ${isStriped ? `
+            <defs>
+                <clipPath id="clip-${ball}">
+                    <circle cx="50" cy="50" r="47"/>
+                </clipPath>
+            </defs>
+            <circle cx="50" cy="50" r="47" fill="white" stroke="#000" stroke-width="2"/>
+            <rect x="0" y="22" width="100" height="56" fill="${color}" clip-path="url(#clip-${ball})"/>
+            <circle cx="50" cy="50" r="23" fill="white"/>
+            ` : `
+            <circle cx="50" cy="50" r="47" fill="${color}" stroke="#000" stroke-width="2"/>
+            <circle cx="50" cy="50" r="23" fill="white"/>
+            `}
+            <text x="50" y="58" font-size="34" text-anchor="middle" fill="black" 
+                  font-family="Arial" font-weight="bold">${ball}</text>
+        </svg>`;
+}
+
+return `
+    ${rackRow}
+    <tr>
+        <td class="text-start">${p1Data.points}</td>
+<td class="text-start">
+    <div style="display:flex; flex-wrap:wrap; gap:2px; justify-content:flex-start;">
+        ${(p1Data.balls || []).map(num => getBallSVG(num)).join('') || '-'}
+    </div>
+</td>
+
+        <td class="text-center"><strong>${idx}</strong></td>
+
+<td class="text-end">
+    <div style="display:flex; flex-wrap:wrap; gap:2px; justify-content:flex-end;">
+        ${(p2Data.balls || []).map(num => getBallSVG(num)).join('') || '-'}
+    </div>
+</td>
+        <td class="text-end">${p2Data.points}</td>
+    </tr>`;
+    }).join('') : '';
+
+        const getRate = (player, statKey, totalInnings) => {
+            const statValue = player?.[statKey];
+            return (totalInnings > 0 && statValue !== undefined)
+                ? statValue.toFixed(0)
+                : "0";
+                
+        };
+
+        const p0scratchRate = getRate(m.players[0], 'scratches', m.innings);
+        const p1scratchRate = getRate(m.players[1], 'scratches', m.innings);
+
+        const p0foulRate = getRate(m.players[0], 'fouls', m.innings);
+        const p1foulRate = getRate(m.players[1], 'fouls', m.innings);
+
+        const p0miscueRate = getRate(m.players[0], 'miscues', m.innings);
+        const p1miscueRate = getRate(m.players[1], 'miscues', m.innings);
+
+        const p0escapeRate = getRate(m.players[0], 'escapes', m.innings);
+        const p1escapeRate = getRate(m.players[1], 'escapes', m.innings);
+
+        const p0kickRate = getRate(m.players[0], 'kickshots', m.innings);
+        const p1kickRate = getRate(m.players[1], 'kickshots', m.innings);
+
+        const p0safetyRate = getRate(m.players[0], 'safeties', m.innings);
+        const p1safetyRate = getRate(m.players[1], 'safeties', m.innings);
+
+    // Create the table container OR the empty message
+    const tableSection = (hasInnings && rows !== '') ? `
+        <div class="row">
+            <div class="col w-100">
+                <table class="table table-sm fixed-table">
+                    <tr class="table-primary">
+                        <th class="text-start" style="width: 5%;">pts</th>
+                        <th class="text-start" style="width: 40%;"></th>
+                        <th class="text-center" style="width: 5%;">inn</th>
+                        <th class="text-end" style="width: 40%;"></th>
+                        <th class="text-end" style="width: 5%;">pts</th>
+                    </tr>
+                    ${rows}
+                </table>
             </div>
-          </div>
-        </div>`;
-    }).join('');
+        </div>` : `<p class="text-center text-muted my-3">No inning data available for this match.</p>`;
+
+    // Return the accordion template
+return `
+<div class="accordion-item" id="player-container-${index}">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#player-collapse-${index}"
+            aria-expanded="false"
+            aria-controls="player-collapse-${index}">
+      <div class="me-3">
+        ${m.mode === '8-ball' ? `<div class="ball" data-id="8">8</div>` : ''}
+        ${m.mode === '9-ball' ? `<div class="ball" data-id="9">9</div>` : ''}
+        ${m.mode === '10-ball' ? `<div class="ball" data-id="10">10</div>` : ''} 
+      </div>
+      <div class="text-start">
+        <p class="m-0"><strong>${m.players[0].name} vs. ${m.players[1].name}</strong></p>
+        <p class="m-0 text"><small>${m.date} - ${m.time}</small></p>
+        ${m.racks ? `<p class="m-0 text-muted"><small>Racks: ${m.racks} - Innings: ${m.innings}</small></p>` : ''}
+      </div>
+    </button>
+  </h2>
+
+  <div id="player-collapse-${index}" class="accordion-collapse collapse" data-bs-parent="#history-list">
+    <div class="accordion-body p-2">
+      <div class="d-flex w-100 justify-content-between">
+        <div class="col">
+          <p class="text-start m-0"><span class="h4">${m.players[0].name}</span><br><strong>${m.players[0].score}/${m.players[0].target}</strong></p>
+          <p class="text-start m-0">${m.players[0].won ? '<span class="badge bg-success">win</span>' : '<span class="badge bg-danger">loss</span>'}</p>
+          <p class="text-start mt-1">
+            ${m.players[0].skill != null ? 'SL: '+ m.players[0].skill : ''}<br>
+            Scratch: ${p0scratchRate} | Foul: ${p0foulRate} | Miscue: ${p0miscueRate}<br>
+            Escape: ${p0escapeRate} | Kick: ${p0kickRate} | Safety: ${p0safetyRate}<br>
+            ${m.players[0].breakandrun > 0 ? `Break and Run: ${m.players[0].breakandrun}<br>` : ''}
+            ${m.mode === '8-ball' && m.players[0].count8onbreak > 0 ? `8 on the Break: ${m.players[0].count8onbreak}` : ''}
+            ${m.mode === '9-ball' && m.players[0].count9onsnap > 0 ? `9 on the Snap: ${m.players[0].count9onsnap}` : ''}
+          </p>
+        </div>
+        <div class="col">
+          <p class="text-end m-0"><span class="h4">${m.players[1].name}</span><br><strong>${m.players[1].score}/${m.players[1].target}</strong></p>
+          <p class="text-end m-0">${m.players[1].won ? '<span class="badge bg-success">win</span>' : '<span class="badge bg-danger">loss</span>'}</p>
+          <p class="text-end mt-1">
+            ${m.players[1].skill != null ? 'SL: '+ m.players[1].skill : ''}<br>
+            Scratch: ${p1scratchRate} | Foul: ${p1foulRate} | Miscue: ${p1miscueRate}<br>
+            Escape: ${p1escapeRate} | Kick: ${p1kickRate} | Safety: ${p1safetyRate}<br>
+            ${m.players[1].breakandrun > 0 ? `Break and Run: ${m.players[1].breakandrun}<br>` : ''}
+            ${m.mode === '8-ball' && m.players[1].count8onbreak > 0 ? `8 on the Break: ${m.players[1].count8onbreak}` : ''}
+            ${m.mode === '9-ball' && m.players[1].count9onsnap > 0 ? `9 on the Snap: ${m.players[1].count9onsnap}` : ''}
+          </p>
+        </div>
+      </div>
+
+      ${tableSection}
+
+      <div class="text-right m-0 p-0 text-xsmall">
+        ${m.matchId ? `<small>Match id: ${m.matchId}</small>` : ''}
+      </div>
+    </div>
+  </div>
+</div>`;
+}).join('');
 
     // Render output or a "Not Found" message
     container.innerHTML = htmlOutput || `<div class="p-3 text-center text-muted">No players found matching that name.</div>`;

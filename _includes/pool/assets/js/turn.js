@@ -2,34 +2,40 @@
 
 function handleTurn(action) {
     const mode = gameState.mode;
-
-    // // Save a deep copy of current state before modifying it
-    // // We slice the history to prevent it from growing infinitely (e.g., last 20 moves)
-    // const stateCopy = JSON.parse(JSON.stringify(gameState));
-    // delete stateCopy.history; // Don't nest history inside itself
-    // gameState.history.push(stateCopy);
-    // if (gameState.history.length > 20) gameState.history.shift();
     
     saveHistory();
 
-    // Delegate to specific logic handlers
-    if (mode === '8-ball') {
-        handle8Ball(action);
-    } else if (mode === '9-ball') {
-        handle9Ball(action);
-    } else if (mode === '10-ball') {
-        handle10Ball(action);
+    // Game Mode Switch
+
+    switch (mode) {
+        case '8-ball':
+            handle8Ball(action);
+            break;
+        case '9-ball':
+            handle9Ball(action);
+            break;
+        case '10-ball':
+            handle10Ball(action);
+            break;
+        default:
+            // Handle unexpected modes
+            console.warn(`Unknown mode: ${mode}`);
+            break;
     }
 
     saveGame();
 }
 
 function getActiveBallCount() {
-    return gameState.table.filter(b => b.state === 'killed').length;
+    const activeCount = gameState.table.filter(b => b.state === 'pocketed').length;
+    console.log("Active Ball Count:", activeCount);
+    return activeCount;
 }
 
 function getPocketedBallCount() {
-    return gameState.table.filter(b => b.state === 'selected').length;
+    const pocketedCount = gameState.table.filter(b => b.state === 'selected').length;
+    console.log("Pocketed Ball Count:", pocketedCount);
+    return pocketedCount;
 }
 
 // 8-Ball Logic
@@ -39,6 +45,10 @@ function handle8Ball(action) {
     
     const currentShot = gameState.rackShotCount || 0;
     const isBreakShot = (currentShot === 0);
+
+    // Check for fouls or scratches
+    const scratchChecked = document.getElementById('scratchbtn').checked;
+    const foulChecked = document.getElementById('foulbtn').checked;
 
     const containsEight = pocketed.includes(8);
 
@@ -53,13 +63,13 @@ function handle8Ball(action) {
     // Replacement condition for Break and Run
     const isBnR = (clearedSolids || clearedStripes) && isBreakShot;
 
-    const is8Break = (containsEight && action !== 'scratch' && isBreakShot && !isBnR);
+    const is8Break = (containsEight && scratchChecked === false && foulChecked === false && isBreakShot && !isBnR);
     
     let resetRack = false;
     let earlyLoss = false;
     let pts = 0;
 
-    if (is8Break || isBnR) {
+    if (is8Break && scratchChecked === false && foulChecked === false || isBnR  && scratchChecked === false && foulChecked === false) {
         p.racksWon++;
         pts = 1; 
         p.count8onbreak += is8Break ? 1 : 0;
@@ -77,7 +87,7 @@ function handle8Ball(action) {
         }
     } else {
     // Group Assignment Logic
-    if (pocketed.length > 0 && !p.group && action !== 'scratch') {
+    if (pocketed.length > 0 && !p.group && scratchChecked === false && foulChecked === false) {
         assign8BallGroups(pocketed, p, opponent);
     }
 
@@ -86,7 +96,7 @@ function handle8Ball(action) {
     const isOn8Ball = (p.group && ballsRemaining === 0);
 
     if (madeMoneyBall) {
-        if (isOn8Ball && action !== 'scratch') {
+        if (isOn8Ball && scratchChecked === false && foulChecked === false) {
             // Legal Win: Pocketed the 8 as the last ball
             p.racksWon++;
             pts = 1;
@@ -95,7 +105,7 @@ function handle8Ball(action) {
             // Illegal 8: Either early pocket or scratched on the 8
             earlyLoss = true;
         }
-    } else if (action === 'scratch' && isOn8Ball) {
+    } else if (scratchChecked === true && isOn8Ball || foulChecked === true && isOn8Ball) {
         // Foul while shooting at the 8-ball is a Loss of Game
         earlyLoss = true;
     }
@@ -154,25 +164,28 @@ function handle9Ball(action) {
     
     const currentShot = gameState.rackShotCount || 0;
     const isBreakShot = (currentShot === 0);
+
+    // Check for fouls or scratches
+    const scratchChecked = document.getElementById('scratchbtn').checked;
+    const foulChecked = document.getElementById('foulbtn').checked;
     
     const containsNine = pocketed.includes(9);
     
-    // 1. Define the full set of balls for 9-ball
+    // Define the full set of balls for 9-ball
     const nineBallSet = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-    // 2. Check if every ball in the set is in the 'pocketed' array
+    // Check if every ball in the set is in the 'pocketed' array
     const tableCleared = nineBallSet.every(ball => pocketed.includes(ball));
 
     // Update isBnR to trigger on a table clear instead of the 'breakAndRun' action
     const isBnR = tableCleared;
 
-    const isSnap = (containsNine && action !== 'scratch' && !isBnR && isBreakShot);
+    const isSnap = (containsNine && scratchChecked === false && foulChecked === false && !isBnR && isBreakShot);
 
     let resetRack = false;
     let pts = 0;
 
-
-    if (isSnap || isBnR) {
+    if (isSnap && scratchChecked === false && foulChecked === false || isBnR && scratchChecked === false && foulChecked === false) {
         p.racksWon++;
         p.count9onsnap += isSnap ? 1 : 0;
         p.breakandruns += isBnR ? 1 : 0;
@@ -203,12 +216,12 @@ function handle9Ball(action) {
         }
         resetRack = true;
     } 
-    else if (madeMoneyBall && action === 'scratch') {
+    else if (madeMoneyBall && (scratchChecked === true || madeMoneyBall && foulChecked === true)) {
         respotBall(9);
         alert("9-ball spotted. Turnover.");
         pts = calculatePoints(pocketed.filter(id => id !== 9), rules);
     } 
-    else if (madeMoneyBall) {
+    else if (madeMoneyBall && scratchChecked === false && foulChecked === false) {
         p.racksWon++;
         
         if (isSingleGame) {
@@ -252,50 +265,61 @@ function calculatePoints(pocketed, rules) {
 // 10-Ball Logic
 
 function handle10Ball(action) {
-    const { p, rules, pocketed, madeMoneyBall } = getTurnContext();
+    const { p, madeMoneyBall } = getTurnContext();
     const isBreakShot = (gameState.rackShotCount === 0);
+
+    // Check for fouls or scratches
+    const scratchChecked = document.getElementById('scratchbtn').checked;
+    const foulChecked = document.getElementById('foulbtn').checked;
     
     let resetRack = false;
     let pts = 0;
 
-    if (getPocketedBallCount() === 10 && isBreakShot) {
+    // Break and Run: If all 10 balls are pocketed on the break
+    if (getPocketedBallCount() === 10 && isBreakShot && scratchChecked === false && foulChecked === false) {
         p.racksWon++;
-        pts = 1; // This adds the 1 point
-            const awardCanvasElement = document.getElementById('awardOffcanvas');
-            const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(awardCanvasElement);
-            bsOffcanvas.show();
-            award(0,'Break and Run!');
+        // pts = 1; // 1 point for Break and Run
+        const awardCanvasElement = document.getElementById('awardOffcanvas');
+        const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(awardCanvasElement);
+        bsOffcanvas.show();
+        award(0, 'Break and Run!');
         resetRack = true; // This triggers the rack reset in finalizeTurn
-    } 
+    }
 
-    // In 10-ball, if the 10 is made early or on a scratch, it is spotted
+    // If the 10-ball is made, ensure it's done legally
     if (madeMoneyBall) {
-        const isLegalWin = (action !== 'scratch' && getActiveBallCount() === 9 || getPocketedBallCount() + getActiveBallCount() === 10 );
-        
+        // const remainingBalls = gameState.table.filter(ball => ball.state === 'selected' && ball.id !== 10); // Get active balls, excluding 10-ball
+        const isLegalWin = (scratchChecked === false && foulChecked === false && getActiveBallCount() === 9 || getPocketedBallCount() + getActiveBallCount() === 10 );
+
         if (isLegalWin) {
+            // Legal win: 10-ball made after all other balls are cleared
             p.racksWon++;
             pts += 1;
             resetRack = true;
         } else {
-            respotBall(10);
+            // If the 10-ball was made early or scratched, it gets respotted
+            respotBall(10); // Respot the 10-ball
             alert("10-ball spotted (Early or Scratch).");
         }
     }
 
+    // Increment the rack shot count
     gameState.rackShotCount++;
+
+    // Finalize the turn with points and reset status
     finalizeTurn(action, pts, resetRack);
-    // console.log("Full Game State:", gameState);
 }
-
-
 
 // Shared Helpers
 
 function getTurnContext() {
     const rules = GAME_RULES[gameState.mode];
+    const p = gameState.currentTurn;
+    const opponent = (gameState.currentTurn === 0) ? 1 : 0;
+
     return {
-        p: gameState.players[gameState.currentTurn],
-        opponent: gameState.players[gameState.currentTurn === 0 ? 1 : 0],
+        p: gameState.players[p],
+        opponent: gameState.players[opponent],
         rules: rules,
         pocketed: gameState.table.filter(b => b.state === 'selected').map(b => b.id),
         madeMoneyBall: gameState.table.some(b => b.id === rules.moneyBall && b.state === 'selected')
@@ -305,24 +329,67 @@ function getTurnContext() {
 // Finalize Turn Data
 
 function finalizeTurn(action, pts, resetRack, earlyLoss = false, isBR = false, isSnap = false) {
-    const { p, opponent, pocketed } = getTurnContext();
-    
-    // Ensure global inning index exists
-    if (gameState.currentInningIndex === undefined) gameState.currentInningIndex = 0;
-    const currentIdx = gameState.currentInningIndex;
 
-    // Initialize inning objects for both players to ensure table rows are synced
-    if (!p.innings[currentIdx]) {
-        p.innings[currentIdx] = { balls: [], points: 0, action: null };
+const { p, opponent, pocketed } = getTurnContext();
+    const pId = gameState.currentTurn;
+    const oppId = (gameState.currentTurn === 0) ? 1 : 0;
+
+// Ensure global array and index exist
+if (!gameState.innings) gameState.innings = [];
+if (gameState.currentInningIndex === undefined) gameState.currentInningIndex = 0;
+
+const currentIdx = gameState.currentInningIndex;
+const currentRack = gameState.currentRack;
+
+// Initialize the inning entry for BOTH players at once
+if (!gameState.innings[currentIdx]) {
+    gameState.innings[currentIdx] = {
+        inning: currentIdx,
+        // We use the unique IDs as keys so the table knows exactly who is who
+        [pId]: { 
+            rack: currentRack,
+            balls: [], 
+            points: 0, 
+            action: null,
+            isBR: false // Useful for 'Break and Run' tracking
+        },
+        [oppId]: { 
+            rack: currentRack,
+            balls: [], 
+            points: 0, 
+            action: 'waiting', 
+            isBR: false 
+        }
+    };
+}
+
+// Now you can safely update the current shooter's data
+const currentPlayerInning = gameState.innings[currentIdx][pId];
+
+// Record the results of this turn
+if (pocketed && pocketed.length > 0) {
+    // currentPlayerInning.balls.push(...pocketed.map(b => b.id));
+    currentPlayerInning.balls.push(...pocketed);
+    if (gameState.mode === '9-ball') {
+    currentPlayerInning.points += pocketed.length;
+        if (pocketed.includes(9)) {
+            currentPlayerInning.points += 1; // Bonus for 9-ball
+        }
+    } else if (gameState.mode === '10-ball') {
+        if (pocketed.includes(10)) {
+            currentPlayerInning.points += 1; // Bonus for 10-ball
+        }
+    } else if (gameState.mode === '8-ball') {
+        if (pocketed.includes(8)) {
+            currentPlayerInning.points += 1; // Bonus for 8-ball
+        }
     }
-    if (!opponent.innings[currentIdx]) {
-        opponent.innings[currentIdx] = { balls: [], points: 0, action: 'waiting' };
-    }
+}
 
     // Save Persistent Badges/Flags for this Inning
     // This allows the render function to show 'BR' or 'SNAP'
-    p.innings[currentIdx].isBR = isBR || (action === 'breakAndRun');
-    p.innings[currentIdx].isSnap = isSnap;
+    currentPlayerInning.isBR = isBR;
+    currentPlayerInning.isSnap = isSnap;
 
     // Handle Early Loss for 8-ball
     if (earlyLoss) {
@@ -330,28 +397,48 @@ function finalizeTurn(action, pts, resetRack, earlyLoss = false, isBR = false, i
         opponent.score += 1;
         resetRack = true;
         alert(`Loss of Game! Rack awarded to ${opponent.name}.`);
-        p.innings[currentIdx].action = 'loss';
+        currentPlayerInning.action = 'loss';
     }
 
-    // Update stats and Inning Data for the active shooter
+    // Update stats and Inning Data for the active player
     p.score += pts;
-    p.innings[currentIdx].balls.push(...pocketed);
-    p.innings[currentIdx].points += pts;
-    
-    if (action === 'safety') { 
-        p.defensiveShots++; 
-        p.innings[currentIdx].action = 'safety'; 
-    }
-    if (action === 'scratch') { 
+
+    if (document.getElementById('scratchbtn').checked) { 
         p.scratches++; 
-        p.innings[currentIdx].action = 'scratch'; 
+        currentPlayerInning.action = 'scratch'; 
     }
+
+    if (document.getElementById('foulbtn').checked) {
+        p.fouls++; 
+        currentPlayerInning.action = 'scratch'; 
+    }
+
+    if (document.getElementById('miscuebtn').checked) {
+        p.miscues++; 
+        currentPlayerInning.action = 'scratch'; 
+    }
+
+    if (document.getElementById('escapebtn').checked) { 
+        p.escapes++; 
+        currentPlayerInning.action = 'escape'; 
+    }
+
+    if (document.getElementById('kickbtn').checked) { 
+        p.kickshots++; 
+        currentPlayerInning.action = 'kickshot'; 
+    }
+
+    if (document.getElementById('safetybtn').checked) { 
+        p.defensiveShots++; 
+        currentPlayerInning.action = 'safety'; 
+    }
+
 
     // Manage Table State and Inning Transitions
     if (resetRack) {
         // Mark all pocketed balls as 'dead' before resetting the table for the next rack
         gameState.table.forEach(b => { if(b.state === 'pocketed') b.state = 'dead'; });
-        
+        gameState.currentRack += 1;
         resetTable(); // Resets balls/rackShotCount but KEEPS match innings
         
         // Advance the inning row immediately when a rack ends to keep logic clean
@@ -386,7 +473,6 @@ if (winner) {
         bsOffcanvas.show();
         launchConfetti();
 }
-
 
 }
 

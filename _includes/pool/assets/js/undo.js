@@ -4,6 +4,7 @@ function undoInning() {
     if (!gameState.history || gameState.history.length === 0) {
         alert("No innings to undo! Resetting the table.");
         gameState.currentInningIndex = 0;
+        gameState.currentRack = 1;
         resetTable();
         // loadGame();
         // render();

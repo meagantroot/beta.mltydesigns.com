@@ -46,106 +46,123 @@ const ballGrid = `
 </div>`;
 
     container.innerHTML = `
-    <div class="card">
+    <div class="container m--0 p-1">
         <!-- Scoreboard Header -->
-        <div class="card-body" style="display:flex; justify-content:space-between; padding:15px; background:var(--bg-body); border-bottom:1px solid #ddd;">
+        <div class="body m-0 p-0" style="display:flex; justify-content:space-between;">
             <div style="flex:1; ${gameState.currentTurn === 0 ? 'color:var(--bs-success); font-weight:bold' : ''}">
-                <div style="font-size:1.2em;">${p1.name} ${p1.group ? `(${p1.group})` : ''}</div>
+                <div style="font-size:1.2em;">${p1.name}</div>
                 <div>${p1.score}/${p1.target} pts</div>
+                <div><small>${p1.group ? `${p1.group}` : ''}</small></div>
             </div>
             <div style="flex:1.0; align-self:center; text-align: center; font-weight:bold;">
                 <h3 style="margin:0;"><small>Shooting:</small><br/>
                 <strong><span style="color:var(--bs-success)">${active.name}</span></strong></h3>
+                <p class="m-0 p-0">Inning: ${gameState.currentInningIndex}</p>
             </div>
             <div style="text-align:right; flex:1; ${gameState.currentTurn === 1 ? 'color:var(--bs-success); font-weight:bold' : ''}">
-                <div style="font-size:1.2em;">${p2.name} ${p2.group ? `(${p2.group})` : ''}</div>
+                <div style="font-size:1.2em;">${p2.name}</div>
                 <div>${p2.score}/${p2.target} pts</div>
+                <div><small>${p2.group ? `${p2.group}` : ''}</small></div>
             </div>
+        </div>
+        <div class="row mt-0 pt-1 pb-1" style="border-bottom:1px solid #ddd; min-height:34px;">
+            <div id="p0Balls" class="col"></div>
+            <div id="p1Balls" class="col" style="text-align:right;"></div>
         </div>
 
         <!-- Table Controls -->
         <div style="padding:4px; text-align:center; max-width:390px; margin-left:auto; margin-right:auto;">
             ${ballGrid}
-            <div class="row mt-0 g-1">
-                <div class="col-sm-4 w-50"><button class="btn btn-outline-danger w-100" onclick="quitMatchEarly()">Quit</button></div>
-                <div class="col-sm-2 w-50"><button class="btn btn-outline-primary w-100" onclick="undoInning()">Undo</button></div>
+            <div class="row mt-1 g-1">
+                <div class="col w-100"><button class="btn btn-outline-secondary w-100 p-3 m-0" data-bs-toggle="offcanvas" data-bs-target="#timeout-modal" onclick="useTimeout(${gameState.currentTurn})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+                    </svg> Timeouts: ${active.timeouts}</button>
+                </div>
             </div>
-            <div class="row mt-0 g-1 w-100">
-                <div class="col w-50"><button class="btn btn-danger w-100" onclick="handleTurn('scratch')">Scratched</button></div>
-                <div class="col w-50"><button class="btn btn-warning w-100" onclick="handleTurn('safety')">Safety</button></div>
+            <div class="row mt-1 g-1 mb-1">
+                <div class="col-sm-4 w-50"><button class="btn btn-dark w-100 p-3 m-0" data-bs-toggle="offcanvas" data-bs-target="#ingameMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+                    </svg>  Settings</button>
+                </div>
+                <div class="col-sm-2 w-50"><button class="btn btn-outline-primary w-100 p-3 m-0" onclick="undoInning()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+                    </svg> Undo</button>
+                </div>
             </div>
-            <div class="row mt-0 g-1 w-100">
-                <div class="col w-100"><button class="btn btn-success w-100" onclick="handleTurn('score')">Turn Over</button></div>
+
+            <div class="row mt-2 g-1">
+                <div class="btn-group mt-0" role="group" aria-label="Error Action Type">
+                    <input type="checkbox" class="btn-check" id="miscuebtn" autocomplete="off">
+                    <label class="btn btn-outline-danger mt-0 p-3" for="miscuebtn">Miscue</label>
+                    <input type="checkbox" class="btn-check" id="foulbtn" autocomplete="off">
+                    <label class="btn btn-outline-danger mt-0 p-3" for="foulbtn">Foul</label>
+                    <input type="checkbox" class="btn-check" id="scratchbtn" autocomplete="off">
+                    <label class="btn btn-outline-danger mt-0 p-3" for="scratchbtn">Scratch</label>
+                </div>
+            </div>
+
+            <div class="row mt-2 g-1">
+                <div class="btn-group mt-0" role="group" aria-label="Safety Action Type">
+                    <input type="checkbox" class="btn-check" id="escapebtn" autocomplete="off">
+                    <label class="btn btn-outline-warning mt-0 p-3" for="escapebtn">Escape</label>
+                    <input type="checkbox" class="btn-check" id="kickbtn" autocomplete="off">
+                    <label class="btn btn-outline-warning mt-0 p-3" for="kickbtn">Kick</label>
+                    <input type="checkbox" class="btn-check" id="safetybtn" autocomplete="off">
+                    <label class="btn btn-outline-warning mt-0 p-3" for="safetybtn">Safety</label>
+                </div>
+            </div>
+            <div class="row mt-1 g-1">
+                <div class="col w-100"><button class="btn btn-success w-100 p-3 m-0" onclick="handleTurn('score')">End ${active.name}'s Turn</button></div>
             </div>
         </div>
-    </div>
-
-    <!-- Synchronized Inning Tables -->
-    <div class="row mt-1 g-xl-2">
-        ${gameState.players.map((p, i) => {
-            let rows = "";
-            const isDisabled = p.timeouts <= 0 ? 'disabled' : '';
-            // Ensure we at least show the first row even if index is 0
-            const displayLimit = Math.max(gameState.currentInningIndex || 0, p.innings.length - 1);
-
-            for (let idx = 0; idx <= displayLimit; idx++) {
-                const inn = p.innings[idx] || { balls: [], points: 0, action: 'waiting' };
-                
-                // Style for specialized rows
-                // const isWaiting = inn.action === 'waiting';
-                const bgStyle = inn.action === 'safety' ? 'background:#fff3cd;' : (inn.action === 'scratch' ? 'background:#f8d7da;' : '');
-
-                // Logic for badges (Snap, BR, Defense, Scratch)
-                const badges = `
-                    ${inn.action === 'safety' ? '<span class="badge bg-warning text-dark">Safe</span>' : ''}
-                    ${inn.action === 'scratch' ? '<span class="badge bg-danger">Foul</span>' : ''}
-                    ${inn.isBR  === true ? '<span class="badge bg-info">BR</span>' : ''}
-                    ${inn.isSnap ? `${gameState.mode === '8-ball' ? '<span class="badge bg-primary">8ob</span>' : '<span class="badge bg-warning">9os</span>'}` : ''}
-                `;
-                rows += `
-                <tr style="${bgStyle}">
-                    <td class="text-muted">${idx}</td>
-                    <td>
-                    ${inn.balls.length > 0 && inn.isBR !== true
-                        ? inn.balls.map(ball => getBallSvg(ball)).join('') 
-                        : '-'} 
-                    ${badges}
-                    </td>
-                    <td class="text-end fw-bold">${inn.points}</td>
-                </tr>`;
-            }
-
-            return `
-            <div class="col-sm-12 col-md-6 mb-1 mt-1">
-                <div class="card border-${gameState.currentTurn === i ? 'success' : 'secondary'}">
-                    <div class="card-body p-1">
-                        <div class="d-flex justify-content-between align-items-center mb-0">
-                            <h5 class="m-0">${p.name}</h5>
-                            <button id="timeout-btn-${i}" class="btn btn-sm btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#timeout-modal" onclick="useTimeout(${i})" ${isDisabled}>
-
-                                Timeouts: ${p.timeouts}
-                            </button>
-                        </div>
-                        <div class="m-0">
-                            <small class="text-muted">Racks: ${p.racksWon} | Safeties: ${p.defensiveShots} | Scratches: ${p.scratches}</small>
-                        </div>
-                        <table class="table table-striped table-sm mb-0">
-                            <thead>
-                                <tr>
-                                    <th style="width:40px;">Inning</th>
-                                    <th>Balls</th>
-                                    <th class="text-end">Pts</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${rows}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>`;
-        }).join('')}
     </div>`;
+
+
+// console.log(gameState.innings);
+
+// console.log("Current Rack we are looking for:", gameState.currentRack);
+
+const rackBalls = gameState.innings.filter(i => {
+    // We check both players just in case player 0 is 'waiting'
+    const rackValue = i["0"].rack; 
+    const isMatch = Number(rackValue) === Number(gameState.currentRack);
+    
+    // console.log(`Checking Inning ${i.inning}: Data says Rack ${rackValue}. Match? ${isMatch}`);
+    return isMatch;
+});
+
+const allBallsPlayer0 = rackBalls.flatMap(i => i["0"].balls);
+const allBallsPlayer1 = rackBalls.flatMap(i => i["1"].balls);
+
+
+// Get the SVG strings for each ball
+const p0BallSvgs = allBallsPlayer0.map(ball => getBallSvg(ball)).join('');
+const p1BallSvgs = allBallsPlayer1.map(ball => getBallSvg(ball)).join('');
+
+// Put them into the divs
+const p0Div = document.getElementById('p0Balls');
+const p1Div = document.getElementById('p1Balls');
+
+if (p0Div) {
+    p0Div.innerHTML = allBallsPlayer0.length > 0 ? p0BallSvgs : " ";
+}
+
+if (p1Div) {
+    p1Div.innerHTML = allBallsPlayer1.length > 0 ? p1BallSvgs : '<span style="display:none; min-height:16px;">No balls yet</span>';
+}
+
+
+
+// console.log("Final Balls Array:", allBallsPlayer0);
+// console.log("Final Balls Array:", allBallsPlayer1);
+// console.log(gameState);
+
 }
 
 
@@ -178,8 +195,6 @@ const getBallSvg = (ball) => {
     const isStriped = num >= 9 && num <= 15;
     const colors = ['#FFD700', '#0000FF', '#FF0000', '#800080', '#FFA500', '#008000', '#800000', '#000000'];
     const color = colors[(num - 1) % 8] || 'none';
-    // const textColor = (num === 1 || num === 9 || isStriped) ? 'black' : 'white';
-
 
     if (isStriped) {
         return `

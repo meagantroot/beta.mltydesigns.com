@@ -9,16 +9,25 @@ function saveGame() {
 function archiveMatch() {
     const history = JSON.parse(localStorage.getItem('pool_match_history') || '[]');
     history.unshift({
+        matchId: Date.now().toString(36),
         date: new Date().toLocaleDateString(),
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         mode: gameState.mode,
+        winner: "",
+        innings: (gameState.currentInningIndex -1),
+        inningdata: gameState.innings,
+        racks: (gameState.currentRack - 1),
         players: gameState.players.map(p => ({ 
             name: p.name,
             skill: p.skill,
             score: p.score,
             target: p.target,
             scratches: p.scratches,
-            rate: (p.scratches / (p.innings.length || 1) * 100).toFixed(1),
+            fouls: p.fouls,
+            miscues: p.miscues,
+            escapes: p.escapes,
+            kickshots: p.kickshots,
+            safeties: p.defensiveShots,
             won: p.score >= p.target,
             count8onbreak: p.count8onbreak,
             count9onsnap: p.count9onsnap,
@@ -29,7 +38,7 @@ function archiveMatch() {
 }
 
 function quitMatchEarly() {
-    if (confirm("Match data will be lost if you quit the match early.\n\nDiscard match data and exit to the start menu?")) {
+    if (confirm("Discard match data and exit to the start menu?")) {
         resetGame();
     }
 }

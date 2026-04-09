@@ -61,7 +61,7 @@ function importBackup(e) {
             if (d.history) localStorage.setItem('pool_match_history', JSON.stringify(d.history));
             
             alert("Backup imported successfully!");
-            location.reload();
+            localStorage.removeItem('pool_score_data'); location.reload();
         } catch (err) {
             // Catches errors if the file content isn't valid JSON
             alert("Error: The file content is not valid JSON.");
