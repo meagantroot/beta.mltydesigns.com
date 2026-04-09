@@ -10,8 +10,8 @@ const winningMoves = {
 
 // Define the function
 function rpslsInit() {
-    const p1Name = document.getElementById('p1Name').value || "Player 1";
-    const p2Name = document.getElementById('p2Name').value || "Player 2";
+    const p1Name = clean(document.getElementById('p1Name').value || "Player 1");
+    const p2Name = clean(document.getElementById('p2Name').value || "Player 2");
 
     // console.log(`RPSLS Game Initialized: ${p1Name} vs ${p2Name}`);
 
