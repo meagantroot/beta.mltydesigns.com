@@ -30,8 +30,8 @@ function flipCoin() {
         const result = Math.random() < 0.5 ? 'solids' : 'stripes';
         
         // Grab current names from inputs
-        const p1Name = document.getElementById('p1Name').value || "Player 1";
-        const p2Name = document.getElementById('p2Name').value || "Player 2";
+        const p1Name = clean(document.getElementById('p1Name').value || "Player 1");
+        const p2Name = clean(document.getElementById('p2Name').value || "Player 2");
 
         coin.classList.remove('flipping');
         
