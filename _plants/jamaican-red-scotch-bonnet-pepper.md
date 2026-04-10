@@ -19,4 +19,5 @@ noindex: true
 sitemap: false
 redirect_from:
   - /04:CD:BE:71:C8:2A:81
+  - /04:D7:AD:71:C8:2A:81
 ---
