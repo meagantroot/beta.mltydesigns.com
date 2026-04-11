@@ -20,4 +20,5 @@ sitemap: false
 redirect_from:
   - /04:54:E2:71:C8:2A:81
   - /04:CD:BE:71:C8:2A:81
+  - /04:C4:A9:71:C8:2A:81
 ---
